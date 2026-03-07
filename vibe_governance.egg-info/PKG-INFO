@@ -1,3 +1,12 @@
+Metadata-Version: 2.4
+Name: vibe-governance
+Version: 0.1.0
+Summary: Deterministic cross-IDE governance generator for AI-assisted projects.
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: Jinja2>=3.1.0
+Requires-Dist: PyYAML>=6.0.0
+
 # 跨 IDE Vibe Coding 本地项目启动器
 
 这个仓库现在的正确定位是：

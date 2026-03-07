@@ -7,7 +7,7 @@
 
 ## 1. 当前 `Taotaotao` 工具仓的关键结构
 
-### 根目录 5 个入口文件
+### 根目录 5 个人类入口文件 + 1 个 AI 启动提示词
 
 | 文件 | 作用 |
 | --- | --- |
@@ -16,6 +16,7 @@
 | `ARCHITECTURE.md` | 为什么用这种分层结构 |
 | `DIRECTORY_STRUCTURE.md` | 当前目录职责 |
 | `CHANGELOG.md` | 版本与当前工作区变化 |
+| `AI_QUICKSTART.md` | 复制给新 IDE 里 AI 的固定启动提示词 |
 
 ### 4 个最关键的目录
 

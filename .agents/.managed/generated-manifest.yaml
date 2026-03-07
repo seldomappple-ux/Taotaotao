@@ -4,7 +4,7 @@ upstream_version: 0.1.0
 upstream_published_at: '2026-03-07T00:00:00Z'
 files:
 - path: .agents/PROGRESS.md
-  checksum: 73c84925146092d90c2209abee91822abe80f74fd51216f8d488fe4476d5b2e3
+  checksum: e9c39fd283efab1d0b038093b72b52db6608b15426525c34a11d7cdc31742742
 - path: .cursor/rules/governance.mdc
   checksum: 28c6334eea0a90b631818d1242262ffd8c3680504dca51c6d7999db3706f7d57
 - path: .github/copilot-instructions.md

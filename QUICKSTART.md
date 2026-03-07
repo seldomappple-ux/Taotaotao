@@ -76,6 +76,8 @@ vibe-governance bootstrap --type backend --target .
 5. 我现在最适合做的下一步
 ```
 
+如果你不想每次手工组织这段话，直接复制根目录的 [`AI_QUICKSTART.md`](./AI_QUICKSTART.md) 给 AI 即可。
+
 ## 第 5 步：如果 AI 需要理解启动器本身
 
 新项目生成出来的 `START_HERE.md` 里，会记录本机 `Taotaotao` 工具仓路径。

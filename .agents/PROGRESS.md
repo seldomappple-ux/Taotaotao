@@ -3,7 +3,7 @@ managed-by: vibe-governance 0.1.0
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 0.1.0
 upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: 73c84925146092d90c2209abee91822abe80f74fd51216f8d488fe4476d5b2e3
+checksum-sha256: e9c39fd283efab1d0b038093b72b52db6608b15426525c34a11d7cdc31742742
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -25,16 +25,16 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 
 | Page ID | Date | Title | Status | Path | Related Commit Message |
 | --- | --- | --- | --- | --- | --- |
+| `20260308-9` | `2026-03-08` | Clarify path resolution in AI quickstart prompt | `draft` | `.agents/progress/entries/2026/2026-03-08-9.md` | docs(governance): clarify local path handling in AI quickstart |
+| `20260308-8` | `2026-03-08` | Add dedicated root AI quickstart prompt | `draft` | `.agents/progress/entries/2026/2026-03-08-8.md` | docs(governance): add dedicated AI quickstart prompt |
 | `20260308-7` | `2026-03-08` | Align deep docs with bootstrap-first workflow | `draft` | `.agents/progress/entries/2026/2026-03-08-7.md` | docs(governance): align deep docs with bootstrap workflow |
 | `20260308-6` | `2026-03-08` | Keep bootstrap as the single project creation path | `draft` | `.agents/progress/entries/2026/2026-03-08-6.md` | refactor(governance): keep bootstrap as sole project creation path |
 | `20260308-5` | `2026-03-08` | Add in-place bootstrap flow for new IDE project directories | `draft` | `.agents/progress/entries/2026/2026-03-08-5.md` | feat(governance): add in-place bootstrap workflow |
 | `20260308-4` | `2026-03-08` | Rewrite root entry docs around bootstrap and START_HERE workflow | `draft` | `.agents/progress/entries/2026/2026-03-08-4.md` | docs(governance): rewrite root entry docs around bootstrap usage |
 | `20260308-3` | `2026-03-08` | Add one-command smoke test for repo validation and sample project bootstrap | `draft` | `.agents/progress/entries/2026/2026-03-08-3.md` | feat(governance): add one-command smoke test |
+| `20260308-10` | `2026-03-08` | Write explicit Taotaotao absolute path into AI quickstart | `draft` | `.agents/progress/entries/2026/2026-03-08-10.md` | docs(governance): add explicit Taotaotao path to AI quickstart |
 | `20260308-1` | `2026-03-08` | Slim root human docs to five entry files and move deep guides into docs | `draft` | `.agents/progress/entries/2026/2026-03-08-1.md` | docs(governance): slim root human docs and move deep guides to docs |
 | `20260307-4` | `2026-03-07` | Unify remaining human docs and add onboarding rule for generated adapters | `draft` | `.agents/progress/entries/2026/2026-03-07-4.md` | docs(governance): unify human docs and add onboarding adapter rule |
-| `20260307-3` | `2026-03-07` | Restructure onboarding docs and archive source articles in-repo | `draft` | `.agents/progress/entries/2026/2026-03-07-3.md` | docs(governance): restructure onboarding docs and archive source articles |
-| `20260307-2` | `2026-03-07` | Add root explanatory documentation set for human and cross-account handoff | `draft` | `.agents/progress/entries/2026/2026-03-07-2.md` | docs(governance): add root explanatory documentation set |
-| `20260307-1` | `2026-03-07` | Bootstrap deterministic governance core | `draft` | `.agents/progress/entries/2026/2026-03-07-1.md` | chore(governance): bootstrap deterministic cross-IDE governance core |
 
 ## Archive
 
