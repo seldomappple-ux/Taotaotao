@@ -12,8 +12,10 @@ from vibe_governance.project import (
     _overrides_path,
     _profile_path,
     _snapshot_path,
+    bootstrap_project,
     init_project,
     render_project,
+    smoke_test,
     sync_project,
     validate_project,
 )
@@ -199,6 +201,50 @@ class GovernanceCliTests(unittest.TestCase):
         self.assertIn("English:", claude)
         self.assertIn("中文:", gemini)
         self.assertIn("English:", gemini)
+
+    def test_bootstrap_project_writes_into_current_directory(self) -> None:
+        target = self.root / "fresh-app"
+        created = bootstrap_project(target, "embedded")
+        self.assertTrue((target / "START_HERE.md").exists())
+        self.assertTrue((target / "README.md").exists())
+        self.assertTrue((target / "firmware" / ".gitkeep").exists())
+        self.assertTrue((target / ".agents" / "skills" / "embedded-safety" / "SKILL.md").exists())
+        self.assertIn(str(target / "START_HERE.md"), created)
+        self.assertEqual("Validation passed.", validate_project(target))
+
+    def test_bootstrap_project_allows_git_and_ide_metadata(self) -> None:
+        target = self.root / "metadata-app"
+        (target / ".git").mkdir(parents=True)
+        (target / ".vscode").mkdir(parents=True)
+        created = bootstrap_project(target, "software", project_name="metadata-app")
+        self.assertIn(str(target / "START_HERE.md"), created)
+        self.assertTrue((target / "src" / ".gitkeep").exists())
+        self.assertEqual("Validation passed.", validate_project(target))
+
+    def test_bootstrap_project_rejects_existing_business_files(self) -> None:
+        target = self.root / "occupied-bootstrap"
+        target.mkdir(parents=True)
+        (target / "existing.txt").write_text("busy", encoding="utf-8")
+        with self.assertRaises(GovernanceError):
+            bootstrap_project(target, "software")
+
+    def test_bootstrap_project_uses_explicit_project_name(self) -> None:
+        target = self.root / "named-bootstrap"
+        created = bootstrap_project(target, "software", project_name="demo-software")
+        self.assertIn(str(target / "START_HERE.md"), created)
+        self.assertIn("demo-software", (target / "START_HERE.md").read_text(encoding="utf-8"))
+        self.assertEqual("Validation passed.", validate_project(target))
+
+    def test_smoke_test_runs_short_e2e_flow(self) -> None:
+        render_project(self.root)
+        report = smoke_test(self.root, project_type="software", project_name="quick-check")
+        generated_root = self.root / ".tmp-tests" / "smoke" / "quick-check"
+        self.assertEqual("ok", report["status"])
+        self.assertEqual("Validation passed.", report["current_validation"])
+        self.assertEqual("Validation passed.", report["generated_validation"])
+        self.assertEqual("clean", report["sync_status"])
+        self.assertEqual(str(generated_root), report["generated_project"])
+        self.assertTrue((generated_root / "START_HERE.md").exists())
 
 
 if __name__ == "__main__":

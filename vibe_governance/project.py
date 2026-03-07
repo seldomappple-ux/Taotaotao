@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import shutil
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -19,6 +20,16 @@ DOC_MODES = {"zh", "en", "bilingual"}
 ACTIVE_PROGRESS_STATUSES = {"draft", "promotable"}
 ALL_PROGRESS_STATUSES = ACTIVE_PROGRESS_STATUSES | {"upstreamed"}
 FRONTMATTER_DELIMITER = "---"
+SAFE_BOOTSTRAP_NAMES = {
+    ".git",
+    ".gitignore",
+    ".gitattributes",
+    ".vscode",
+    ".idea",
+    ".vs",
+    ".DS_Store",
+    "Thumbs.db",
+}
 
 
 class GovernanceError(RuntimeError):
@@ -104,8 +115,19 @@ def _load_catalog() -> dict[str, Any]:
     return _load_resource_yaml("rule-catalog.yaml")
 
 
+def _load_project_types() -> dict[str, Any]:
+    return _load_resource_yaml("project-types.yaml")["project_types"]
+
+
+PROJECT_TYPES = frozenset(_load_project_types())
+
+
 def _read_scaffold(relative_path: str) -> str:
     return SCAFFOLD_ROOT.joinpath(relative_path).read_text(encoding="utf-8")
+
+
+def _governance_source_root() -> Path:
+    return Path(__file__).resolve().parent.parent
 
 
 def _profile_path(target: Path) -> Path:
@@ -514,6 +536,141 @@ def _render_template(
     return _wrap_managed_content(body, manifest)
 
 
+def _render_plain_template(template_name: str, **context: Any) -> str:
+    template = ENVIRONMENT.get_template(template_name)
+    return template.render(**context).rstrip() + "\n"
+
+
+def _write_text_file(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+
+
+def _append_project_type_rules(target: Path, project_type: str, spec: dict[str, Any]) -> None:
+    rules_path = _rules_path(target)
+    content = rules_path.read_text(encoding="utf-8").rstrip()
+    appendix = [
+        "",
+        "## Project Type Focus",
+        "",
+        f"- Project type: `{project_type}`",
+    ]
+    for note in spec.get("rules_notes", []):
+        appendix.append(f"- {note}")
+    rules_path.write_text("\n".join([content, *appendix]).rstrip() + "\n", encoding="utf-8")
+
+
+def _append_project_type_decisions(target: Path, spec: dict[str, Any]) -> None:
+    path = _decisions_path(target)
+    data = _load_yaml_file(path, default={"decisions": []})
+    existing_ids = {str(item["id"]) for item in data.get("decisions", [])}
+    for decision in spec.get("decisions", []):
+        if decision["id"] not in existing_ids:
+            data["decisions"].append(copy.deepcopy(decision))
+    _write_yaml_file(path, data)
+
+
+def _create_project_directories(target: Path, directories: list[str]) -> list[str]:
+    created: list[str] = []
+    for relative in directories:
+        directory = target / relative
+        directory.mkdir(parents=True, exist_ok=True)
+        created.append(str(directory))
+        keep = directory / ".gitkeep"
+        if not keep.exists():
+            keep.write_text("", encoding="utf-8")
+            created.append(str(keep))
+    return created
+
+
+def _create_project_skills(target: Path, skills: list[dict[str, Any]]) -> list[str]:
+    created: list[str] = []
+    for skill in skills:
+        skill_dir = target / ".agents" / "skills" / str(skill["name"])
+        skill_dir.mkdir(parents=True, exist_ok=True)
+        created.append(str(skill_dir))
+        skill_path = skill_dir / "SKILL.md"
+        content = _render_plain_template(
+            "project-SKILL.md.j2",
+            title=str(skill["title"]),
+            summary=str(skill["summary"]),
+            steps=[str(step) for step in skill.get("steps", [])],
+        )
+        _write_text_file(skill_path, content)
+        created.append(str(skill_path))
+    return created
+
+
+def _bootstrap_project_entry_files(target: Path, project_name: str, project_type: str, spec: dict[str, Any]) -> list[str]:
+    created: list[str] = []
+    shared_context = {
+        "project_name": project_name,
+        "project_type": project_type,
+        "display_name_zh": spec["display_name_zh"],
+        "description_zh": spec["description_zh"],
+        "directories": [str(item) for item in spec.get("directories", [])],
+        "skills": spec.get("skills", []),
+        "rules_notes": [str(item) for item in spec.get("rules_notes", [])],
+        "governance_source_path": str(_governance_source_root()),
+    }
+    files = {
+        target / "START_HERE.md": "START_HERE.md.j2",
+        target / "README.md": "project-README.md.j2",
+    }
+    for path, template_name in files.items():
+        content = _render_plain_template(template_name, **shared_context)
+        _write_text_file(path, content)
+        created.append(str(path))
+    return created
+
+
+def _ensure_bootstrap_target_is_safe(root: Path) -> None:
+    root.mkdir(parents=True, exist_ok=True)
+    disallowed = sorted(item.name for item in root.iterdir() if item.name not in SAFE_BOOTSTRAP_NAMES)
+    if disallowed:
+        joined = ", ".join(disallowed)
+        raise GovernanceError(
+            "Bootstrap target must be empty or contain only metadata directories/files. "
+            f"Found: {joined}"
+        )
+
+
+def _apply_project_type_scaffold(
+    root: Path,
+    project_name: str,
+    project_type: str,
+    spec: dict[str, Any],
+    *,
+    project_lang: str | None = None,
+    comment_lang: str | None = None,
+    doc_mode: str | None = None,
+) -> list[str]:
+    created = init_project(root)
+
+    profile = _load_profile(root)
+    profile["project_type"] = project_type
+    if project_lang is not None:
+        profile["project_lang"] = project_lang
+    if comment_lang is not None:
+        profile["comment_lang"] = comment_lang
+    if doc_mode is not None:
+        profile["doc_mode"] = doc_mode
+    _write_yaml_file(_profile_path(root), profile)
+    created.append(str(_profile_path(root)))
+
+    _append_project_type_rules(root, project_type, spec)
+    created.append(str(_rules_path(root)))
+    _append_project_type_decisions(root, spec)
+    created.append(str(_decisions_path(root)))
+
+    created.extend(_create_project_directories(root, [str(item) for item in spec.get("directories", [])]))
+    created.extend(_create_project_skills(root, list(spec.get("skills", []))))
+    created.extend(_bootstrap_project_entry_files(root, project_name, project_type, spec))
+
+    created.extend(render_project(root))
+    return list(dict.fromkeys(created))
+
+
 def _expected_managed_outputs(target: Path) -> tuple[dict[str, str], dict[str, str]]:
     manifest = _load_release_manifest()
     catalog = _load_catalog()
@@ -582,6 +739,77 @@ def init_project(target: Path) -> list[str]:
         created.append(str(_snapshot_path(target)))
 
     return created
+
+
+def bootstrap_project(
+    target: Path,
+    project_type: str,
+    *,
+    project_name: str | None = None,
+    project_lang: str | None = None,
+    comment_lang: str | None = None,
+    doc_mode: str | None = None,
+) -> list[str]:
+    specs = _load_project_types()
+    if project_type not in specs:
+        supported = ", ".join(sorted(specs))
+        raise GovernanceError(f"Unsupported project type `{project_type}`. Choose from: {supported}")
+
+    if doc_mode is not None and doc_mode not in DOC_MODES:
+        raise GovernanceError("`doc_mode` must be one of: bilingual, en, zh")
+
+    root = target.resolve()
+    _ensure_bootstrap_target_is_safe(root)
+
+    inferred_name = str(project_name).strip() if project_name is not None else root.name
+    if not inferred_name:
+        raise GovernanceError("Project name cannot be empty.")
+
+    return _apply_project_type_scaffold(
+        root,
+        inferred_name,
+        project_type,
+        specs[project_type],
+        project_lang=project_lang,
+        comment_lang=comment_lang,
+        doc_mode=doc_mode,
+    )
+
+
+def smoke_test(
+    target: Path,
+    *,
+    project_type: str = "embedded",
+    project_name: str | None = None,
+) -> dict[str, Any]:
+    """Run the shortest end-to-end regression path for the current version."""
+    if project_type not in PROJECT_TYPES:
+        supported = ", ".join(sorted(PROJECT_TYPES))
+        raise GovernanceError(f"Unsupported project type `{project_type}`. Choose from: {supported}")
+
+    current_validation = validate_project(target)
+
+    smoke_parent = (target / ".tmp-tests" / "smoke").resolve()
+    name = (project_name or f"smoke-{project_type}").strip()
+    smoke_root = smoke_parent / name
+    if smoke_root.exists():
+        shutil.rmtree(smoke_root)
+
+    bootstrap_project(smoke_root, project_type, project_name=name)
+    generated_validation = validate_project(smoke_root)
+    sync_report = sync_project(smoke_root, dry_run=True)
+
+    return {
+        "status": "ok",
+        "target": str(target.resolve()),
+        "project_type": project_type,
+        "current_validation": current_validation,
+        "generated_project": str(smoke_root),
+        "generated_start_here": str((smoke_root / "START_HERE.md").resolve()),
+        "generated_validation": generated_validation,
+        "sync_status": sync_report["status"],
+        "sync_changed_rule_ids": sync_report["changed_rule_ids"],
+    }
 
 
 def render_project(target: Path) -> list[str]:

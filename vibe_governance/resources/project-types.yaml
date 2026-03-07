@@ -1,0 +1,193 @@
+project_types:
+  governance:
+    display_name: governance
+    display_name_zh: 治理内核
+    description_zh: 适合维护治理引擎、共享规则或自举示例仓的项目类型。
+    directories:
+      - docs
+      - tests
+      - scripts
+      - examples
+    rules_notes:
+      - 修改治理规则、模板或校验逻辑时, 必须同步检查 render、validate 和测试结果。
+      - 通用经验先写入 PROGRESS, 确认可复用后再提升到 canonical 规则或模板。
+    decisions:
+      - id: ADR-TPL-0001
+        title: Governance kernel baseline
+        status: proposed
+        summary: This project starts from the governance template and is expected to host shared workflow logic or reusable policy assets.
+    skills:
+      - name: project-onboarding
+        title: 项目接手
+        summary: 先读 START_HERE 和 `.agents/` 真源, 再开始改动。
+        steps:
+          - 先按 START_HERE 指定顺序读取本地文件。
+          - 先输出项目定位、规则红线和下一步建议, 再开始改动。
+      - name: progress-tracker
+        title: 经验沉淀
+        summary: 每次关键变更先写 progress entry, 再决定是否升级为通用规则。
+        steps:
+          - 把关键背景、结果和 durable lesson 写进 `.agents/progress/entries/`。
+          - 如果经验具有跨项目价值, 再考虑回流上游。
+      - name: governance-workflow
+        title: 治理迭代
+        summary: 修改治理内核前, 先确认改动属于项目局部还是通用能力。
+        steps:
+          - 规则和模板变更优先写入 canonical 层, 不直接改生成文件。
+          - 每次修改后都运行 render、validate 和测试。
+  software:
+    display_name: software
+    display_name_zh: 纯软件
+    description_zh: 适合通用桌面工具、命令行程序或单体软件项目。
+    directories:
+      - src
+      - tests
+      - docs
+      - scripts
+      - resources
+    rules_notes:
+      - 优先建立清晰的 src、tests、docs 边界, 避免把业务逻辑和脚本混在一起。
+      - 接口、配置和发布方式变更要同步更新说明文档。
+    decisions:
+      - id: ADR-TPL-0001
+        title: Software baseline layout
+        status: proposed
+        summary: The project starts with separate source, test, documentation, and automation directories to keep the repository reviewable from day one.
+    skills:
+      - name: project-onboarding
+        title: 项目接手
+        summary: 开工前先读真源和最近进度, 不要直接猜目录结构。
+        steps:
+          - 先总结项目目标、规则和当前状态。
+          - 变更前先判断是项目真源改动还是业务代码改动。
+      - name: progress-tracker
+        title: 经验沉淀
+        summary: 关键实现、踩坑和接口变化都要沉淀到 progress entry。
+        steps:
+          - 新增模块或接口时记录原因和边界。
+          - 提交前确认 progress entry 能解释这次改动。
+      - name: software-delivery
+        title: 软件交付
+        summary: 纯软件项目优先关注模块边界、测试和交付说明。
+        steps:
+          - 新功能先明确 src 下的模块落点。
+          - 需要时同步补 tests、docs 和 scripts。
+  backend:
+    display_name: backend
+    display_name_zh: 后端
+    description_zh: 适合 API、服务端或中台类项目。
+    directories:
+      - src
+      - src/api
+      - src/domain
+      - src/infrastructure
+      - tests
+      - docs
+      - scripts
+      - config
+    rules_notes:
+      - 优先保持 API、领域逻辑和基础设施分层, 不要把所有东西都堆在同一个目录。
+      - 配置、部署和接口变更需要同步记录。
+    decisions:
+      - id: ADR-TPL-0001
+        title: Backend layered layout
+        status: proposed
+        summary: API, domain, infrastructure, and configuration are separated from the start so later service growth does not collapse into a single folder.
+    skills:
+      - name: project-onboarding
+        title: 项目接手
+        summary: 先对齐接口边界、配置边界和部署边界。
+        steps:
+          - 先读 `.agents/` 真源和 START_HERE。
+          - 先说清当前服务边界和下一步再动手。
+      - name: progress-tracker
+        title: 经验沉淀
+        summary: API 变化、配置变化和兼容性风险必须沉淀。
+        steps:
+          - 接口变更要记录到 progress entry。
+          - 兼容性变化需要同步反映到版本说明。
+      - name: backend-delivery
+        title: 服务端交付
+        summary: 后端项目优先保证分层清晰、接口稳定和配置可追溯。
+        steps:
+          - 先明确落点在 api、domain 还是 infrastructure。
+          - 涉及部署或配置时同步更新 docs 和 config。
+  frontend:
+    display_name: frontend
+    display_name_zh: 前端
+    description_zh: 适合网页、控制台和交互界面项目。
+    directories:
+      - src
+      - src/pages
+      - src/components
+      - public
+      - assets
+      - tests
+      - docs
+    rules_notes:
+      - 页面、组件、静态资源和测试目录要从一开始就分开。
+      - 交互和视觉层变更要同步记录关键决策。
+    decisions:
+      - id: ADR-TPL-0001
+        title: Frontend screen/component split
+        status: proposed
+        summary: Pages, shared components, public assets, and tests are separated so UI growth does not collapse into a single src tree.
+    skills:
+      - name: project-onboarding
+        title: 项目接手
+        summary: 先对齐页面结构、组件边界和视觉约束。
+        steps:
+          - 先根据 START_HERE 读取真源和技能文件。
+          - 先总结页面层级、组件边界和下一步再动手。
+      - name: progress-tracker
+        title: 经验沉淀
+        summary: 关键交互、布局和样式决策要进入 progress entry。
+        steps:
+          - 页面结构调整要记录原因和影响范围。
+          - 可复用的 UI 决策再考虑提升成通用规范。
+      - name: frontend-delivery
+        title: 前端交付
+        summary: 前端项目优先保证页面、组件和资源分层清晰。
+        steps:
+          - 新功能先判断属于 page 还是 shared component。
+          - 测试、资源和文档与界面改动同步维护。
+  embedded:
+    display_name: embedded
+    display_name_zh: 嵌入式
+    description_zh: 适合 ESP32、STM32 等软硬件协同项目。
+    directories:
+      - firmware
+      - firmware/src
+      - host
+      - web
+      - hardware
+      - tools
+      - docs
+      - tests
+    rules_notes:
+      - 先把硬件红线、供电条件、烧录边界和联调要求写进 `.agents/RULES.md`。
+      - 固件、上位机、前端和硬件资料必须分层, 不能只靠聊天传递背景。
+    decisions:
+      - id: ADR-TPL-0001
+        title: Embedded split across firmware, host, and hardware
+        status: proposed
+        summary: Firmware, host tooling, web surfaces, and hardware notes are separated from the start so cross-domain work stays reviewable.
+    skills:
+      - name: project-onboarding
+        title: 项目接手
+        summary: 先读硬件红线、架构决策和最近联调记录。
+        steps:
+          - 先说明当前板卡、工具链和固件边界。
+          - 未经确认不要执行高风险硬件动作。
+      - name: progress-tracker
+        title: 经验沉淀
+        summary: bring-up、联调和协议变化必须沉淀到 progress entry。
+        steps:
+          - 把硬件踩坑和固件协议变化写进 progress entry。
+          - 高风险联调经验优先沉淀, 便于跨账号接手。
+      - name: embedded-safety
+        title: 硬件安全
+        summary: 嵌入式项目优先保证硬件安全、烧录边界和联调纪律。
+        steps:
+          - 烧录、上电、串口和外设操作前先确认规则红线。
+          - 变更涉及硬件时同步更新 docs、RULES 和 progress。
