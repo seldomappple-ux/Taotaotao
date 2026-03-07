@@ -1,21 +1,23 @@
 # 5 分钟快速上手指南
 
-这份文档只做一件事: 让你在最短时间内把当前仓库看懂、校验通过、接手成功。
+这份文档是给第一次接手仓库的人写的。
 
-## 第 0 步: 先知道“跑通”是什么意思
+不管你是新维护者、新账号, 还是一个全新的 AI 实例, 做完这 5 分钟流程后, 你至少应该达成四件事:
 
-这个项目不是一个 Web 服务, 也不是一个桌面程序。
+1. 知道这个仓库到底在解决什么问题.
+2. 能在本地跑通 `validate / render / sync --dry-run`.
+3. 知道哪些文件是事实真源, 哪些文件不能直接改.
+4. 知道下一步该去读哪份文档继续接手.
 
-对它来说, “跑通” 的标准是:
+## 先记住一句话
 
-1. 你能在本地成功运行治理 CLI.
-2. `validate` 能通过.
-3. `render` 能重新生成适配文件.
-4. 你知道该去哪里看规则、历史和上下文.
+这个仓库的“跑通”, 不是某个服务启动成功, 而是治理链路能闭环:
 
-## 第 1 步: 准备环境
+`读说明 -> 读真源 -> validate -> render -> sync -> 继续开发或接手`
 
-确认本机有这些东西:
+## 第 1 步: 先确认环境
+
+本机至少要有:
 
 - Python 3.11+
 - `pip`
@@ -29,21 +31,25 @@ pip --version
 git --version
 ```
 
-## 第 2 步: 打开项目根目录
+如果这一步过不了, 先不要往下走。这个仓库的所有后续动作都建立在本地 Python CLI 可运行之上。
 
-进入当前仓库根目录后, 先看一眼核心入口:
+## 第 2 步: 先用 1 分钟看懂仓库是什么
 
-- [README.md](./README.md)
-- [AGENTS.md](./AGENTS.md)
-- [`.agents/profile.yaml`](./.agents/profile.yaml)
+不要一上来就读代码。先看这三个文件:
 
-这三处能让你很快知道:
+1. [README.md](./README.md)
+2. [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)
+3. [`.agents/profile.yaml`](./.agents/profile.yaml)
 
-- 这个仓库是什么
-- 当前启用了哪些 IDE 适配器
-- 当前版本是怎么组织的
+你要从这三处搞清楚三件事:
 
-## 第 3 步: 跑第一次校验
+- 这个仓库不是业务项目, 而是治理内核和自举示例仓.
+- 它的设计直接承接了最初那三篇 Vibe Coding 原文.
+- 当前项目启用了哪些适配器、采用什么文档模式、认定的上游版本是什么.
+
+## 第 3 步: 跑第一次健康检查
+
+在项目根目录运行:
 
 ```bash
 python -m vibe_governance validate --target .
@@ -51,13 +57,16 @@ python -m vibe_governance validate --target .
 
 预期结果:
 
-- 看到 `Validation passed.`
+- 命令成功结束.
+- 输出里能看到 `Validation passed.`.
 
-如果失败, 先去看:
+这一步的目的不是“试试看”, 而是先判断当前仓库是不是一个健康的、可继续接手的状态。
 
-- [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
-- [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
-- [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md)
+如果失败, 优先去看:
+
+1. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
+2. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
+3. [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md)
 
 ## 第 4 步: 重新生成一次适配层
 
@@ -65,7 +74,7 @@ python -m vibe_governance validate --target .
 python -m vibe_governance render --target .
 ```
 
-这一步会重新生成这些文件:
+这一步会重建当前受管输出, 包括:
 
 - `AGENTS.md`
 - `CLAUDE.md`
@@ -76,113 +85,85 @@ python -m vibe_governance render --target .
 - `.opencode/AGENTS.md`
 - `.agents/PROGRESS.md`
 
-注意:
+你要从这一步建立一个正确认知:
 
-- 这些文件是“受管生成文件”.
-- 不要直接改.
-- 真正应该改的是 `.agents/` 里的源文件, 或 `vibe_governance/resources/` 里的 canonical 模板和规则目录.
+- 根目录 AI 文件、`.cursor/`、`.github/`、`.opencode/` 是生成结果.
+- 真正该改的是 `.agents/` 里的源文件, 或 `vibe_governance/resources/` 里的 canonical 规则与模板.
+- 如果你习惯直接改 `AGENTS.md`, 这个仓库会越来越乱。
 
-## 第 5 步: 看一次同步报告
+## 第 5 步: 看当前和上游快照是否一致
 
 ```bash
 python -m vibe_governance sync --target . --dry-run --json
 ```
 
-这一步不会改东西, 只是告诉你:
+这一步不会直接改文件。它只回答一个问题:
 
-- 当前工作区保存的上游规则快照
-- 和当前代码里的规则目录相比, 有没有 `rule_id` 级别的差异
+- 当前工作区认定的上游规则快照, 和现在的规则目录相比, 有没有 `rule_id` 级差异.
 
-如果输出是 `clean`, 说明当前快照和规则目录一致。
+如果输出是 `clean`, 说明当前快照和本地规则目录一致。
 
-## 第 6 步: 搞清楚文档分工
+如果不是 `clean`, 不要急着覆盖。先去看 [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md) 里的同步和冲突 SOP。
 
-你只要记住这一句:
+## 第 6 步: 进入“可接手”状态
 
-- 根目录说明文档是给人和新接手的 AI 看的.
-- `.agents/` 是本地真源.
-- 根目录 AI 适配文件和 `.cursor/`、`.github/`、`.opencode/` 是生成结果.
-- `vibe_governance/` 是生成器代码和上游资源.
+做到前 5 步之后, 你已经不算“刚拿到仓库”了, 而是进入了“可以继续接手”的状态。接下来按这个顺序读:
 
-推荐阅读顺序:
+1. [ARCHITECTURE.md](./ARCHITECTURE.md): 先理解这套治理框架为什么存在.
+2. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md): 再理解每个目录该给谁读、能不能改.
+3. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md): 再理解优先级、红线和同步方式.
+4. [CHANGELOG.md](./CHANGELOG.md): 再看当前版本和最近的工作区变化.
+5. [`.agents/RULES.md`](./.agents/RULES.md)、[`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)、[`.agents/PROGRESS.md`](./.agents/PROGRESS.md): 最后看当前项目偏好、架构决策和近期状态.
 
-1. [ARCHITECTURE.md](./ARCHITECTURE.md)
-2. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
-3. [USAGE_GUIDE.md](./USAGE_GUIDE.md)
-4. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
+## 新账号 / 新 AI 的无缝接手流程
 
-## 专属章节: 新账号 / 新 AI 无缝接手流程
+如果你换了 GPT 账号、换了 IDE 账号, 或者直接换了一台设备, 就按这个顺序做:
 
-这是最重要的一段。如果你换了 GPT 账号、换了 Cursor 账号、换了设备, 就按下面做。
-
-### 1. 先把仓库完整同步下来
-
-必须同步这些内容:
-
-- 根目录全部说明文档
-- `.agents/`
-- `vibe_governance/`
-- `tests/`
-- `.github/`
-- `.cursor/`
-- `.opencode/`
-- `AGENTS.md`
-- `CLAUDE.md`
-- `GEMINI.md`
-- `pyproject.toml`
-
-### 2. 先读人类说明, 不要一上来就让 AI 猜
-
-按顺序读:
-
-1. [README.md](./README.md)
-2. [CHANGELOG.md](./CHANGELOG.md)
-3. [ARCHITECTURE.md](./ARCHITECTURE.md)
-4. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
-5. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
-
-### 3. 再读本地真源
-
-按顺序打开:
-
-1. [`.agents/profile.yaml`](./.agents/profile.yaml)
-2. [`.agents/RULES.md`](./.agents/RULES.md)
-3. [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
-4. [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
-
-### 4. 跑三条命令确认状态
-
-```bash
-python -m vibe_governance validate --target .
-python -m vibe_governance render --target .
-python -m vibe_governance sync --target . --dry-run --json
-```
-
-### 5. 再让新 AI 读取适配文件
-
-最后再给 AI 看:
-
-- [AGENTS.md](./AGENTS.md)
-- [CLAUDE.md](./CLAUDE.md)
-- [GEMINI.md](./GEMINI.md)
+1. 先完整同步仓库, 不要只拷代码, 忘了 `.agents/`、`references/` 和根目录说明文档.
+2. 先读 [README.md](./README.md)、[SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)、[ARCHITECTURE.md](./ARCHITECTURE.md), 不要让新 AI 一上来就猜.
+3. 再让新 AI 读取 [`.agents/profile.yaml`](./.agents/profile.yaml)、[`.agents/RULES.md`](./.agents/RULES.md)、[`.agents/PROGRESS.md`](./.agents/PROGRESS.md).
+4. 最后才让它看 [`AGENTS.md`](./AGENTS.md)、[`CLAUDE.md`](./CLAUDE.md)、[`GEMINI.md`](./GEMINI.md) 这些适配层结果.
 
 这样做的原因很简单:
 
-- 先把“人类理解层”补齐
-- 再把“机器执行层”挂上去
-- 避免新 AI 只盯着一个适配文件, 误判整个仓库的真实状态
+- 先把“项目语义”和“设计背景”对齐.
+- 再把“机器执行规则”挂上去.
+- 避免新 AI 只看一个适配文件, 就误判整个仓库的真实边界.
 
-## 常见误区
+## 最容易踩的三个坑
 
-- 误区 1: 直接改 `AGENTS.md`
-  实际上应该改 `.agents/` 或 `vibe_governance/resources/`
-- 误区 2: 只看聊天记录不看文件
-  这个项目就是为“脱离聊天记忆”设计的
-- 误区 3: 看到 `RULES.md` 就以为改完自动生效
-  `RULES.md` 是人类说明文件, 真正会影响生成结果的是 `.agents/overrides/rules.yaml`
+### 坑 1: 把生成文件当真源改
 
-## 接下来去哪里
+不要直接改:
 
-- 想学完整流程: [USAGE_GUIDE.md](./USAGE_GUIDE.md)
-- 想理解项目结构: [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
+- `AGENTS.md`
+- `CLAUDE.md`
+- `GEMINI.md`
+- `.cursor/rules/governance.mdc`
+- `.github/copilot-instructions.md`
+
+要改就回到:
+
+- [`.agents/profile.yaml`](./.agents/profile.yaml)
+- [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml)
+- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
+- [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
+
+### 坑 2: 只看聊天, 不看仓库里的资料
+
+这个项目本来就是为了摆脱聊天记忆依赖才设计的。
+
+如果你跳过 [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)、[ARCHITECTURE.md](./ARCHITECTURE.md)、[`.agents/PROGRESS.md`](./.agents/PROGRESS.md), 很容易把本项目的治理边界理解错。
+
+### 坑 3: 以为 `RULES.md` 一改就自动生效
+
+`.agents/RULES.md` 主要是解释层。
+
+真正影响生成和校验的, 还是 [`.agents/profile.yaml`](./.agents/profile.yaml) 和 [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml)。
+
+## 5 分钟之后该看哪里
+
+- 想理解为什么这套东西要这样拆: [ARCHITECTURE.md](./ARCHITECTURE.md)
+- 想理解每个目录能不能改: [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
+- 想按完整生命周期操作: [USAGE_GUIDE.md](./USAGE_GUIDE.md)
 - 想处理迁移和换账号: [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md)

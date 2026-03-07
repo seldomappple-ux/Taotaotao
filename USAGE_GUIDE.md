@@ -1,34 +1,92 @@
 # 完整全流程使用手册
 
-这份手册讲的是“从一个治理仓库开始, 一直到版本发布、经验回流”为止, 每一步怎么做。
+这份手册讲的是一条完整闭环:
 
-## 一句话先说清
+从第一次接手仓库, 到日常修改, 再到版本发布、经验沉淀和规则回流, 每一步到底怎么做。
 
-当前仓库的真实工作流是:
+如果你刚接这个项目, 建议先读:
 
-1. 人在根目录说明文档里理解项目.
-2. 真正的项目事实落在 `.agents/`.
-3. 生成器从 `.agents/` 和 `vibe_governance/resources/` 出发, 生成多 IDE 适配层.
-4. 变更、验证、版本、经验全部回写到本地文件, 不依赖聊天上下文.
+1. [QUICKSTART.md](./QUICKSTART.md)
+2. [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)
+3. [ARCHITECTURE.md](./ARCHITECTURE.md)
 
-## 一、初始化阶段
+然后再回来看这份手册。
 
-> 当前仓库已经初始化完成。下面这段主要是给你在新仓库复用这套体系时参考。
+## 一、先把真实工作流记住
 
-### 1. 准备代码
+这套仓库真正的工作流不是“开个会话, 让 AI 猜着写”, 而是:
 
-最少需要这些内容:
+1. 先用根目录说明文档和原始资料对齐语义.
+2. 再从 `.agents/` 读取项目事实、规则和长期记忆.
+3. 再让 `vibe_governance` 读取真源并生成适配层.
+4. 每次变更都回写到本地文件, 形成版本、经验和迁移闭环.
+
+所以这份手册也按这个顺序来讲。
+
+## 二、场景 1: 接手一个已经存在的仓库
+
+这是当前仓库最常见的使用方式。
+
+### 第 1 步: 先读, 不要先改
+
+建议顺序:
+
+1. [README.md](./README.md)
+2. [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)
+3. [ARCHITECTURE.md](./ARCHITECTURE.md)
+4. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
+5. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
+
+然后再看:
+
+- [`.agents/profile.yaml`](./.agents/profile.yaml)
+- [`.agents/RULES.md`](./.agents/RULES.md)
+- [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
+- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+
+### 第 2 步: 跑三条标准命令
+
+```bash
+python -m vibe_governance validate --target .
+python -m vibe_governance render --target .
+python -m vibe_governance sync --target . --dry-run --json
+```
+
+这三条命令的职责分别是:
+
+- `validate`: 检查配置、override、progress 和受管输出是否健康.
+- `render`: 按当前真源重建适配层和 `PROGRESS` 索引.
+- `sync --dry-run`: 查看本地快照和当前规则目录有没有差异.
+
+### 第 3 步: 判断这次接手要改哪一层
+
+最常见的四层是:
+
+1. 根目录解释层
+2. `.agents/` 真源层
+3. `vibe_governance/` 生成器代码层
+4. `vibe_governance/resources/` canonical 规则和模板层
+
+如果这一步判断错了, 后面基本都会乱。
+
+## 三、场景 2: 用这套治理体系初始化一个新仓库
+
+当前仓库已经是初始化完成的状态, 但你以后复用时应该按下面做。
+
+### 第 1 步: 把治理内核带进新项目
+
+最少需要:
 
 - `vibe_governance/`
 - `pyproject.toml`
 
-### 2. 初始化治理骨架
+### 第 2 步: 初始化 `.agents/` 骨架
 
 ```bash
 python -m vibe_governance init --target .
 ```
 
-这一步会创建:
+当前代码会创建这些核心文件:
 
 - `.agents/profile.yaml`
 - `.agents/RULES.md`
@@ -37,128 +95,165 @@ python -m vibe_governance init --target .
 - `.agents/progress/ENTRY_TEMPLATE.md`
 - `.agents/.managed/upstream-rule-catalog.yaml`
 
-### 3. 立即做第一次校验和渲染
+### 第 3 步: 补项目事实和项目边界
+
+优先改:
+
+- [`.agents/profile.yaml`](./.agents/profile.yaml)
+- [`.agents/RULES.md`](./.agents/RULES.md)
+- [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
+
+这一步要做的不是“赶紧开始写代码”, 而是先把:
+
+- 项目类型
+- 文档模式
+- 注释语言
+- 启用的适配器
+- 项目红线
+- 关键架构边界
+
+写清楚。
+
+### 第 4 步: 立刻校验和生成
 
 ```bash
 python -m vibe_governance validate --target .
 python -m vibe_governance render --target .
 ```
 
-## 二、日常开发阶段
+不要跳过这一步。很多初始化问题, 在第一轮 `validate` 就能暴露出来。
 
-日常开发分三类, 处理方式不一样。
+## 四、日常迭代到底怎么做
 
-### 类别 1: 只改人类说明文档
+日常迭代可以按一个固定循环来做。
 
-例如:
+### 第 1 步: 先判断改动类型
 
-- 修改 [README.md](./README.md)
-- 补充 [ARCHITECTURE.md](./ARCHITECTURE.md)
-- 更新 [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md)
+常见改动类型有三类:
 
-这种情况:
-
-- 不需要重跑 `render`
-- 但建议补 `PROGRESS` 记录
-- 如果影响使用方式或版本说明, 要同步改 [CHANGELOG.md](./CHANGELOG.md)
-
-### 类别 2: 改项目真源
+#### 类型 A: 只改解释文档
 
 例如:
 
-- 改 `.agents/profile.yaml`
-- 改 `.agents/overrides/rules.yaml`
-- 改 `.agents/architecture-decisions.yaml`
-- 新增或修改 `.agents/progress/entries/*`
+- [README.md](./README.md)
+- [ARCHITECTURE.md](./ARCHITECTURE.md)
+- [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md)
 
-这种情况:
+这类改动通常不影响生成逻辑, 但如果对接手方式、版本理解或治理边界有影响, 仍然建议补 `PROGRESS`。
 
-1. 先改真源文件
-2. 跑 `validate`
-3. 跑 `render`
-4. 再检查生成结果是否符合预期
-
-### 类别 3: 改治理引擎和上游规则
+#### 类型 B: 改项目真源
 
 例如:
 
-- 改 `vibe_governance/project.py`
-- 改 `vibe_governance/cli.py`
-- 改 `vibe_governance/resources/rule-catalog.yaml`
-- 改 `vibe_governance/resources/templates/*`
+- [`.agents/profile.yaml`](./.agents/profile.yaml)
+- [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml)
+- [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
+- `.agents/progress/entries/*`
 
-这种情况:
-
-1. 先改代码或 canonical 资源
-2. 运行 `render`
-3. 运行 `validate`
-4. 跑测试:
+这类改动通常要走:
 
 ```bash
+python -m vibe_governance validate --target .
+python -m vibe_governance render --target .
+```
+
+#### 类型 C: 改治理内核
+
+例如:
+
+- [`vibe_governance/project.py`](./vibe_governance/project.py)
+- [`vibe_governance/cli.py`](./vibe_governance/cli.py)
+- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
+- [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
+
+这类改动通常要走:
+
+```bash
+python -m vibe_governance render --target .
+python -m vibe_governance validate --target .
 python -m unittest discover -s tests -v
 ```
 
-5. 检查根目录生成文件有没有跟着正确变化
+### 第 2 步: 先写 `PROGRESS`, 再继续改
 
-## 三、版本迭代管理全流程
+只要这次改动具有以下任一特征, 建议先写一条 entry:
 
-这里是这套项目最重要的一部分。
+- 会影响后续接手
+- 会影响规则理解
+- 会影响版本历史
+- 会影响多个文件或多个阶段
 
-### 第 1 步: 确认这次改动属于哪个层级
-
-先判断:
-
-- 是文档解释层变化
-- 是项目真源变化
-- 还是治理引擎变化
-
-不同层级会决定你要不要更新:
-
-- `.agents/progress/entries/*`
-- [CHANGELOG.md](./CHANGELOG.md)
-- `vibe_governance/resources/release-manifest.yaml`
-- `pyproject.toml`
-
-### 第 2 步: 先写 `PROGRESS`, 再谈发版
-
-任何值得保留的经验, 先落到:
+entry 位置在:
 
 - `.agents/progress/entries/YYYY/YYYY-MM-DD-N.md`
 
-推荐写法:
+### 第 3 步: 修改正确层级
 
-- 这次为什么改
-- 改了什么
-- 哪些坑以后别再踩
-- 相关 commit message 应该写什么
+最重要的纪律只有两条:
 
-如果这条经验只是项目局部经验, 停在 `draft` 或 `promotable` 就够了。
+- 不要直接改受管生成文件.
+- 不要把项目局部经验直接写成通用规则.
 
-如果这条经验已经值得提升到通用规则, 再走回流。
+## 五、同步、升级和规则调整怎么做
 
-### 第 3 步: 再决定要不要发版本
+这部分最容易出事故, 必须单独讲清楚。
 
-当前仓库已经有一个版本基线:
+### 第 1 步: 先看同步报告
 
-- `0.1.0`
+```bash
+python -m vibe_governance sync --target . --dry-run --json
+```
 
-版本信息现在分散在三个地方:
+重点看:
 
-- [`pyproject.toml`](./pyproject.toml): Python 包版本
-- [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml): 上游发布清单
-- [CHANGELOG.md](./CHANGELOG.md): 人类可读版本历史
+- `status`
+- `changed_rule_ids`
 
-如果你只是补局部说明文档, 不一定要马上发版。
+### 第 2 步: 再判断变化属于哪一类
 
-如果你改了以下内容, 就应该认真考虑发版:
+- 只是快照和当前规则目录不同
+- 还是你真的想升级上游基线
+- 还是你其实只想做项目局部 override
 
-- CLI 行为
-- 规则目录
-- 模板输出格式
-- 同步策略
-- 进度管理逻辑
+### 第 3 步: 真要同步时再执行
 
-### 第 4 步: 发版前的标准动作
+```bash
+python -m vibe_governance sync --target .
+python -m vibe_governance validate --target .
+python -m vibe_governance render --target .
+```
+
+当前代码里的 `sync_project()` 做的是真正的“快照更新和上游版本信息回写”, 不是复杂的 overlay 自动合并器。不要把它理解成已经有完整自动合并系统。
+
+## 六、版本迭代怎么形成闭环
+
+这套项目最重要的不是“能改文件”, 而是“每次改动能被后人看懂”。
+
+### 第 1 步: 先决定这次改动要不要升到版本级
+
+一般建议认真考虑发版的情况:
+
+- CLI 行为变了
+- 规则目录变了
+- 模板输出格式变了
+- 校验逻辑变了
+- 同步策略或 `PROGRESS` 生命周期变了
+
+一般不一定需要马上发版的情况:
+
+- 只补解释文档
+- 只新增项目局部经验
+- 只调整还未提升为通用规则的局部内容
+
+### 第 2 步: 版本相关文件一起看
+
+当前版本信息至少分布在:
+
+- [`pyproject.toml`](./pyproject.toml)
+- [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
+- [CHANGELOG.md](./CHANGELOG.md)
+
+### 第 3 步: 发版前跑标准动作
 
 ```bash
 python -m vibe_governance validate --target .
@@ -170,130 +265,71 @@ python -m unittest discover -s tests -v
 然后人工确认:
 
 - [CHANGELOG.md](./CHANGELOG.md) 是否更新
-- `.agents/PROGRESS.md` 是否包含新记录
+- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md) 是否能追到最近变化
 - 根目录说明文档是否需要同步更新
 
-### 第 5 步: 发布和归档
+## 七、经验回流到治理内核怎么做
 
-当前仓库里已经有 GitHub Actions 工作流:
+经验回流不是“看着不错就往上塞”, 而是一个升级动作。
 
-- [`.github/workflows/release-governance.yml`](./.github/workflows/release-governance.yml)
+### 哪些经验值得回流
 
-它现在做的事情很明确:
-
-1. 校验治理源文件
-2. 重新渲染生成文件
-3. 跑单元测试
-4. 打包发布产物
-
-发版完成后:
-
-- 相关 `PROGRESS` 可以从 `draft` 提升为 `promotable`
-- 真正被上游吸收后, 再转 `upstreamed` 并归档
-
-## 四、经验回流流程
-
-“经验回流”不是一句空话, 在这个项目里它对应明确动作。
-
-### 什么时候该回流
-
-当你发现下面这类内容时, 应该考虑回流:
-
-- 某条规则在多个项目重复出现
-- 某个模板的表达方式应该统一
-- 某个校验逻辑能防止高频事故
-- 某个嵌入式/跨 IDE 的坑已经被证明是通用坑
+- 多个项目重复出现的规则
+- 可以减少高频事故的校验逻辑
+- 应该统一的模板表达
+- 已经被验证为通用的跨 IDE / 嵌入式坑点
 
 ### 回流到哪里
 
-按实际情况回:
+- 通用规则: [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
+- 通用模板: [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
+- 初始化骨架: [`vibe_governance/resources/scaffold/`](./vibe_governance/resources/scaffold/)
+- 解释层说明: 根目录说明文档
 
-- 通用规则: `vibe_governance/resources/rule-catalog.yaml`
-- 通用模板: `vibe_governance/resources/templates/*`
-- 初始化骨架: `vibe_governance/resources/scaffold/*`
-- 解释性文档: 根目录这套说明文档
+### 回流前必须先满足什么
 
-### 回流前必须先做什么
+1. 先有 `.agents/progress/entries/*` 里的原始经验记录.
+2. 先确认这不是一次性项目噪音.
+3. 先判断它应该提升到哪一层.
 
-1. 在 `.agents/progress/entries/*` 留下原始经验
-2. 人工确认这不是一次性项目噪音
-3. 明确它要升级到哪一层
+## 八、常见场景的最短路径
 
-## 五、同步上游规则
+### 我只想改某条适配文案
 
-当前实现里的同步不是自动覆盖, 而是“先看报告, 再决定”.
+先看它是否允许项目本地覆盖:
 
-### 先看报告
+- [`.agents/profile.yaml`](./.agents/profile.yaml) 里的 `override_whitelist`
 
-```bash
-python -m vibe_governance sync --target . --dry-run --json
-```
+如果允许, 去改:
 
-### 报告看什么
+- [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml)
 
-- `status`
-- `changed_rule_ids`
-
-如果为空, 当前快照和规则目录一致。
-
-如果有变化, 先去看:
-
-- [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
-- [CODE_WALKTHROUGH.md](./CODE_WALKTHROUGH.md)
-
-### 真正执行同步
-
-```bash
-python -m vibe_governance sync --target .
-python -m vibe_governance validate --target .
-python -m vibe_governance render --target .
-```
-
-## 六、常见场景怎么做
-
-### 场景 1: 我只想改某条 Copilot 文案
-
-去改:
-
-- `.agents/overrides/rules.yaml`
-
-前提:
-
-- 这条规则必须在 `.agents/profile.yaml -> override_whitelist` 里
-
-不要去改:
+不要直接改:
 
 - `.github/copilot-instructions.md`
+- `.cursor/rules/governance.mdc`
+- `CLAUDE.md`
 
-### 场景 2: 我想加一个新的规则种类
+### 我想加一个新的规则种类
 
 去改:
 
-- `vibe_governance/resources/rule-catalog.yaml`
-- 必要时改模板
+- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
 
-然后:
+必要时再改:
 
-```bash
-python -m vibe_governance render --target .
-python -m unittest discover -s tests -v
-```
+- [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
+- [`vibe_governance/project.py`](./vibe_governance/project.py)
 
-### 场景 3: 我想换账号继续做
+### 我换账号了, 还想继续做
 
 直接看:
 
 - [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md)
 
-## 七、手册结尾的硬原则
+## 九、最后记住这四条
 
-- 真源优先, 生成文件靠后
-- 经验先落 `PROGRESS`, 再谈升规则和发版
-- 新账号接手靠文件, 不靠聊天上下文
-- 当前 v1 已经有 MCP 配置入口, 但还没有完整嵌入式 overlay, 不要把“预留能力”当成“现成能力”
-
-## 继续阅读
-
-- 规则和冲突处理: [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
-- 架构设计: [ARCHITECTURE.md](./ARCHITECTURE.md)
-- 代码入口: [CODE_WALKTHROUGH.md](./CODE_WALKTHROUGH.md)
+- 真源优先, 生成层靠后.
+- 经验先写 `PROGRESS`, 再谈升级规则和发版本.
+- 新账号接手靠文件闭环, 不靠聊天历史.
+- 当前 v1 只预留了嵌入式 / MCP 的入口, 不要把预留能力写成现成功能.

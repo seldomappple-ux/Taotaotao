@@ -1,29 +1,45 @@
 # 版本更新日志
 
-这份文件只记录“版本级变化”和“当前工作区与版本之间的关系”。
+这份文件只记录两类信息:
+
+1. 已经发布的版本级变化
+2. 当前工作区相对最近版本的解释性说明
+
+它不负责记流水账。更细的经验和上下文, 在:
+
+- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+- `.agents/progress/entries/*`
 
 ## 维护规则
 
 每次正式发版时, 至少要同步更新这三处:
 
-- `pyproject.toml`
-- `vibe_governance/resources/release-manifest.yaml`
+- [`pyproject.toml`](./pyproject.toml)
+- [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
 - 本文件
 
-另外还要确认:
+同时还要确认:
 
 - 关联的 `PROGRESS` 条目已经写好
-- 相关的根目录说明文档已经更新
+- 相关根目录说明文档已经更新
+- 新账号接手路径没有被文档改乱
 
 ## 当前工作区说明
 
-当前工作区已经补齐了根目录解释性文档体系, 但这些文档的职责是“解释当前版本”, 不是单独构成一个新的已发布版本。
+当前工作区相对 `0.1.0` 基线, 已经完成两类解释层增强:
 
-本轮解释性文档补全对应的本地经验记录建议写入:
+1. 把根目录入门文档重构为更清晰的接手顺序
+2. 把最初三篇原文纳入仓库内资料归档, 并把其中心思想映射到当前实现
 
-- `20260307-2`：根目录解释性文档补全
+这部分变化目前仍然是“当前工作区说明”, 不是单独的已发布版本段落。
 
-如果后续你要把这批文档变化算作正式版本的一部分, 应该在下一次发版时把它写进新的版本段落里。
+当前工作区可对应的本地经验记录包括:
+
+- `20260307-2`: 根目录解释性文档补全
+- `20260307-3`: 重构 onboarding 文档并补齐原始资料归档
+- `20260307-4`: 统一剩余人读文档并补充适配层 onboarding 规则
+
+如果后续要把这些变化并入正式版本, 应在下一个版本段落里明确写入。
 
 ## [0.1.0] - 2026-03-07
 
@@ -31,7 +47,7 @@
 
 这是当前仓库的第一版治理内核基线版本。
 
-它完成了:
+它建立了:
 
 - Python CLI
 - `.agents/` 真源骨架
@@ -41,7 +57,7 @@
 
 ### 为什么会有这个版本
 
-目标很明确:
+这个版本解决的核心问题是:
 
 - 不再依赖聊天记忆保存项目状态
 - 把规则、进度、版本、迁移信息全部落到本地文件
@@ -52,9 +68,9 @@
 #### 新增
 
 - `init / render / validate / sync / progress` 命令集
-- `.agents/profile.yaml` 项目事实源
-- `.agents/overrides/rules.yaml` override 机制
-- `rule-catalog.yaml` canonical 规则目录
+- [`.agents/profile.yaml`](./.agents/profile.yaml) 项目事实源
+- [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml) override 机制
+- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml) canonical 规则目录
 - 根级 AI 适配文件生成
 - `generated-manifest.yaml` 和 `upstream-rule-catalog.yaml` 两类受管状态
 - `PROGRESS` 滑动窗口索引
@@ -73,19 +89,19 @@
 - 基线 Commit 标题: `初版_5.4生成`
 - 基线提交时间: `2026-03-07T15:42:15+08:00`
 
-### 关联文件
+### 关联上下文
 
 - 关联 `PROGRESS`:
   - `20260307-1` -> `.agents/progress/entries/2026/2026-03-07-1.md`
 - 关联发布清单:
-  - `vibe_governance/resources/release-manifest.yaml`
+  - [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
 - 关联包版本:
-  - `pyproject.toml`
+  - [`pyproject.toml`](./pyproject.toml)
 
 ### 对后续版本的要求
 
-从这个版本开始, 后续发版必须保证:
+从这个版本开始, 后续发版至少要保证:
 
-1. `CHANGELOG` 能看懂版本为什么变
+1. `CHANGELOG` 能解释版本为什么变
 2. `PROGRESS` 能追溯经验从哪里来
 3. 新账号只看本地文件就能接手

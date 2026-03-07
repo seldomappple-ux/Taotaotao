@@ -1,137 +1,103 @@
 # 核心代码走读
 
-这份文档是给“想改代码的人”看的。
+这份文档是给准备改生成器的人看的。
 
-它不会把每一行代码抄一遍, 只讲最关键的执行路线、函数职责和扩展入口。
+它不会逐行解释代码, 只讲三件事:
 
-## 一、先看入口
+1. 真实执行链路是什么
+2. 关键函数各管什么
+3. 如果你想扩展功能, 应该从哪一层下手
 
-当前 CLI 入口在:
+## 一、先用一句话看懂代码结构
 
-- [`vibe_governance/cli.py`](./vibe_governance/cli.py)
+当前实现可以直接理解成:
 
-你只要记住一个事实:
+- [`vibe_governance/cli.py`](./vibe_governance/cli.py) 负责接命令
+- [`vibe_governance/project.py`](./vibe_governance/project.py) 负责真正干活
 
-- `cli.py` 负责接命令
-- `project.py` 负责干活
+所以读代码时, 最简单的顺序就是:
 
-## 二、CLI 支持哪些命令
+1. 先看 `cli.py`
+2. 再看 `project.py`
+3. 最后看 `tests/test_governance.py`
 
-### `init`
+## 二、CLI 到底在做什么
 
-作用:
+`cli.py` 本身很薄, 它的职责主要有两个:
 
-- 创建 `.agents/` 基础目录
-- 写入 profile、RULES、override 骨架、架构决策骨架、progress 模板
-- 写入上游规则快照
+1. 用 `argparse` 定义命令和参数
+2. 把子命令分发给 `project.py` 里的公开函数
 
-对应实现:
+当前公开出来的动作只有这些:
 
-- `init_project()`
+- `init`
+- `render`
+- `validate`
+- `sync`
+- `progress promote`
+- `progress archive`
 
-### `render`
+也就是说, 这个文件本身几乎不承载业务逻辑。它更像是一个稳定入口。
 
-作用:
+## 三、真实执行链路怎么走
 
-- 读取项目真源
-- 渲染根目录和 IDE 适配层
-- 生成 manifest
+如果把整个生成器压缩成一条线, 当前代码的核心流程是:
 
-对应实现:
+```text
+CLI 参数
+-> 读取 `.agents/` 真源和 canonical 资源
+-> 校验 profile / overrides / progress
+-> 按 adapter 解析有效规则
+-> 用模板生成受管输出
+-> 写 manifest 和 PROGRESS 索引
+-> 需要时比较上游快照
+```
 
-- `render_project()`
+这条线非常重要, 因为它解释了为什么这个仓库能做到:
 
-### `validate`
+- 先有真源
+- 再有生成结果
+- 最后才有适配层分发
 
-作用:
+## 四、`project.py` 应该怎么读
 
-- 校验 profile
-- 校验 override
-- 校验 progress entry
-- 校验生成结果有没有漂移
+`project.py` 虽然比 `cli.py` 大很多, 但你可以按下面几个区块去理解。
 
-对应实现:
+### 1. 常量和基础数据结构
 
-- `validate_project()`
+这里最先出现的是:
 
-### `sync`
+- `KNOWN_ADAPTERS`
+- `SYNC_STRATEGIES`
+- `DOC_MODES`
+- `ACTIVE_PROGRESS_STATUSES`
+- `ALL_PROGRESS_STATUSES`
 
-作用:
-
-- 把当前 `rule-catalog.yaml` 和项目保存的快照做比较
-- 输出按 `rule_id` 聚合的差异
-- 非 dry-run 时更新快照和 profile 中的上游版本信息
-
-对应实现:
-
-- `sync_project()`
-
-### `progress promote`
-
-作用:
-
-- 把 entry 状态改成 `promotable`
-- 顺手重建 `.agents/PROGRESS.md`
-
-对应实现:
-
-- `promote_progress_entry()`
-
-### `progress archive`
-
-作用:
-
-- 把 entry 移到 `archived/`
-- 状态改成 `upstreamed`
-- 重建 `.agents/PROGRESS.md`
-
-对应实现:
-
-- `archive_progress_entry()`
-
-## 三、`project.py` 的关键模块怎么理解
-
-### 1. 常量区
-
-这里定义了:
-
-- 支持的适配器
-- 支持的同步策略
-- 支持的文档模式
-- `PROGRESS` 状态集合
-
-它的意义是:
-
-- 把“允许什么”放到一处统一管理
-- 避免散落在代码里的魔法字符串
-
-### 2. 数据结构区
-
-当前主要用了几个 dataclass:
+以及三个 dataclass:
 
 - `ReleaseManifest`
 - `ProgressEntry`
 - `ArchitectureDecision`
 
-这些结构的作用是把 YAML / Markdown 解析后的数据变成明确对象, 后续渲染和校验都围绕它们走。
+这部分的作用很直接:
 
-### 3. 文件定位函数
+- 把允许值集中定义
+- 把 YAML / Markdown 解析结果变成更明确的结构
 
-例如:
+### 2. 路径和资源读取函数
 
-- `_profile_path()`
-- `_rules_path()`
-- `_overrides_path()`
-- `_progress_entries_dir()`
-- `_manifest_path()`
+这部分是 `_profile_path()`、`_rules_path()`、`_overrides_path()`、`_managed_dir()` 这一类函数, 再加上 `_resource_text()`、`_load_resource_yaml()`、`_read_scaffold()`。
 
-这些函数的价值很朴素:
+它们负责做两件事:
 
-- 以后目录如果要调整, 改一处比改十几处安全
+- 统一定位本地真源和受管文件的位置
+- 统一读取 `resources/` 里的规则、模板和 scaffold
 
-### 4. 配置读取与校验函数
+这层虽然看起来朴素, 但它决定了整个项目的目录约定。
 
-核心是:
+### 3. 真源读取和校验
+
+这部分核心函数是:
 
 - `_load_profile()`
 - `_load_overrides()`
@@ -139,63 +105,129 @@
 - `_validate_profile()`
 - `_validate_overrides()`
 
-它们负责把“人写的配置”变成“程序能判断对错的结构”。
+这里的关键约束有两个:
 
-最重要的两个约束:
+1. `override_whitelist` 之外的规则不能乱 override
+2. `immutable` 规则不能被项目层覆盖
 
-1. `override_whitelist` 之外不允许乱 override
-2. `immutable` 规则就算进了 whitelist 也不能改
+这部分就是治理红线在代码里的第一道落点。
 
-### 5. `PROGRESS` 处理函数
+### 4. `PROGRESS` 读取、序列化和索引生成
 
-核心是:
+这部分核心函数是:
 
 - `_load_entry()`
 - `_serialize_entry()`
 - `_load_entries()`
 - `_render_progress_markdown()`
 
-这部分代码解决的是:
+它解决的是:
 
-- 经验记录怎么从“零散 Markdown”变成“结构化索引”
-- 为什么 `.agents/PROGRESS.md` 可以只保留最近 10 条活跃 entry
+- 如何把零散的 entry 文件变成结构化对象
+- 如何只把最近 10 条活跃 entry 放进 [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+- 如何把更早或已沉淀的记录继续留在磁盘上可检索
 
-这就是版本迭代和上下文迁移能落地的关键之一。
+这部分代码直接对应了“长期记忆本地化”和“滑动窗口索引”的设计。
 
-### 6. 规则选择和渲染函数
+### 5. 规则选择和模板渲染
 
-核心是:
+这部分核心函数是:
 
 - `_effective_rule_for_adapter()`
 - `_rules_for_adapter()`
 - `_render_template()`
 - `_expected_managed_outputs()`
 
-可以这样理解:
+它的真实工作顺序可以理解成:
 
-1. 先找出当前 adapter 应该看到哪些规则
-2. 再把允许的 override 覆盖进去
-3. 最后把规则喂给模板, 生成目标文件
+1. 从 `rule-catalog.yaml` 里找出当前 adapter 相关的规则
+2. 把允许的项目级 override 合并进去
+3. 根据 `doc_mode`、`mcp.enabled` 等条件筛选规则
+4. 把结果喂给模板
+5. 得到每个受管输出的预期内容和 checksum
 
-### 7. Manifest 和漂移校验
+### 6. 受管输出包装和漂移检测
 
-核心是:
+这部分关键函数是:
 
 - `_metadata_comment()`
 - `_wrap_managed_content()`
 - `validate_project()`
 
-它解决的是:
+它负责把这些信息写进每个受管文件头部:
 
-- 生成文件如何带上 checksum
-- 怎么知道有人是不是手工改过生成文件
+- 工具版本
+- 上游仓地址
+- 上游版本
+- 发布时间
+- checksum
 
-这也是跨账号接手很重要的一层保险:
+然后在 `validate_project()` 里, 再用这些预期输出来检查当前磁盘内容是否漂移。
 
-- 新 AI 拿到仓库后可以先 `validate`
-- 一眼判断当前生成层是不是被人手工动过
+### 7. 公开动作函数
 
-## 四、如果你想扩展功能, 应该从哪下手
+这部分是你在 `cli.py` 里最终会调到的函数:
+
+- `init_project()`
+- `render_project()`
+- `validate_project()`
+- `sync_project()`
+- `promote_progress_entry()`
+- `archive_progress_entry()`
+
+它们分别对应仓库的生命周期动作:
+
+- 初始化
+- 生成
+- 校验
+- 同步
+- 经验提升
+- 经验归档
+
+## 五、几个最关键的执行细节
+
+### 1. `render_project()` 先校验, 再生成
+
+当前实现里, `render_project()` 会先调用:
+
+- `validate_project(target, check_generated=False)`
+
+这意味着:
+
+- 真源本身如果有问题, 根本不会进入渲染阶段
+- 但渲染前不会因为“当前生成文件已经漂移”而卡死
+
+### 2. `validate_project()` 会检查两类问题
+
+第一类是源文件问题:
+
+- profile 字段缺失
+- override 越权
+- progress entry 格式错误
+
+第二类是生成层问题:
+
+- manifest 与预期输出集合不一致
+- 受管文件内容和当前应生成内容不一致
+
+### 3. `sync_project()` 现在做的是快照同步, 不是复杂合并
+
+当前 `sync_project()` 的工作重点是:
+
+- 比较当前 `rule-catalog.yaml` 和 `.agents/.managed/upstream-rule-catalog.yaml`
+- 输出 `changed_rule_ids`
+- 非 dry-run 时更新快照和 `profile.yaml` 里的上游版本信息
+
+它还没有实现复杂 overlay 合并器。写文档或扩展功能时要守住这个边界。
+
+### 4. `progress promote` 和 `progress archive` 都会触发重新渲染
+
+这是因为:
+
+- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md) 是生成文件
+- entry 状态一变, 滑动索引也必须跟着变
+
+## 六、如果你想扩展功能, 应该从哪下手
 
 ### 场景 1: 新增一个 CLI 子命令
 
@@ -212,51 +244,48 @@
 - [tests/test_governance.py](./tests/test_governance.py)
 - 根目录说明文档
 
-### 场景 2: 新增一个新的规则字段
+### 场景 2: 新增一个规则字段或新 `rule_id`
 
 先改:
 
-- `vibe_governance/resources/rule-catalog.yaml`
+- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
 
-如果模板也要显示它, 再改:
+如有需要, 再改:
 
-- `vibe_governance/resources/templates/*`
+- [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
+- [`vibe_governance/project.py`](./vibe_governance/project.py)
 
-如果校验也要管它, 再改:
+### 场景 3: 新增一个 IDE 适配器
 
-- `project.py` 里的校验逻辑
-
-### 场景 3: 新增一个新的 IDE 适配器
-
-最少要动这些地方:
+当前最少要同时改这些地方:
 
 1. `KNOWN_ADAPTERS`
 2. `_managed_targets()`
-3. 新增模板文件
+3. 对应模板文件
 4. 测试
-5. 文档
+5. 说明文档
 
-### 场景 4: 补真正的嵌入式 overlay
+### 场景 4: 推进嵌入式 / MCP 到下一阶段
 
-当前 v1 还没有独立 overlay 系统。
+当前 v1 还没有独立 overlay 体系。
 
-如果你要做, 推荐的切入顺序是:
+更稳的切入顺序是:
 
-1. 先在文档里补设计
-2. 再设计新的结构化目录
-3. 再决定是扩 `profile.yaml`, 还是新增 overlay 目录
-4. 最后再改生成器
+1. 先把设计和边界写进文档
+2. 再补结构化 schema 或目录
+3. 再决定是扩 `profile.yaml`, 还是新增 overlay 层
+4. 最后再改渲染和校验逻辑
 
-不要一上来就在模板里硬塞大量嵌入式判断。
+不要直接在模板里堆大量嵌入式判断。
 
-## 五、版本迭代相关代码逻辑在哪
+## 七、版本、经验和快照相关代码在哪里
 
 ### 与版本号直接相关
 
 - [`pyproject.toml`](./pyproject.toml)
 - [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
 
-### 与版本历史和经验相关
+### 与经验记录相关
 
 - `.agents/progress/entries/*`
 - [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
@@ -270,25 +299,20 @@
 
 - [`.agents/.managed/generated-manifest.yaml`](./.agents/.managed/generated-manifest.yaml)
 
-也就是说:
+也就是说, 版本和状态并不是只放在一个文件里, 而是由发布清单、经验索引、版本说明和同步快照一起组成。
 
-- 版本本身不是只存在一个文件里
-- 它是“发布清单 + 变更历史 + 经验索引 + 当前快照”一起组成的
-
-## 六、新账号接手代码时建议怎么读
+## 八、新账号接手代码时, 推荐怎么读
 
 推荐顺序:
 
-1. 先看 [ARCHITECTURE.md](./ARCHITECTURE.md)
-2. 再看 [`vibe_governance/cli.py`](./vibe_governance/cli.py)
-3. 再看 [`vibe_governance/project.py`](./vibe_governance/project.py)
-4. 再看 [tests/test_governance.py](./tests/test_governance.py)
-5. 最后回来看 [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
+1. [ARCHITECTURE.md](./ARCHITECTURE.md)
+2. [`vibe_governance/cli.py`](./vibe_governance/cli.py)
+3. [`vibe_governance/project.py`](./vibe_governance/project.py)
+4. [tests/test_governance.py](./tests/test_governance.py)
+5. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
 
-这样读不会乱。
+## 九、最后的底线提醒
 
-## 七、这份代码走读的底线提醒
-
-- 当前项目已经把“解释层”和“执行层”分开了, 改代码时不要再把它们混回去
-- 当前项目还没有项目类型 overlay, 文档里提到的扩展方向不等于现成功能
-- 想改行为, 一定先确认自己是在改“真源”, 还是在改“生成结果”
+- 这个项目已经把解释层和执行层分开了, 不要再把它们混回去
+- 当前项目还没有真正的项目类型 overlay, 文档里提到的方向不等于现成功能
+- 想改行为时, 先确认自己在改真源、canonical 资源, 还是生成结果

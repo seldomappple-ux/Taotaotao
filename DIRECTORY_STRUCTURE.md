@@ -8,6 +8,7 @@
 | --- | --- | --- | --- |
 | `README.md` | 人、新账号、新 AI | 可以 | 项目门面和导航 |
 | `QUICKSTART.md` | 人、新账号、新 AI | 可以 | 5 分钟接手 |
+| `SOURCE_MATERIALS.md` | 人、新账号、新 AI | 可以 | 原始资料索引和思想来源映射 |
 | `USAGE_GUIDE.md` | 人 | 可以 | 生命周期操作手册 |
 | `ARCHITECTURE.md` | 人、新 AI | 可以 | 架构解释 |
 | `DIRECTORY_STRUCTURE.md` | 人、新 AI | 可以 | 目录说明 |
@@ -125,7 +126,14 @@
   - `PROGRESS` 滑动窗口
   - 同步报告
 
-### 4. `.github/`
+### 4. `references/`
+
+- 作用: 保存项目的原始资料和长期参考材料
+- 当前内容: `references/original-articles/` 里保存了三篇最初的 Vibe Coding 相关文章网页快照
+- 适用场景: 新账号接手、回看架构来源、校验后续演进有没有偏离最初思路
+- 能不能改: 可以补充说明文档, 但不建议随意改动原文快照文件
+
+### 5. `.github/`
 
 #### `.github/copilot-instructions.md`
 
@@ -142,19 +150,19 @@
 - 作用: 校验、渲染、测试、打包发布
 - 能不能改: 可以, 但这属于治理引擎层改动
 
-### 5. `.cursor/`
+### 6. `.cursor/`
 
 - 作用: Cursor 规则适配目录
 - 当前核心文件: `.cursor/rules/governance.mdc`
 - 来源: `render`
 
-### 6. `.opencode/`
+### 7. `.opencode/`
 
 - 作用: opencode 适配目录
 - 当前核心文件: `.opencode/AGENTS.md`
 - 来源: `render`
 
-### 7. `.tmp-tests/`
+### 8. `.tmp-tests/`
 
 - 作用: 本地测试临时目录
 - 需要同步吗: 不需要
@@ -166,6 +174,7 @@
 必须同步:
 
 - 根目录全部说明文档
+- `references/`
 - `.agents/`
 - `vibe_governance/`
 - `tests/`
@@ -208,6 +217,7 @@
 看目录时只记住这条:
 
 - 根目录说明文档负责“讲清楚”
+- `references/` 负责“保存原始资料和设计来源”
 - `.agents/` 负责“保存事实”
 - `vibe_governance/` 负责“驱动生成”
 - 各 IDE 目录负责“接收结果”

@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://www.caoxin.xyz/index.php/archives/82/ -->
+<html lang="zh-CN" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-transform">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<title itemprop="name">关于 Vibe Coding 的思考与探索 - CaoXin 的小站</title>
+	<meta name="description" content="关于 Vibe Coding 的思考与探索今年我最直接的感受是：vibe coding 真的把开发门槛压下来了。很多以前要完整团队做的东西，现在个人开发者也能做，尤其是那种只服务我自己的高定制化...">
+<link rel="alternate" type="application/rss+xml" title="关于 Vibe Coding 的思考与探索 » CaoXin 的小站 » RSS 2.0" href="https://www.caoxin.xyz/index.php/feed/archives/82/">
+<link rel="alternate" type="application/rdf+xml" title="关于 Vibe Coding 的思考与探索 » CaoXin 的小站 » RSS 1.0" href="https://www.caoxin.xyz/index.php/feed/rss/archives/82/">
+<link rel="alternate" type="application/atom+xml" title="关于 Vibe Coding 的思考与探索 » CaoXin 的小站 » ATOM 1.0" href="https://www.caoxin.xyz/index.php/feed/atom/archives/82/">
+<script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-82'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-82'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+(function () {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        triggers: ['scroll', 'mousemove', 'keyup', 'touchstart'],
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        triggers: ['onfocus', 'onmousemove', 'onkeyup', 'ontouchstart'],
+        load: 'onload'
+    }, added = false;
+
+    document[event.add](event.load, function () {
+        var r = document.getElementById('respond-post-82'),
+            input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = '_';
+        input.value = (function () {
+    var _5Ut = 'e'//'wS8'
++'7'//'1S4'
++'1'//'j'
++'e6'//'rf2'
++'U'//'U'
++'ec'//'wWA'
++//'P'
+'7d5'+//'uNw'
+'556'+'601'//'0v'
++'48'//'N7'
++/* 'j'//'j' */''+'45'//'0Q9'
++//'QE'
+'5'+//'k1'
+'700'+//'9U'
+'a92'+'770'//'H'
++'2'//'y'
++'3m'//'3m'
++//'PBB'
+'PBB'+/* 'yh4'//'yh4' */''+//'yKz'
+'yKz'+''///*'nto'*/'nto'
++''///*'JU'*/'JU'
++//'I'
+'3', _ZrM = [[5,6],[31,33],[31,34],[31,34]];
+    
+    for (var i = 0; i < _ZrM.length; i ++) {
+        _5Ut = _5Ut.substring(0, _ZrM[i][0]) + _5Ut.substring(_ZrM[i][1]);
+    }
+
+    return _5Ut;
+})();
+
+        if (null != r) {
+            var forms = r.getElementsByTagName('form');
+            if (forms.length > 0) {
+                function append() {
+                    if (!added) {
+                        forms[0].appendChild(input);
+                        added = true;
+                    }
+                }
+            
+                for (var i = 0; i < event.triggers.length; i ++) {
+                    var trigger = event.triggers[i];
+                    document[event.add](trigger, append);
+                    window[event.add](trigger, append);
+                }
+            }
+        }
+    });
+})();
+</script>	<link rel="dns-prefetch" href="https://cdn.zhebk.cn/">
+	
+	<link rel="shortcut icon" href="https://www.caoxin.xyz/usr/themes/Akina/images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/style.css" type="text/css">
+	<link rel="stylesheet" href="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/OwO.css" type="text/css"><link rel="stylesheet" href="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/dark.css" type="text/css">  <!-- 个性化选项 CSS 代码 -->
+  <style type="text/css">
+	
+    @media (max-width:1080px) {#centerbg {display:block;} }
+    
+      @media ( prefers-color-scheme: dark ) {
+        .cd-top { 
+          background:url(https://www.caoxin.xyz/usr/themes/Akina/images/gotop-dark.png) no-repeat center 50% !important;
+        }
+      }
+        /* 到顶部按钮 */
+  .wedonate img { 
+    margin-right: 10px;
+  }
+  .cd-top { 
+    background:url(https://www.caoxin.xyz/usr/themes/Akina/images/gotop.png) no-repeat center 50%;
+  }
+</style>  <!-- 自定义 CSS 代码 -->
+	<style>.Typewriter__cursor{-webkit-animation:Typewriter-cursor 1s infinite;animation:Typewriter-cursor 1s infinite;margin-left:1px}@-webkit-keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}@keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}</style><style id="pp_style">:root {
+  --color-primary: #306eff;
+  --color-primary-hover: #4a80ff;
+  --color-primary-active: #175cff;
+  --color-primary-disabled: rgba(48, 110, 255, 0.5);
+  --el-color-error: #ff663b;
+  --transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+#no-select {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+}
+a.pp-restore-btn {
+  --size: 24px;
+  height: var(--size) !important;
+  width: var(--size) !important;
+  display: inline-block;
+  vertical-align: middle !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  z-index: 999 !important;
+  cursor: pointer !important;
+  background-color: transparent !important;
+  position: relative;
+}
+a.pp-restore-btn::after,
+a.pp-restore-btn::before {
+  display: none;
+}
+a.pp-restore-btn div {
+  margin: 0 !important;
+}
+a.pp-restore-btn::before,
+a.pp-restore-btn::after {
+  display: none !important;
+}
+a.pp-restore-btn:hover .pp-tip {
+  display: block;
+}
+a.pp-restore-btn:hover .pp-btn {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgNEMwIDEuNzkwODYgMS43OTA4NiAwIDQgMEgyOFYyOEg0QzEuNzkwODYgMjggMCAyNi4yMDkxIDAgMjRWNFoiIGZpbGw9IiMzMDZFRkYiLz4KPHBhdGggb3BhY2l0eT0iMC45ODU2MDEiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTUuNzI0MiA4LjYyMDM4QzE1LjQ4NDggOC41OTAwOCAxNS4yODEyIDguNDMwNzkgMTUuMTk0MyA4LjIwNTYyTDE0LjQ3NDIgNi4zNDExNUMxNC40MTQ2IDYuMTg2ODMgMTQuNTQxMiA2LjAyNDc0IDE0LjcwNTQgNi4wNDUxN0wyMi4yODM0IDYuOTg4MzhDMjIuNjcyOCA3LjAzNjg1IDIzLjAwNjQgNy4yOTAxNiAyMy4xNTc3IDcuNjUyMjNMMjQgOS42Njc2OEwxNS43MjQyIDguNjIwMzhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBvcGFjaXR5PSIwLjk4NTYwMSIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMi4yOTE0IDguNjIwMzhDMTIuNTMwOSA4LjU5MDA4IDEyLjczNDQgOC40MzA3OSAxMi44MjE0IDguMjA1NjJMMTMuNTQxNCA2LjM0MTE1QzEzLjYwMSA2LjE4NjgzIDEzLjQ3NDQgNi4wMjQ3NCAxMy4zMTAzIDYuMDQ1MTdMNS43MzIyNiA2Ljk4ODM4QzUuMzQyODUgNy4wMzY4NSA1LjAwOTIyIDcuMjkwMTYgNC44NTc5MSA3LjY1MjIzTDQuMDE1NjIgOS42Njc2OEw3LjQ0MzQzIDkuMjMzODlMMTIuMjkxNCA4LjYyMDM4WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00IDkuNjY3NzJIMjRWMjAuNjUyMUMyNCAyMS44ODc1IDIyLjk5ODUgMjIuODg4OSAyMS43NjMyIDIyLjg4ODlINi4yMzY4M0M1LjAwMTQ2IDIyLjg4ODkgNCAyMS44ODc1IDQgMjAuNjUyMVY5LjY2NzcyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTExLjc3NzMgMTkuNTU1NUMxMS43NzczIDE5LjU1NTUgMTIuODc3MSAyMCAxMy45ODkyIDIwQzE1LjEwMTQgMjAgMTYuMjIxOCAxOS41NTU1IDE2LjIyMTggMTkuNTU1NSIgc3Ryb2tlPSIjMzA2RUZGIiBzdHJva2Utd2lkdGg9IjEuMTE4NDIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNMTAuNDQ1NyAxMy45OTk5VjE1Ljc3NzciIHN0cm9rZT0iIzMwNkVGRiIgc3Ryb2tlLXdpZHRoPSIxLjc4OTQ3IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTE3LjU1NTEgMTMuOTk5OVYxNS43Nzc3IiBzdHJva2U9IiMzMDZFRkYiIHN0cm9rZS13aWR0aD0iMS43ODk0NyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=);
+}
+a.pp-restore-btn .pp-btn {
+  height: var(--size);
+  width: var(--size);
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC4yNSIgeT0iMC4yNSIgd2lkdGg9IjI3LjUiIGhlaWdodD0iMjcuNSIgcng9IjMuNzUiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjAuMjUiIHk9IjAuMjUiIHdpZHRoPSIyNy41IiBoZWlnaHQ9IjI3LjUiIHJ4PSIzLjc1IiBmaWxsPSIjMzA2RUZGIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8cmVjdCB4PSIwLjI1IiB5PSIwLjI1IiB3aWR0aD0iMjcuNSIgaGVpZ2h0PSIyNy41IiByeD0iMy43NSIgc3Ryb2tlPSIjMzA2RUZGIiBzdHJva2Utd2lkdGg9IjAuNSIvPgo8cGF0aCBkPSJNMCA0QzAgMS43OTA4NiAxLjc5MDg2IDAgNCAwSDI0QzI2LjIwOTEgMCAyOCAxLjc5MDg2IDI4IDRWMjRDMjggMjYuMjA5MSAyNi4yMDkxIDI4IDI0IDI4SDRDMS43OTA4NiAyOCAwIDI2LjIwOTEgMCAyNFY0WiIgZmlsbD0iIzMwNkVGRiIvPgo8cGF0aCBvcGFjaXR5PSIwLjk4NTYwMSIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNS43MjQyIDguNjIwMzhDMTUuNDg0OCA4LjU5MDA4IDE1LjI4MTIgOC40MzA3OSAxNS4xOTQzIDguMjA1NjJMMTQuNDc0MiA2LjM0MTE1QzE0LjQxNDYgNi4xODY4MyAxNC41NDEyIDYuMDI0NzQgMTQuNzA1NCA2LjA0NTE3TDIyLjI4MzQgNi45ODgzOEMyMi42NzI4IDcuMDM2ODUgMjMuMDA2NCA3LjI5MDE2IDIzLjE1NzcgNy42NTIyM0wyNCA5LjY2NzY4TDE1LjcyNDIgOC42MjAzOFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIG9wYWNpdHk9IjAuOTg1NjAxIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTEyLjI5MTQgOC42MjAzOEMxMi41MzA5IDguNTkwMDggMTIuNzM0NCA4LjQzMDc5IDEyLjgyMTQgOC4yMDU2MkwxMy41NDE0IDYuMzQxMTVDMTMuNjAxIDYuMTg2ODMgMTMuNDc0NCA2LjAyNDc0IDEzLjMxMDMgNi4wNDUxN0w1LjczMjI2IDYuOTg4MzhDNS4zNDI4NSA3LjAzNjg1IDUuMDA5MjIgNy4yOTAxNiA0Ljg1NzkxIDcuNjUyMjNMNC4wMTU2MiA5LjY2NzY4TDcuNDQzNDMgOS4yMzM4OUwxMi4yOTE0IDguNjIwMzhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTQgOS42Njc3MkgyNFYyMC42NTIxQzI0IDIxLjg4NzUgMjIuOTk4NSAyMi44ODg5IDIxLjc2MzIgMjIuODg4OUg2LjIzNjgzQzUuMDAxNDYgMjIuODg4OSA0IDIxLjg4NzUgNCAyMC42NTIxVjkuNjY3NzJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTEuNzc3MyAxOS41NTU1QzExLjc3NzMgMTkuNTU1NSAxMi44NzcxIDIwIDEzLjk4OTIgMjBDMTUuMTAxNCAyMCAxNi4yMjE4IDE5LjU1NTUgMTYuMjIxOCAxOS41NTU1IiBzdHJva2U9IiMzMDZFRkYiIHN0cm9rZS13aWR0aD0iMS4xMTg0MiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMC40NDU3IDEzLjk5OTlWMTUuNzc3NyIgc3Ryb2tlPSIjMzA2RUZGIiBzdHJva2Utd2lkdGg9IjEuNzg5NDciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNMTcuNTU1MSAxMy45OTk5VjE1Ljc3NzciIHN0cm9rZT0iIzMwNkVGRiIgc3Ryb2tlLXdpZHRoPSIxLjc4OTQ3IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==) no-repeat center / 100%;
+}
+a.pp-restore-btn .pp-tip {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  background: rgba(38, 38, 38, 0.9);
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  box-sizing: border-box;
+  color: #fff;
+  display: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  height: var(--size);
+  line-height: var(--size);
+  padding: 0 4px !important;
+  position: fixed;
+  z-index: 9999999999;
+  white-space: nowrap;
+}
+#pp_context_menu,
+#pp .context-menu {
+  position: fixed;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 6px 8px 8px;
+  margin: 0;
+  z-index: 9999999999;
+}
+#pp_context_menu li,
+#pp .context-menu li {
+  cursor: pointer;
+  border-radius: 6px;
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  white-space: nowrap;
+}
+#pp_context_menu li.title,
+#pp .context-menu li.title {
+  cursor: default;
+  color: #666;
+  font-size: 12px;
+  height: 32px;
+  line-height: 32px;
+  position: relative;
+  margin-bottom: 14px;
+}
+#pp_context_menu li.title:hover,
+#pp .context-menu li.title:hover {
+  background: unset;
+}
+#pp_context_menu li.title::after,
+#pp .context-menu li.title::after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 1px;
+  inset: auto -8px -6px;
+  background: rgba(0, 0, 0, 0.1);
+}
+#pp_context_menu li:hover,
+#pp .context-menu li:hover {
+  background: #f2f3f4;
+}
+#pp_landing_page {
+  display: none;
+  position: fixed;
+  z-index: 9999999999;
+  top: 6px;
+  right: 6px;
+  width: 380px;
+  min-height: 504px;
+  max-height: calc(100vh - 12px);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  outline: 0.5px solid #e5e5e5;
+}
+#pp_close_landing_page {
+  display: none;
+  position: fixed;
+  z-index: 9999999999;
+  top: 18px;
+  right: 18px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: #ddd;
+}
+#pp_close_landing_page:hover {
+  color: #fff;
+}
+#pp_modal {
+  width: 640px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  border: none;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  font-style: normal !important;
+}
+#pp_modal_wrap {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999999999;
+}
+#pp_modal_wrap * {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, apple color emoji, segoe ui emoji, Segoe UI Symbol, noto color emoji;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
+  transition: all var(--transition);
+}
+#pp_modal_wrap a {
+  display: inline-block;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+#pp_modal .pp_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#pp_modal_title {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+}
+#pp_modal_close {
+  width: 24px;
+  height: 24px;
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjYiIHZpZXdCb3g9IjAgMCAyNCAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMy40MDgzIDE0LjEzNzhMMTcuMjkxMSAxOC4yMjZDMTcuNjgxNiAxOC42Mzc5IDE3LjY4MTYgMTkuMzA1NyAxNy4yOTExIDE5LjcxNzZDMTYuOTAwNiAyMC4xMjk2IDE2LjI2NzQgMjAuMTI5NiAxNS44NzY5IDE5LjcxNzZMMTEuOTk1NCAxNS42MzA3TDguMTE5NDMgMTkuNzI2QzcuNzI4OTEgMjAuMTM4IDcuMDk1NzQgMjAuMTM4IDYuNzA1MjIgMTkuNzI2QzYuMzE0NjkgMTkuMzE0MSA2LjMxNDY5IDE4LjY0NjMgNi43MDUyMiAxOC4yMzQ0TDEwLjU3OTkgMTQuMTQwNEw2LjY5NzI4IDEwLjA1MjNDNi4zMDY3NiA5LjY0MDM1IDYuMzA2NzYgOC45NzI1MSA2LjY5NzI4IDguNTYwNkM3LjA4NzgxIDguMTQ4NjkgNy43MjA5NyA4LjE0ODY5IDguMTExNSA4LjU2MDZMMTEuOTkyOSAxMi42NDc0TDE1Ljg2ODggOC41NTIxQzE2LjI1OTMgOC4xNDAxOSAxNi44OTI1IDguMTQwMTkgMTcuMjgzIDguNTUyMUMxNy42NzM1IDguOTY0MDEgMTcuNjczNSA5LjYzMTg0IDE3LjI4MyAxMC4wNDM4TDEzLjQwODMgMTQuMTM3OFoiIGZpbGw9IiM2NjY2NjYiLz4KPC9zdmc+Cg==) no-repeat center / cover;
+}
+#pp_modal_body {
+  padding: 24px 0 32px;
+}
+#pp_modal_input {
+  width: 100%;
+  background: #f2f3f4;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 12px 16px;
+  border: none;
+  resize: none;
+  outline: none;
+}
+#pp_modal_valid_message {
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #ff663b;
+  position: absolute;
+  line-height: 26px;
+  height: 26px;
+  max-width: 576px;
+}
+#pp_modal .pp_footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+#pp_modal_cancel {
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
+  padding: 0 16px;
+  line-height: 36px;
+  height: 36px;
+}
+#pp_modal_cancel:hover {
+  background: #f5f7fa;
+}
+#pp_modal_confirm {
+  min-width: 120px;
+  line-height: 36px;
+  height: 36px;
+  padding: 0 16px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  display: flex !important;
+  align-items: center;
+  margin-left: 16px;
+  background: var(--color-primary);
+}
+#pp_modal_confirm:hover {
+  background: var(--color-primary-hover);
+}
+#pp_modal_confirm:active {
+  background: var(--color-primary-active);
+}
+#pp_modal_confirm.disabled,
+#pp_modal_confirm:disabled {
+  background: var(--color-primary-disabled);
+  opacity: 0.5;
+}
+#pp_modal_confirm_icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNSAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMS41IDExVjVDMTEuNSA0LjQ0NzcyIDExLjk0NzcgNCAxMi41IDRDMTMuMDUyMyA0IDEzLjUgNC40NDc3MiAxMy41IDVWMTFIMTkuNUMyMC4wNTIzIDExIDIwLjUgMTEuNDQ3NyAyMC41IDEyQzIwLjUgMTIuNTUyMyAyMC4wNTIzIDEzIDE5LjUgMTNIMTMuNVYxOUMxMy41IDE5LjU1MjMgMTMuMDUyMyAyMCAxMi41IDIwQzExLjk0NzcgMjAgMTEuNSAxOS41NTIzIDExLjUgMTlWMTNINS41QzQuOTQ3NzIgMTMgNC41IDEyLjU1MjMgNC41IDEyQzQuNSAxMS40NDc3IDQuOTQ3NzIgMTEgNS41IDExSDExLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K) no-repeat center / cover;
+}
+#pp_float_ball {
+  position: fixed;
+  z-index: 9999999999;
+  right: 0;
+  bottom: 20%;
+  display: flex;
+  flex-direction: column-reverse;
+}
+#pp_float_ball_main:hover {
+  width: 64px;
+  border: 0;
+  background: var(--color-primary) url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggb3BhY2l0eT0iMC45ODU2MDEiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTQuMDY5MSA1LjMyNjFDMTMuNzgxNyA1LjI4OTczIDEzLjUzNzUgNS4wOTg1OSAxMy40MzMxIDQuODI4MzhMMTIuNTY5IDIuNTkxMDJDMTIuNDk3NSAyLjQwNTg0IDEyLjY0OTQgMi4yMTEzMyAxMi44NDY0IDIuMjM1ODRMMjEuOTQgMy4zNjc3QzIyLjQwNzMgMy40MjU4NiAyMi44MDc3IDMuNzI5ODMgMjIuOTg5MyA0LjE2NDMxTDI0IDYuNTgyODVMMTQuMDY5MSA1LjMyNjFaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBvcGFjaXR5PSIwLjk4NTYwMSIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik05Ljk1MjQgNS4zMjYxQzEwLjIzOTggNS4yODk3MyAxMC40ODQgNS4wOTg1OSAxMC41ODg0IDQuODI4MzhMMTEuNDUyNCAyLjU5MTAyQzExLjUyNCAyLjQwNTg0IDExLjM3MjEgMi4yMTEzMyAxMS4xNzUxIDIuMjM1ODRMMi4wODE0NSAzLjM2NzdDMS42MTQxNiAzLjQyNTg2IDEuMjEzOCAzLjcyOTgzIDEuMDMyMjIgNC4xNjQzMUwwLjAyMTQ4NDQgNi41ODI4NUw0LjEzNDg1IDYuMDYyMzFMOS45NTI0IDUuMzI2MVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMCA2LjU4MzVIMjRWMTkuNzY0OEMyNCAyMS4yNDcyIDIyLjc5ODIgMjIuNDQ5IDIxLjMxNTggMjIuNDQ5SDIuNjg0MkMxLjIwMTc2IDIyLjQ0OSAwIDIxLjI0NzIgMCAxOS43NjQ4VjYuNTgzNVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik05LjMzMjAzIDE4LjQ0NzNDOS4zMzIwMyAxOC40NDczIDEwLjY1MTcgMTguOTgwNiAxMS45ODYzIDE4Ljk4MDZDMTMuMzIwOSAxOC45ODA2IDE0LjY2NTQgMTguNDQ3MyAxNC42NjU0IDE4LjQ0NzMiIHN0cm9rZT0iIzMwNmVmZiIgc3Ryb2tlLXdpZHRoPSIxLjM0MjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNNy43MzQ0NiAxMS43ODA2VjEzLjkxMzkiIHN0cm9rZT0iIzMwNmVmZiIgc3Ryb2tlLXdpZHRoPSIyLjE0NzM2IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTE2LjI1OTkgMTEuNzgwNlYxMy45MTM5IiBzdHJva2U9IiMzMDZlZmYiIHN0cm9rZS13aWR0aD0iMi4xNDczNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=) no-repeat center / 24px;
+}
+#pp_float_ball_main {
+  position: relative;
+  cursor: pointer;
+  width: 50px;
+  height: 44px;
+  box-shadow: 0 8px 16px 0 rgba(8, 6, 33, 0.1);
+  border-radius: 44px 0 0 44px;
+  border: 0.5px solid #0000001a;
+  box-sizing: border-box;
+  background: #fff url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggb3BhY2l0eT0iMC45ODU2MDEiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTQuMDY5MSA1LjMyNjM0QzEzLjc4MTcgNS4yODk5OCAxMy41Mzc1IDUuMDk4ODQgMTMuNDMzMSA0LjgyODYzTDEyLjU2OSAyLjU5MTI2QzEyLjQ5NzUgMi40MDYwOCAxMi42NDk0IDIuMjExNTcgMTIuODQ2NCAyLjIzNjA5TDIxLjk0IDMuMzY3OTRDMjIuNDA3MyAzLjQyNjExIDIyLjgwNzcgMy43MzAwNyAyMi45ODkzIDQuMTY0NTZMMjQgNi41ODMxTDE0LjA2OTEgNS4zMjYzNFoiIGZpbGw9IiMzMDZlZmYiLz4KPHBhdGggb3BhY2l0eT0iMC45ODU2MDEiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNOS45NTI0IDUuMzI2MzRDMTAuMjM5OCA1LjI4OTk4IDEwLjQ4NCA1LjA5ODg0IDEwLjU4ODQgNC44Mjg2M0wxMS40NTI0IDIuNTkxMjZDMTEuNTI0IDIuNDA2MDggMTEuMzcyMSAyLjIxMTU3IDExLjE3NTEgMi4yMzYwOUwyLjA4MTQ1IDMuMzY3OTRDMS42MTQxNiAzLjQyNjExIDEuMjEzOCAzLjczMDA3IDEuMDMyMjIgNC4xNjQ1NkwwLjAyMTQ4NDQgNi41ODMxTDQuMTM0ODUgNi4wNjI1NUw5Ljk1MjQgNS4zMjYzNFoiIGZpbGw9IiMzMDZlZmYiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDYuNTgzNzRIMjRWMTkuNzY1QzI0IDIxLjI0NzQgMjIuNzk4MiAyMi40NDkyIDIxLjMxNTggMjIuNDQ5MkgyLjY4NDJDMS4yMDE3NiAyMi40NDkyIDAgMjEuMjQ3NCAwIDE5Ljc2NVY2LjU4Mzc0WiIgZmlsbD0iIzMwNmVmZiIvPgo8cGF0aCBkPSJNOS4zMzIwMyAxOC40NDc4QzkuMzMyMDMgMTguNDQ3OCAxMC42NTE3IDE4Ljk4MTEgMTEuOTg2MyAxOC45ODExQzEzLjMyMDkgMTguOTgxMSAxNC42NjU0IDE4LjQ0NzggMTQuNjY1NCAxOC40NDc4IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuMzQyMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxwYXRoIGQ9Ik03LjczNDQ2IDExLjc4MDZWMTMuOTEzOSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyLjE0NzM2IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTE2LjI1OTkgMTEuNzgwNlYxMy45MTM5IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIuMTQ3MzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K) no-repeat center / 24px;
+  transition: all var(--transition);
+}
+#pp_float_ball_tip {
+  display: none;
+  z-index: -1;
+  position: absolute;
+  background-color: #457cff;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px;
+  right: 82px;
+  border-radius: 8px;
+  padding: 24px 12px;
+  text-align: center;
+}
+#pp_float_ball_tip_close {
+  position: absolute;
+  display: block;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  mask: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjYiIHZpZXdCb3g9IjAgMCAyNCAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMy40MDgzIDE0LjEzNzhMMTcuMjkxMSAxOC4yMjZDMTcuNjgxNiAxOC42Mzc5IDE3LjY4MTYgMTkuMzA1NyAxNy4yOTExIDE5LjcxNzZDMTYuOTAwNiAyMC4xMjk2IDE2LjI2NzQgMjAuMTI5NiAxNS44NzY5IDE5LjcxNzZMMTEuOTk1NCAxNS42MzA3TDguMTE5NDMgMTkuNzI2QzcuNzI4OTEgMjAuMTM4IDcuMDk1NzQgMjAuMTM4IDYuNzA1MjIgMTkuNzI2QzYuMzE0NjkgMTkuMzE0MSA2LjMxNDY5IDE4LjY0NjMgNi43MDUyMiAxOC4yMzQ0TDEwLjU3OTkgMTQuMTQwNEw2LjY5NzI4IDEwLjA1MjNDNi4zMDY3NiA5LjY0MDM1IDYuMzA2NzYgOC45NzI1MSA2LjY5NzI4IDguNTYwNkM3LjA4NzgxIDguMTQ4NjkgNy43MjA5NyA4LjE0ODY5IDguMTExNSA4LjU2MDZMMTEuOTkyOSAxMi42NDc0TDE1Ljg2ODggOC41NTIxQzE2LjI1OTMgOC4xNDAxOSAxNi44OTI1IDguMTQwMTkgMTcuMjgzIDguNTUyMUMxNy42NzM1IDguOTY0MDEgMTcuNjczNSA5LjYzMTg0IDE3LjI4MyAxMC4wNDM4TDEzLjQwODMgMTQuMTM3OFoiIGZpbGw9IiM2NjY2NjYiLz4KPC9zdmc+Cg==) no-repeat center / cover;
+  background: #fff;
+}
+#pp_float_ball_tip_icon {
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTMiIGhlaWdodD0iNTQiIHZpZXdCb3g9IjAgMCA1MyA1NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMy40MzEgMTguMzQ4MkMyMy44NjEyIDE4LjI5NDIgMjQuMjI3MiAxOC4wMDg4IDI0LjM4NDUgMTcuNjA0N0wyNS43MTE0IDE0LjE5NDhDMjUuODE5NCAxMy45MTcyIDI1LjU5MTkgMTMuNjI0OCAyNS4yOTYzIDEzLjY2MTNMMTEuMzYyNyAxNS4zODI1QzEwLjY2MzMgMTUuNDY4OSAxMC4wNjM0IDE1LjkyMjcgOS43ODk5MSAxNi41NzIyTDguMjM4NjcgMjAuMjU2MUg4LjIwODk4VjQwLjc3ODNDOC4yMDg5OCA0Mi43MzUgOS43OTUyOCA0NC4zMjEzIDExLjc1MjEgNDQuMzIxM0g0MS4zNDU3QzQzLjMwMjUgNDQuMzIxMyA0NC44ODg4IDQyLjczNSA0NC44ODg4IDQwLjc3ODNWMjAuMjU2M0w0NC44ODk3IDIwLjI1NjRMNDMuMzM4MyAxNi41NzIyQzQzLjA2NDggMTUuOTIyNyA0Mi40NjUgMTUuNDY4OSA0MS43NjU1IDE1LjM4MjVMMjcuODMyIDEzLjY2MTNDMjcuNTM2MyAxMy42MjQ4IDI3LjMwODggMTMuOTE3MiAyNy40MTY4IDE0LjE5NDhMMjguNzQzOCAxNy42MDQ3QzI4LjkwMSAxOC4wMDg4IDI5LjI2NyAxOC4yOTQyIDI5LjY5NzIgMTguMzQ4Mkw0NC44ODc2IDIwLjI1NjFIOC4yNDA2TDE0LjUyNTEgMTkuNDY2OEwyMy40MzEgMTguMzQ4MloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjIuODg2MSAzNy4wOTY5QzIyLjcyNjEgMzYuNjc4OSAyMy4wNTY4IDM2LjI4MTIgMjMuNTA0MyAzNi4yODEySDI5LjQ5MjJDMjkuOTM5NyAzNi4yODEyIDMwLjI3MDQgMzYuNjc4OSAzMC4xMTA0IDM3LjA5NjlDMjkuNzI4MSAzOC4wOTU2IDI4Ljc2NzcgMzkuNjU2MiAyNi40OTgzIDM5LjY1NjJDMjQuMjI4OCAzOS42NTYyIDIzLjI2ODQgMzguMDk1NiAyMi44ODYxIDM3LjA5NjlaIiBmaWxsPSIjMzA2ZWZmIi8+CjxwYXRoIGQ9Ik0yMC4wMjc1IDI4LjE0MjJWMzEuMzc4MSIgc3Ryb2tlPSIjMzA2ZWZmIiBzdHJva2Utd2lkdGg9IjMuMjE5MzkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNMzMuMDcwNSAyOC4xNDIyVjMxLjM3ODEiIHN0cm9rZT0iIzMwNmVmZiIgc3Ryb2tlLXdpZHRoPSIzLjIxOTM5IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTAuODI4MTI1IDI4LjgwNzZDMC44MjgxMjUgMjQuNzY1MiA0LjEwNTA5IDIxLjQ4ODMgOC4xNDc0NCAyMS40ODgzSDguMjM4MTlWMzYuMTI2OUg4LjE0NzQ0QzQuMTA1MDkgMzYuMTI2OSAwLjgyODEyNSAzMi44NDk5IDAuODI4MTI1IDI4LjgwNzZaIiBmaWxsPSIjMjgzNjU3Ii8+CjxwYXRoIGQ9Ik01Mi4xNjggMjguODA3NkM1Mi4xNjggMjQuNzY1MiA0OC44OTEgMjEuNDg4MyA0NC44NDg3IDIxLjQ4ODNINDQuNzU3OVYzNi4xMjY5SDQ0Ljg0ODdDNDguODkxIDM2LjEyNjkgNTIuMTY4IDMyLjg0OTkgNTIuMTY4IDI4LjgwNzZaIiBmaWxsPSIjMjgzNjU3Ii8+CjxwYXRoIGQ9Ik02Ljg4MDg2IDM0LjQ0ODdDNi44ODA4NiAzNC40NDg3IDEwLjk3OTYgMzkuMDYzMSAxNS4xODEgMzkuMDYzMSIgc3Ryb2tlPSIjMjgzNjU3IiBzdHJva2Utd2lkdGg9IjEuODI5ODMiLz4KPGVsbGlwc2UgY3g9IjE1LjY0OCIgY3k9IjM5LjA1NDIiIHJ4PSIxLjQ4MjAxIiByeT0iMS40NjM4NiIgZmlsbD0iIzI4MzY1NyIvPgo8cGF0aCBkPSJNNi44ODA4NiAyMi42MDUxQzYuODgwODYgMjIuNjA1MSA4LjIwODYyIDguNzMzNDIgMjYuNTQ4NSA5LjMwMzc3QzQ0Ljg4ODUgOS44NzQxMyA0NiAyMi4xNzggNDYgMjIuMTc4IiBzdHJva2U9IiMyODM2NTciIHN0cm9rZS13aWR0aD0iMi4xOTU3OSIvPgo8L3N2Zz4K) no-repeat center / 100%;
+}
+#pp_float_ball_tip_desc {
+  font-size: 16px;
+  color: #fff;
+  font-weight: 600;
+}
+#pp_float_ball_tip_btn {
+  margin-top: 12px;
+  background: #fff;
+  padding: 4px 12px;
+  line-height: 22px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  color: var(--color-primary);
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+#pp_float_ball_tip_btn:hover {
+  background: #ecf2ff;
+}
+#pp_float_ball_tip::after {
+  content: '';
+  position: absolute;
+  border-radius: 0 2px;
+  width: 14px;
+  height: 14px;
+  display: block;
+  background: #457cff;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  right: -7px;
+}
+#pp_float_ball_context_menu {
+  position: fixed;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 6px 8px 8px;
+  margin: 0;
+  z-index: 9999999999;
+  display: none;
+}
+#pp_float_ball_context_menu li {
+  cursor: pointer;
+  border-radius: 6px;
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  white-space: nowrap;
+}
+#pp_float_ball_context_menu li.title {
+  cursor: default;
+  color: #666;
+  font-size: 12px;
+  height: 32px;
+  line-height: 32px;
+  position: relative;
+  margin-bottom: 14px;
+}
+#pp_float_ball_context_menu li.title:hover {
+  background: unset;
+}
+#pp_float_ball_context_menu li.title::after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 1px;
+  inset: auto -8px -6px;
+  background: rgba(0, 0, 0, 0.1);
+}
+#pp_float_ball_context_menu li:hover {
+  background: #f2f3f4;
+}
+#pp_alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  line-height: 1.2;
+  box-sizing: border-box;
+  padding: 12px 24px;
+  background: var(--color-primary);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  gap: 8px;
+  box-shadow: 0 0 12px 0 #7fa4dc;
+}
+</style></head>
+<body class="home blog hfeed">
+<!-- 加载动画 -->
+
+<section id="main-container">
+	 <div class="openNav">
+		<div class="iconflat">	 
+			 <div class="icon"></div>
+		</div>
+			<!-- logo则显示 -->
+			<div class="site-branding">
+			 <div class="site-title"><a href="https://www.caoxin.xyz/"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/akina.png"></a></div>		  
+			</div>
+			<!-- logo 结束 -->
+	 </div>	
+	 <!-- 主页面显示 -->
+<div id="page" class="site wrapper">
+<header class="site-header gizle sabit" role="banner">
+	<div class="site-top">
+		<!-- logo则显示 -->
+		<div class="site-branding">
+		<div class="site-title"><a href="https://www.caoxin.xyz/"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/akina.png"></a></div>		  
+		</div>
+		<!-- logo 结束 -->
+		<div id="login-reg">
+			<!-- 个人头像 -->
+						<!-- 如果用户未登录 -->
+			<div class="ex-login">
+				<a href="https://www.caoxin.xyz/admin/" target="_top">
+					<i class="iconfont"></i>
+				</a>
+			</div>
+					</div>
+		<!-- 搜索 -->
+		<div class="searchbox">
+			<i class="iconfont js-toggle-search iconsearch"></i>
+		</div> 
+		<!-- 分类 -->
+		<div class="lower">
+			<nav>
+				<ul class="menu"><li class="current-menu-item"><a href="https://www.caoxin.xyz/">首页</a></li>
+				<li><a href="https://www.caoxin.xyz/index.php/archives/82/#">分类</a>
+				<ul class="sub-menu">
+					<li><a href="https://www.caoxin.xyz/index.php/category/ACM-ICPC-Note/">ACM-ICPC</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Photography/">Photography</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Smart-Car/">Smart Car</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Electronics-Design-Contest/">Electronics Design Contest</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Other/">Other</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Robotic/">Robotic</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Debug-Lab/">Debug-Lab</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Note/">Note</a></li>				</ul>
+				</li>
+				<li><a href="https://www.caoxin.xyz/index.php/archives/82/#">更多</a>
+				<ul class="sub-menu">
+																<li><a href="https://www.caoxin.xyz/index.php/friends.html">友链互换</a></li>
+											<li><a href="https://www.caoxin.xyz/index.php/tips.html">日积月累</a></li>
+											<li><a href="https://www.caoxin.xyz/index.php/about.html">关于本站</a></li>
+									</ul>
+				</li>
+				</ul>
+				<!-- 隐藏后菜单图标 -->
+				<i class="iconfont show-nav"></i>
+			</nav>
+		</div>
+	</div>
+	<!-- 到顶部按钮 -->
+	<div class="cd-top-box">
+	<a href="https://www.caoxin.xyz/index.php/archives/82/#" class="cd-top"></a>
+	</div>
+</header>
+<!-- 文章部分 -->
+<div class="blank"></div>
+<div class="headertop"></div>
+<style type="text/css">.site-content {padding-top:0px !important}</style>
+<!-- 不是加密文章 -->
+<!-- 透明导航栏后调整间距 -->
+<script src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/core.js.下载"></script>
+<div id="content" class="site-content">
+<div id="toc-container" style="">
+<div id="toc">
+<strong>文章目录</strong>
+<ul>
+<li><a href="https://www.caoxin.xyz/index.php/archives/82/#cl-1">关于 Vibe Coding 的思考与探索</a><ul>
+<li><a href="https://www.caoxin.xyz/index.php/archives/82/#cl-2">为什么需要一套自己的工作流</a></li>
+<li><a href="https://www.caoxin.xyz/index.php/archives/82/#cl-3">Vibe Coding 的问题</a></li>
+<li><a href="https://www.caoxin.xyz/index.php/archives/82/#cl-4">解决方案</a><ul>
+<li><a href="https://www.caoxin.xyz/index.php/archives/82/#cl-5">学生党推荐的高性价比选型</a></li>
+<li><a href="https://www.caoxin.xyz/index.php/archives/82/#cl-6">工程上的落地方式</a></li>
+</ul>
+</li><li><a href="https://www.caoxin.xyz/index.php/archives/82/#cl-7">最后</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<style>#toc-container {right: -260px;}</style>	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+		<article class="hentry">
+		<!-- 文章头部 -->
+		<header class="entry-header">
+		<!-- 标题输出 -->
+		<h1 class="entry-title">关于 Vibe Coding 的思考与探索</h1>
+		<hr>
+		<div class="breadcrumbs">	
+			<div itemscope="" itemtype="http://schema.org/WebPage" id="crumbs">最后更新时间：2026年03月03日</div>
+		</div>	
+		</header>
+		<!-- 正文输出 -->
+		<div class="entry-content">
+		<h1><a id="cl-1"></a><a id="content-关于-vibe-coding-的思考与探索" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E5%85%B3%E4%BA%8E-vibe-coding-%E7%9A%84%E6%80%9D%E8%80%83%E4%B8%8E%E6%8E%A2%E7%B4%A2" class="heading-permalink" aria-hidden="true" title="Permalink"></a>关于 Vibe Coding 的思考与探索</h1>
+<p>今年我最直接的感受是：vibe coding 真的把开发门槛压下来了。很多以前要完整团队做的东西，现在个人开发者也能做，尤其是那种只服务我自己的高定制化工具。</p>
+<p>前一阵子玩了下 openclaw。它确实足够通用，但对我当时的需求来说有点大炮打蚊子，token 花得不算少，最后拿到的价值却没有跟着等比例增长。再加上我自己的工作流已经被不少工具改造过一轮，真正还缺 AI 帮忙的高频场景，其实不多。</p>
+<p>剩下最刚需的一块，是邮件和一些事务性管理。现成工具要么太重，要么不贴手。所以我最后决定自己写一套：带 AI 总结和翻译功能的低成本 Telegram 邮件 Bot。项目地址：<a rel="nofollow noopener noreferrer" href="https://github.com/LanternCX/MailBot" target="_blank">LanternCX/MailBot: A low-cost and lightweight mail agent</a></p>
+<p>事情到这里就变了：问题不再是怎么找到一个好的工具，而是怎么把 vibe coding 这件事做得更快、更稳、更省钱。</p>
+<p>恰好在知乎也读了胡渊鸣大佬的文章：<a rel="nofollow noopener noreferrer" href="https://zhuanlan.zhihu.com/p/2007147036185744607" target="_blank">如何有效地给 10 个 Claude Code 打工</a>，深受启发，于是决定系统性的学习探索一下 Vibe Coding。</p>
+<p>PS：在我写完这篇文章之后我就在 Github 看到了和我类似思路但是更加完善的项目：<a rel="nofollow noopener noreferrer" href="https://github.com/mindfold-ai/Trellis" target="_blank">mindfold-ai/Trellis: All-in-one AI framework &amp; toolkit</a>。所以这篇文章的 workflow 似乎已经过时了。</p>
+<p>UPD(2026.3.3)：我现在的工作流是 <a rel="nofollow noopener noreferrer" href="https://github.com/anomalyco/opencode" target="_blank">opencode</a> + <a rel="nofollow noopener noreferrer" href="https://github.com/obra/superpowers" target="_blank">superpowers</a>，使用的是我自己的 fork：<a rel="nofollow noopener noreferrer" href="https://github.com/LanternCX/superpowers" target="_blank">LanternCX/superpowers</a> 订阅使用的是 codex 的小黄鱼拼车版，一个月 7r ，额度每周重置，几乎用不完。也可以通过一些手段将 codex 的 oauth 认证转换为更为通用的 OpenAI API + API-Kay 的格式，我的项目 <a rel="nofollow noopener noreferrer" href="https://github.com/LanternCX/codex-gateway" target="_blank">LanternCX/codex-gateway</a> 实现了这一点，当然社区也有其他类似实现。然后我的另一篇文章中根据这几天的使用体验对初始化要求做了更为严格的定义: <a href="https://www.caoxin.xyz/index.php/archives/83/">项目初始化 prompt</a></p>
+<h2><a id="cl-2"></a><a id="content-为什么需要一套自己的工作流" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%B8%80%E5%A5%97%E8%87%AA%E5%B7%B1%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81" class="heading-permalink" aria-hidden="true" title="Permalink"></a>为什么需要一套自己的工作流</h2>
+<p>现在的 coding agent 可以分为两类：以 Cursor 为代表的插件和软件型工具和以 Claude-Code 为代表的 CLI 型工具。</p>
+<p>而我日常任务大概也可以分成两类。</p>
+<p>一类是目标非常明确的：我在开工前就知道该怎么去写、最后结果大概长什么样，更多是执行问题。另一类是探索型任务：方向大概有，但细节和具体的设计需要边做边试。</p>
+<p>这直接决定了我怎么选 agent：</p>
+<ul>
+<li><strong>明确型任务</strong>，我更偏向 CLI。派活直接、推进快，可以放心让它高自主性地到后台去跑，不需要过多的监督。</li>
+<li><strong>探索型任务</strong>，我更偏向编辑器工具，有一个图形化页面让 review 代码更方便。</li>
+</ul>
+<p>所以对我来说，vibe coding 的价值不是全自动替代开发，而是把我从重复劳动里解放出来，把时间留给更高杠杆的事情。</p>
+<p>大部分 LLM 厂都有自己的 CLI 工具和图形化工具，而且实际上在设计好工作流之后体验不会差特别多，本质上是选择高性价比的模型方案。</p>
+<h2><a id="cl-3"></a><a id="content-vibe-coding-的问题" href="https://www.caoxin.xyz/index.php/archives/82/#content-vibe-coding-%E7%9A%84%E9%97%AE%E9%A2%98" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Vibe Coding 的问题</h2>
+<p>跑过几轮之后，我发现 AI 写代码和人写代码一样：没有工程约束，就会慢慢长成屎山。主要卡在这几件事上。</p>
+<p>第一是<strong>意图对齐</strong>：需求如果没说清楚，AI 跑得越快，偏得也越快。返工很多时候不是模型不行，而是输入阶段就没对齐。</p>
+<p>第二是<strong>代码一致性</strong>：单个任务看起来都能完成，但跨会话后命名、结构和边界会逐步失控。没有统一规范，维护成本会迅速上涨。</p>
+<p>第三是<strong>上下文问题</strong>：会话一长，AI 就容易漏掉关键约束，或者开始脑补。我自己的体验是，每开一个新 session 往往都要重新喂一遍背景，token 和时间都会持续消耗。</p>
+<p>第四是 <strong>CI/CD 的现实差异</strong>：纯软件项目接 GitHub Actions 还算顺手；但我也在做嵌入式和 Robotic 方向的工作，硬件协同一上来，工程链路复杂度会明显上升。</p>
+<h2><a id="cl-4"></a><a id="content-解决方案" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88" class="heading-permalink" aria-hidden="true" title="Permalink"></a>解决方案</h2>
+<h3><a id="cl-5"></a><a id="content-学生党推荐的高性价比选型" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E5%AD%A6%E7%94%9F%E5%85%9A%E6%8E%A8%E8%8D%90%E7%9A%84%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94%E9%80%89%E5%9E%8B" class="heading-permalink" aria-hidden="true" title="Permalink"></a>学生党推荐的高性价比选型</h3>
+<p>对我这样的学生党来说，成本不是附加题，而是主问题。我自己也很敏感，所以现在选 agent 不看谁最强，而是看谁在我预算里最稳定可用。首先是模型方面，世界上顶尖的模型其实无非 Gemini、OpenAI、Claude，写代码这部分甚至只有 gpt-codex 和 claude 可以用，Gemini 也还可以。不过最近国产模型有一些新的动向，据说效果不错，不过我没有体验过。</p>
+<p>我于是我选择尽量在小黄鱼上淘到高可用的 AI 工具：</p>
+<ul>
+<li><strong>Copilot</strong>：学生包非常友好。对很多日常编码需求来说是够用的，性价比高，而且和 VS Code 深度集成，也有 CLI 版本的 Copilot-cli，可惜就是免费的 Copilot Pro 额度有点低，还是要省着点用。</li>
+<li><strong>Gemini</strong>：个人版有方案可以白嫖学生优惠，但稳定性要打问号，之前 Google 已经封了一批；而家庭组拼车更是来历不明和不稳定不说，很多家庭组实际上是不带 Gemini-cli 和 Antigravity 的（不过也有的是带的）。我现在 Gemini Pro 就是拼车来的，主要还是承担日常的对话任务，相当于大号 Google。</li>
+<li><strong>Codex</strong>：我现在主力在用 Codex。小黄鱼 10r 以内就能买到一个月的拼车，只不过我还没有深度使用，不知道稳定性如何。</li>
+<li><strong>Cursor 和 Claude-code</strong>：确实相比于 Gemini 和 Codex 不是很有性价比，不过体验应该是最好的一批。</li>
+<li><strong>国产模型和工具</strong>：我的观察是，Qwen、GLM、minimax 这些模型的口碑都不错，但我还没有系统性实测，所以暂时不做结论。像 Trae 这类国产工具我虽然体验过但是也没有深度体验，所以只保留观察，不给推荐结论。</li>
+</ul>
+<p>对我而言，在预算紧张时，优先级始终是稳定连续可用，其次才是理论最强模型。</p>
+<h3><a id="cl-6"></a><a id="content-工程上的落地方式" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E5%B7%A5%E7%A8%8B%E4%B8%8A%E7%9A%84%E8%90%BD%E5%9C%B0%E6%96%B9%E5%BC%8F" class="heading-permalink" aria-hidden="true" title="Permalink"></a>工程上的落地方式</h3>
+<p>这部分我现在尽量写成固定流程，避免每次换 agent 就重来一遍。</p>
+<h4><a id="content-流程主线" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E6%B5%81%E7%A8%8B%E4%B8%BB%E7%BA%BF" class="heading-permalink" aria-hidden="true" title="Permalink"></a>流程主线</h4>
+<blockquote>
+<p>需求 → 开发 → 调试 → 上线 → 复盘沉淀</p>
+</blockquote>
+<ol>
+<li><strong>需求阶段</strong>
+<ul>
+<li>先用 <strong>Plan 模式</strong>对齐意图。</li>
+<li>明确目标、边界、验收条件。</li>
+<li>这一部分需要重点进行 Review。</li>
+</ul>
+</li>
+<li><strong>开发阶段</strong>
+<ul>
+<li>用 <code>Skills + AGENTS.md + RULES.md</code> 约束代码和设计一致性。</li>
+<li>统一规则，不让不同 agent 带入各自默认流程。</li>
+</ul>
+</li>
+<li><strong>调试阶段</strong>
+<ul>
+<li>先验证功能正确性，再看结构一致性。</li>
+<li>重点检查命名、模块边界、文档同步。</li>
+</ul>
+</li>
+<li><strong>上线阶段</strong>
+<ul>
+<li>纯软件项目 GitHub Actions 之类的自动化工具是最好的，其次 Github 也开源了他们的<a rel="nofollow noopener noreferrer" href="https://github.com/github/gh-aw" target="_blank">GitHub Agentic Workflows</a>。</li>
+<li>和硬件交互更多的、更为底层的领域，例如我正在做的嵌入式和 robotic 项目应该需要补 MCP 协议能力和更多 skills 扩展，这一部分其实有待探索。</li>
+</ul>
+</li>
+<li><strong>复盘沉淀阶段</strong>
+<ul>
+<li>把关键变更沉淀到 <code>.agents/progress/entries</code>。</li>
+<li>在 <code>PROGRESS.md</code> 维护目录和摘要，做长期记忆和上下文压缩。</li>
+</ul>
+</li>
+</ol>
+<h4><a id="content-工作流治理原则" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%B2%BB%E7%90%86%E5%8E%9F%E5%88%99" class="heading-permalink" aria-hidden="true" title="Permalink"></a>工作流治理原则</h4>
+<p>在我看来：铁打的工作流，流水的 agent。</p>
+<p>我希望做到不管用哪家 agent，开多少个 <code>session</code>，工作流都不变，也就是维护代码一致性。</p>
+<p><code>AGENTS.md</code> 是统一入口。</p>
+<p><code>CLAUDE.md</code>、<code>GEMINI.md</code> 只做适配层，不作为主流程定义源，统一使用 <code>AGENTS.md</code>。</p>
+<p><code>.agents/RULES.md</code> 用来手动维护的偏好文件。agent 必须读取并遵守，未经用户明确要求不得自动改写。</p>
+<p>其次就是 <code>instructions/rules</code> 以及 <code>skills</code> 功能基本上所有的 coding agent 都是自带的，本文其实更多的是在胡渊鸣大佬的博客提出的 <code>PROGRESS.md</code> 的基础上进行了适当的扩充和完善以适应低成本个人开发者（尤其是学生党）的场景。</p>
+<h4><a id="content-初始化-agents-的最小结构" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E5%88%9D%E5%A7%8B%E5%8C%96-agents-%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%93%E6%9E%84" class="heading-permalink" aria-hidden="true" title="Permalink"></a>初始化 <code>.agents</code> 的最小结构</h4>
+<pre class=" language-text"><code class=" language-text">.agents
+├── AGENTS.md
+├── RULES.md
+├── PROGRESS.md
+├── progress/entries/YYYY
+│   	└── YYYY-MM-DD-N.md
+└── skills
+    ├── git-workflow-guard
+    │   └── SKILL.md
+    ├── code-standards
+    │   └── SKILL.md
+    ├── progress-tracker
+    │   └── SKILL.md
+    └── doc-maintainer
+        └── SKILL.md
+</code><button type="button" class="copy-btn" aria-label="Copy Code">Copy</button></pre>
+<h4><a id="content-progressmd-的-index" href="https://www.caoxin.xyz/index.php/archives/82/#content-progressmd-%E7%9A%84-index" class="heading-permalink" aria-hidden="true" title="Permalink"></a><code>PROGRESS.md</code> 的 Index</h4>
+<div class="table-box"><table>
+<thead>
+<tr>
+<th>Page ID</th>
+<th>Date</th>
+<th>Title</th>
+<th>Path</th>
+<th>Keywords</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20260221-1</td>
+<td>2026-02-21</td>
+<td>Initialized PROGRESS workflow and progress-tracker skill</td>
+<td><code>./progress/entries/2026/2026-02-21-1.md</code></td>
+<td>progress-tracker, governance, logging</td>
+</tr>
+<tr>
+<td>20260221-2</td>
+<td>2026-02-21</td>
+<td>Added git-workflow-guard governance skill</td>
+<td><code>./progress/entries/2026/2026-02-21-2.md</code></td>
+<td>git-flow, conventional-commits, co-author</td>
+</tr>
+<tr>
+<td>20260222-1</td>
+<td>2026-02-22</td>
+<td>Migrated PROGRESS to .agents structured entries</td>
+<td><code>./progress/entries/2026/2026-02-22-1.md</code></td>
+<td>toc, structure, indexing</td>
+</tr>
+</tbody>
+</table></div>
+<p>每个 <code>entries</code> 文件都必须记录相关 commit 信息，至少包含：</p>
+<ul>
+<li><code>Related Commit Message</code>（必填）</li>
+<li><code>Related Commit Hash</code>（建议）</li>
+</ul>
+<p>并且 commit message 需要符合 Angular/Conventional Commit 规范，分支管理需要使用 git flow。</p>
+<h4><a id="content-初始化阶段可直接投喂的-6-条-prompt" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%98%B6%E6%AE%B5%E5%8F%AF%E7%9B%B4%E6%8E%A5%E6%8A%95%E5%96%82%E7%9A%84-6-%E6%9D%A1-prompt" class="heading-permalink" aria-hidden="true" title="Permalink"></a>初始化阶段可直接投喂的 6 条 Prompt</h4>
+<p>根据我前面的过程进行一下 Prompt Enginer，很容易得到。</p>
+<p>下面这 6 条我会一条一条喂给模型，只做最基本初始化，把业务决策空间留给 agent。</p>
+<p><strong>Prompt 1</strong>：先确定 <code>PROJECT_LANG</code>，后续所有文件语言和注释规范都依赖这个决策。如果不先锁定，后面很容易出现中英文混写和规范冲突。</p>
+<pre class=" language-markdown"><code class=" language-markdown">你是初始化代理。先做语言决策，不做业务实现。
+
+任务：
+1) 在 zh 和 en 中确定 `PROJECT_LANG`。
+2) 输出决策依据。
+3) 锁定后续生成规则：
+   - `PROJECT_LANG=en`：`.agents` 下新生成文件必须全英文。
+   - `PROJECT_LANG=zh`：可用中文，注释允许中文但只能使用半角标点。
+
+输出：`PROJECT_LANG`、依据、下一步计划。
+</code><button type="button" class="copy-btn" aria-label="Copy Code">Copy</button></pre>
+<p><strong>Prompt 2</strong>：只先搭最小目录骨架，不碰业务代码。这样后续 agent 有稳定入口，但不会过早绑定具体实现。</p>
+<pre class=" language-markdown"><code class=" language-markdown">基于已锁定的 `PROJECT_LANG`，初始化最小目录，不改业务代码。
+
+必须创建：
+- `.agents/AGENTS.md`
+- `.agents/RULES.md`
+- `.agents/PROGRESS.md`
+- `.agents/progress/entries/2026/`
+- `.agents/skills/`
+
+约束：
+- `RULES.md` 标记为用户手动维护，未经明确授权不得改写。
+- 保持结构最小可用，不额外扩展业务文件。
+
+输出：创建结果清单。
+</code><button type="button" class="copy-btn" aria-label="Copy Code">Copy</button></pre>
+<p><strong>Prompt 3</strong>：<code>AGENTS.md</code> 是总治理入口。这里一次性写清 Git 流程、提交规范、注释规范和架构原则，后续 agent 才能在同一套规则里工作。</p>
+<pre class=" language-markdown"><code class=" language-markdown">生成 `.agents/AGENTS.md` 最小治理规则。
+
+必须包含：
+1) Git Flow 分支策略。
+2) Angular/Conventional Commit 规范。
+3) 注释规范：
+   - `PROJECT_LANG=zh` 时，注释可中文，但只用半角标点。
+   - `PROJECT_LANG=en` 时，注释必须全英文。
+4) Doxygen 风格注释要求。
+5) 架构原则：高内聚、低耦合。
+6) `RULES.md` 优先级高于 agent 默认习惯。
+
+要求：规则简洁，可执行。
+</code><button type="button" class="copy-btn" aria-label="Copy Code">Copy</button></pre>
+<p><strong>Prompt 4</strong>：<code>PROGRESS.md</code> 负责长期记忆和可追溯性。这里强制写入 commit 关联字段，确保每条经验都能回溯到代码变更。</p>
+<pre class=" language-markdown"><code class=" language-markdown">生成 `.agents/PROGRESS.md`，只保留最小可用结构：
+- Purpose
+- Storage Layout
+- Entry Template
+- TOC Rules
+- Global TOC 表头
+
+Entry Template 必须包含：
+- Related Commit Message（必填）
+- Related Commit Hash（建议）
+
+要求：没有 commit message 的 entry 不允许入库。
+</code><button type="button" class="copy-btn" aria-label="Copy Code">Copy</button></pre>
+<p><strong>Prompt 5</strong>：skills 先建最小骨架，不写业务细节。目标是让 agent 可以复用治理能力，而不是被单项目实现锁死。现在几乎所有工具都有 skills 的完整支持，因此实际上这一步之遥说明需要创建哪些方面的 skills 就好了，这里只做示例。</p>
+<pre class=" language-markdown"><code class=" language-markdown">初始化最小 skills 骨架，并创建对应 `SKILL.md`：
+- git-workflow-guard
+- code-standards
+- progress-tracker
+- doc-maintainer
+
+每个 `SKILL.md` 仅包含：
+- 适用场景
+- 输入
+- 输出
+- 执行约束
+
+要求：保持通用，不绑定具体业务实现。
+</code><button type="button" class="copy-btn" aria-label="Copy Code">Copy</button></pre>
+<p><strong>Prompt 6</strong>：最后做一次结构化自检，避免初始化看起来完成但规则缺项。尤其要检查语言一致性、RULES 保护和 commit 字段约束。</p>
+<pre class=" language-markdown"><code class=" language-markdown">对初始化结果执行自检并输出报告。
+
+检查项：
+1) `.agents` 结构是否完整。
+2) `AGENTS.md` 是否包含 Git Flow、Angular Commit、Doxygen、高内聚低耦合。
+3) `RULES.md` 是否被标记为用户手动维护且受保护。
+4) 文件语言是否满足 `PROJECT_LANG` 约束。
+5) `PROGRESS.md` 是否强制 `Related Commit Message`。
+
+输出：通过项、不通过项、修复建议。
+</code><button type="button" class="copy-btn" aria-label="Copy Code">Copy</button></pre>
+<p>本质上 <code>PROGRESS.md</code> 就是给 AI 做了一套简单的错题本 + RAG，使得模型拥有了结构化的记忆，能够自主进化。这套结构的核心目标就是两点，agent 可替换，流程不可变。</p>
+<p>当然我也添加了一些 <code>instructions/rules</code>，只不过是全局规则。</p>
+<h2><a id="cl-7"></a><a id="content-最后" href="https://www.caoxin.xyz/index.php/archives/82/#content-%E6%9C%80%E5%90%8E" class="heading-permalink" aria-hidden="true" title="Permalink"></a>最后</h2>
+<p>回头看这段时间，真正有效的不是某个万能 prompt，而是把传统软件工程工业里已经成熟的方法，重新落实到 AI 协作过程里。</p>
+<p>很多时候看上去是模型输出问题，最后追根到底还是流程治理问题。意图没有对齐、一致性规则缺失、上下文没有沉淀，都会把结果推向屎山。反过来，只要流程能稳定运行，模型和 agent 的切换成本就会明显下降。</p>
+<p>这段实践也让我更明确了一点：只站在 <strong>designer</strong> 或 <strong>engineer</strong> 甚至是<strong>码农</strong>的局部视角，很容易把问题理解成单点技术问题（工具不好用、模型不够强等等）。切换到 <strong>manager</strong> 视角后，问题会更像系统治理问题，重点是规则、节奏、边界和反馈闭环。</p>
+<p>所以这篇总结最终落到一个很朴素的结论。**AI 协作不是减少工程化，而是更依赖工程化。**流程稳定以后，产出质量和迭代效率才会一起提升。</p>
+		</div>
+		<!-- 广告展示 -->
+				<!-- 文章底部 -->
+		<footer class="post-footer">
+			<!-- 阅读次数 -->
+			<div class="post-like">
+				<a href="javascript:;" data-action="ding" data-id="58" class="specsZan ">
+					<i class="iconfont"></i>
+					<span class="count">321</span>
+				</a>
+			</div>
+			<!-- 分享按钮 -->
+			<div class="post-share">
+				<ul class="sharehidden">
+					<li><a href="https://api.pwmqr.com/qrcode/create/?url=https://www.caoxin.xyz/index.php/archives/82/" onclick="window.open(this.href, &#39;renren-share&#39;, &#39;width=490,height=700&#39;);return false;" class="s-weixin" target="_blank" rel="nofollow noopener noreferrer"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/wechat.png"></a></li>
+					<li><a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.caoxin.xyz/index.php/archives/82/&amp;title=%E5%85%B3%E4%BA%8E%20Vibe%20Coding%20%E7%9A%84%E6%80%9D%E8%80%83%E4%B8%8E%E6%8E%A2%E7%B4%A2" onclick="window.open(this.href, &#39;weibo-share&#39;, &#39;width=730,height=500&#39;);return false;" class="s-qq" target="_blank" rel="nofollow noopener noreferrer"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/qzone.png"></a></li>
+					<li><a href="http://service.weibo.com/share/share.php?url=https://www.caoxin.xyz/index.php/archives/82/&amp;title=%E5%85%B3%E4%BA%8E%20Vibe%20Coding%20%E7%9A%84%E6%80%9D%E8%80%83%E4%B8%8E%E6%8E%A2%E7%B4%A2" onclick="window.open(this.href, &#39;weibo-share&#39;, &#39;width=550,height=235&#39;);return false;" class="s-sina" target="_blank" rel="nofollow noopener noreferrer"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/sina.png"></a></li>
+				</ul>
+				<i class="iconfont show-share"></i>
+			</div>
+			<!-- 赞助按钮 -->
+			<div class="donate">
+			<a>赏</a>
+				<ul class="donate_inner">
+					<li class="wedonate"><img src="https://www.caoxin.xyz/index.php/archives/82/"></li>
+					<li class="alidonate"><img src="https://www.caoxin.xyz/index.php/archives/82/"></li>
+				</ul>
+			</div>
+			<!-- 文章标签 -->
+			<div class="post-tags">
+				<i class="iconfont"></i>
+									none							</div>
+		</footer>
+		</article>
+		<!-- 版权声明 -->
+		<div class="open-message">
+			<p>声明：CaoXin 的小站|版权所有，违者必究|如未注明，均为原创|本网站采用<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="nofollow noopener noreferrer">BY-NC-SA</a>协议进行授权</p>
+			<p>转载：转载请注明原文链接 - <a href="https://www.caoxin.xyz/index.php/archives/82/">关于 Vibe Coding 的思考与探索</a></p>	
+		</div>
+		<!-- 相邻文章 -->
+		<section class="post-squares nextprev">
+			<div class="post-nepre half previous"><a href="https://www.caoxin.xyz/index.php/archives/83/" rel="prev"><div class="background" style="background-image:url(/usr/themes/Akina/images/random/deu7.jpg);"></div><span class="label">Previous Post</span><div class="info"><h3>项目初始化 prompt</h3><hr></div></a></div><div class="post-nepre half next"><a href="https://www.caoxin.xyz/index.php/archives/81/" rel="next"><div class="background" style="background-image:url(/usr/themes/Akina/images/random/deu1.jpg);"></div><span class="label">Next Post</span><div class="info"><h3>HZCU Web Develop</h3><hr></div></a></div>		</section>
+<!-- 判断文章加密结束 -->
+		<!-- 个人信息 -->
+		<section class="author-profile">
+			<div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+				<div class="pf-gavtar">
+					<div class="pf-tou">
+						<a><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/avatar.jpg"></a>
+					</div>
+				</div>
+				<div class="meta">
+					<span class="title">Author</span>
+					<h3 itemprop="name">
+						<a href="https://www.caoxin.xyz/" itemprop="url" rel="author">caoxin</a>
+					</h3>
+				</div>
+			</div>
+			<hr>
+            <p>
+                <i class="iconfont"></i>
+                <span id="typewriter"><span class="Typewriter__wrapper">O Captain! My Captain!</span><span class="Typewriter__cursor">|</span>
+                </span>
+            </p>
+		</section>
+		</main>
+	</div>
+</div>
+<!--评论输出地方-->
+
+<section id="comments" class="comments">
+	<!-- 隐藏评论 -->
+	<div class="commentwrap comments-hidden" style="display: block;">
+		<div class="notification"><i class="iconfont"></i>添加评论</div>
+	</div>
+		<!-- 输出评论信息 -->
+	<div class="comments-main" style="display: none;">
+		<h3 id="comments-list-title">Comments | <a>NOTHING</a></h3> 
+		<div id="loading-comments"><span></span></div>
+		<!-- 评论内容 -->
+	<div id="comments-ajax">
+	    	</div>
+			<!--评论框-->
+		<!-- 判断设置是否允许对当前文章进行评论 -->
+				<div id="respond_box">
+			<div id="respond-post-82" class="comment-respond">
+				<div class="cancel-comment-reply">
+					<a id="cancel-comment-reply-link" href="https://www.caoxin.xyz/index.php/archives/82/#respond-post-82" rel="nofollow" style="display:none" onclick="return TypechoComment.cancelReply();">取消回复</a>				</div>
+				<!-- 输入表单开始 -->
+				<form action="https://www.caoxin.xyz/index.php/archives/82/comment" method="post" id="commentform">
+					<!-- 如果当前用户已经登录 -->
+										<div class="author-updown">Welcome back ,&nbsp;&nbsp;<a id="toggle-comment-info">[ 修改 ] ↓</a></div>
+					<div id="comment-author-info">
+						<input type="text" name="author" id="author" class="commenttext" placeholder="Name" value="" size="22" tabindex="1">
+						<label for="author"></label>
+					
+						<input type="text" name="mail" id="mail" class="commenttext" value="" size="22" placeholder="Email" tabindex="2">
+						<label for="mail"></label>
+					
+						<input type="text" name="url" id="url" class="commenttext" value="" size="22" placeholder="http://" tabindex="3">
+						<label for="url"></label>
+					</div>
+					<div class="clear"></div>
+										<p><textarea name="text" id="comment" class="OwO-textarea" placeholder="come on baby !" tabindex="4" cols="50" rows="5"></textarea></p>
+					<div class="com-footer">
+						<input class="submit" name="submit" type="submit" id="submit" tabindex="5" value="发表评论">
+						<input type="hidden" name="comment_post_ID" value="58" id="comment_post_ID">
+						<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+							<!--表情-->
+						<div class="OwO">
+            <div class="OwO-logo"><span>OωO表情</span></div>
+            <div class="OwO-body" style="width: 447%">
+                <ul class="OwO-items OwO-items-image OwO-items-show" style="max-height: 197px;">
+                    <li class="OwO-item" title="@(高兴)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/gaoxing.png"></li>
+                    <li class="OwO-item" title="@(不高兴)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/bugaoxing.png"></li>
+                    <li class="OwO-item" title="@(皱眉)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/zhoumei.png"></li>
+                    <li class="OwO-item" title="@(大囧)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/dajiong.png"></li>
+                    <li class="OwO-item" title="@(惊喜)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/jingxi.png"></li>
+                    <li class="OwO-item" title="@(无语)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/wuyu.png"></li>
+                    <li class="OwO-item" title="@(傻笑)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/shaxiao.png"></li>
+                    <li class="OwO-item" title="@(期待)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/qidai.png"></li>
+                    <li class="OwO-item" title="@(喜极而泣)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/xijierqi.png"></li>
+                    <li class="OwO-item" title="@(脸红)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/lianhong.png"></li>
+                    <li class="OwO-item" title="@(来亲亲)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/laiqinqin.png"></li>
+                    <li class="OwO-item" title="@(汗如雨下)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/hanruyuxia.png"></li>
+                    <li class="OwO-item" title="@(酷炸天)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/kuzhatian.png"></li>
+                    <li class="OwO-item" title="@(抠鼻)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/koubi.png"></li>
+                    <li class="OwO-item" title="@(叼烟)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/diaoyan.png"></li>
+                    <li class="OwO-item" title="@(吐血)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/tuxie.png"></li>
+                    <li class="OwO-item" title="@(流口水)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/liukoushui.png"></li>
+                    <li class="OwO-item" title="@(呕吐不止)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/outubuzhi.png"></li>
+                    <li class="OwO-item" title="@(吐舌)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/tushe.png"></li>
+                    <li class="OwO-item" title="@(闭嘴)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/bizui.png"></li>
+                    <li class="OwO-item" title="@(丢脸)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/diulian.png"></li>
+                    <li class="OwO-item" title="@(含羞)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/hanxiu.png"></li>
+                    <li class="OwO-item" title="@(不出所料)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/buchusuoliao.png"></li>
+                    <li class="OwO-item" title="@(装逼)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/zhuangbi.png"></li>
+                    <li class="OwO-item" title="@(尴尬)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/ganga.png"></li>
+                    <li class="OwO-item" title="@(喷水)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/penshui.png"></li>
+                    <li class="OwO-item" title="@(炒鸡愤怒)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/chaojifennu.png"></li>
+                    <li class="OwO-item" title="@(干得好)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/gandehao.png"></li>
+                    <li class="OwO-item" title="@(鄙视)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/bishi.png"></li>
+                    <li class="OwO-item" title="@(捂眼)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/wuyan.png"></li>
+                    <li class="OwO-item" title="@(无所谓)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/wusuowei.png"></li>
+                    <li class="OwO-item" title="@(喜大普奔)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/xijidaben.png"></li>
+                    <li class="OwO-item" title="@(思考)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/sikao.png"></li>
+                    <li class="OwO-item" title="@(鼓掌)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/guzhang.png"></li>
+                    <li class="OwO-item" title="@(发现此事并不简单)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/fxcsbbjd.png"></li>
+                    <li class="OwO-item" title="@(汗)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/han.png"></li>
+                    <li class="OwO-item" title="@(泪流成河)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/llch.png"></li>
+                    <li class="OwO-item" title="@(阴暗)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/yinan.png"></li>
+                    <li class="OwO-item" title="@(蜡烛)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/lazhu.png"></li>
+                    <li class="OwO-item" title="@(投降)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/touxiang.png"></li>
+                    <li class="OwO-item" title="@(吐血倒地)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/tuxiedaodi.png"></li>
+                    <li class="OwO-item" title="@(便便)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/bianbian.png"></li>
+                    <li class="OwO-item" title="@(长草)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/zhangcao.png"></li>
+                    <li class="OwO-item" title="@(肿包)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/zhongbao.png"></li>
+                    <li class="OwO-item" title="@(陷入深思)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/xrss.png"></li>
+                    <li class="OwO-item" title="@(献花)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/xianhua.png"></li>
+                    <li class="OwO-item" title="@(绿绿)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/lvlv.png"></li>
+                    <li class="OwO-item" title="@(中枪)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/zhongqiang.png"></li>
+                    <li class="OwO-item" title="@(击掌)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/jizhang.png"></li>
+                    <li class="OwO-item" title="@(扇耳光)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/shanerguang.png"></li>
+                    <li class="OwO-item" title="@(中刀)"><img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/zhongdao.png"></li>
+                </ul>
+                <div class="OwO-bar">
+                    <ul class="OwO-packages">
+                        <li class="OwO-package-active"><span>阿鲁</span></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+						<script type="text/javascript" src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/OwO.js.下载" defer="defer"></script>
+					</div>
+				<input type="hidden" name="_" value="e71e6ec7d555660148455700a9277023"></form>
+						<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+</section>
+</div>
+</section>
+<footer id="colophon" class="site-footer" role="contentinfo">
+	<!-- 请尊重作者！至少保留主题名称及其超链接，谢谢！ -->
+	<div id="footer" class="site-info">Copyright © 2026 by <a href="https://www.caoxin.xyz/" target="_blank" rel="nofollow">CaoXin 的小站</a> - All rights reserved<span class="sep"> | </span>Theme : <a href="https://zhebk.cn/Web/Akina.html" target="_blank" rel="nofollow noopener noreferrer">Akina For Typecho</a>
+		<div class="footertext">
+			<p><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener noreferrer">闽ICP备2024058562号</a></p>
+					</div>
+			</div>
+</footer>
+<div id="mo-nav">
+	<div class="m-avatar">
+		<img src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/avatar.jpg">
+	</div>
+	<div class="m-search">
+		<form class="m-search-form" method="post" action="https://www.caoxin.xyz/index.php/archives/82/" role="search">
+			<input class="m-search-input" type="search" name="s" placeholder="搜索...">
+		</form>
+	</div>
+	<ul id="nav_menu" class="menu">
+		<li class="current-menu-item"><a href="https://www.caoxin.xyz/">首页</a></li>
+		<li><a href="https://www.caoxin.xyz/index.php/archives/82/#">分类</a>
+			<ul class="sub-menu">
+				<li><a href="https://www.caoxin.xyz/index.php/category/ACM-ICPC-Note/">ACM-ICPC</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Photography/">Photography</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Smart-Car/">Smart Car</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Electronics-Design-Contest/">Electronics Design Contest</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Other/">Other</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Robotic/">Robotic</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Debug-Lab/">Debug-Lab</a></li><li><a href="https://www.caoxin.xyz/index.php/category/Note/">Note</a></li>			</ul>
+		</li>
+		<li><a href="https://www.caoxin.xyz/index.php/archives/82/#">更多</a>
+			<ul class="sub-menu">
+													<li><a href="https://www.caoxin.xyz/index.php/friends.html">友链互换</a></li>
+									<li><a href="https://www.caoxin.xyz/index.php/tips.html">日积月累</a></li>
+									<li><a href="https://www.caoxin.xyz/index.php/about.html">关于本站</a></li>
+							</ul>
+		</li>
+	</ul>
+</div>
+<!-- 搜索 -->
+<form class="js-search search-form search-form--modal" method="post" action="https://www.caoxin.xyz/index.php/archives/82/" role="search">
+	<div class="search-form__inner">
+		<div class="search-div">
+			<h1 class="micromb-search">你想搜索什么...</h1>
+			<i class="iconfont"></i>
+			<input class="submit" type="search" name="s" placeholder="Search...">
+		</div>
+	</div>
+</form>
+<!-- 搜索结束 -->
+<script type="text/javascript">
+	var app = {"pjax":""};
+	var theurl = "https://www.caoxin.xyz/usr/themes/Akina/";
+	if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+	  alert('请抛弃万恶的IE系列浏览器吧。');
+	}
+	  var xl = 0;
+  var transparent = 0;
+</script>
+
+<script type="text/javascript" src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/jquery.min.js.下载"></script>
+<script type="text/javascript" src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/jquery.preloader.js.下载"></script>
+<script type="text/javascript" src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/jquery.pjax.js.下载"></script>
+<script type="text/javascript" src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/baguetteBox.min.js.下载"></script>
+<script type="text/javascript" src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/global.js.下载"></script><div role="dialog" id="baguetteBox-overlay"><div id="baguetteBox-slider"></div><button type="button" id="previous-button" aria-label="Previous" class="baguetteBox-button"><svg width="44" height="60"><polyline points="30 10 10 30 30 50" stroke="rgba(255,255,255,0.5)" stroke-width="4" stroke-linecap="butt" fill="none" stroke-linejoin="round"></polyline></svg></button><button type="button" id="next-button" aria-label="Next" class="baguetteBox-button"><svg width="44" height="60"><polyline points="14 10 34 30 14 50" stroke="rgba(255,255,255,0.5)" stroke-width="4" stroke-linecap="butt" fill="none" stroke-linejoin="round"></polyline></svg></button><button type="button" id="close-button" aria-label="Close" class="baguetteBox-button"><svg width="30" height="30"><g stroke="rgb(160,160,160)" stroke-width="4"><line x1="5" y1="5" x2="25" y2="25"></line><line x1="5" y1="25" x2="25" y2="5"></line></g></svg></button></div>
+<script type="text/javascript" src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/prism.js.下载"></script>
+<script type="text/javascript" src="./关于 Vibe Coding 的思考与探索 - CaoXin 的小站_files/SmoothScroll.js.下载"></script>
+<style>
+pre {
+    position: relative;
+    overflow: auto;
+}
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 180ms ease, transform 180ms ease;
+    z-index: 20;
+}
+pre:hover .copy-btn,
+pre:focus-within .copy-btn {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.copy-btn:hover {
+    background: #bdbdbd;
+}
+.copy-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.06);
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const codeBlocks = document.querySelectorAll("pre code");
+    codeBlocks.forEach(function(codeBlock) {
+        const pre = codeBlock.closest('pre') || codeBlock.parentNode;
+        if (!pre || pre.querySelector('.copy-btn')) return;
+
+        const button = document.createElement("button");
+        button.type = 'button';
+        button.innerText = "Copy";
+        button.className = "copy-btn";
+        button.setAttribute('aria-label','Copy Code');
+
+        button.addEventListener("click", function(e) {
+            e.stopPropagation();
+            const text = codeBlock.innerText;
+            const old = button.innerText;
+
+            function success() {
+                button.innerText = "Copied";
+                setTimeout(() => {
+                    button.innerText = old;
+                }, 1500);
+            }
+
+            function fail() {
+                button.innerText = "Failed";
+                setTimeout(() => {
+                    button.innerText = old;
+                }, 1500);
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(success).catch(fail);
+            } else {
+                try {
+                    const ta = document.createElement("textarea");
+                    ta.value = text;
+                    ta.style.position = 'fixed';
+                    ta.style.left = '-9999px';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    success();
+                } catch (err) {
+                    fail();
+                }
+            }
+        });
+
+        pre.appendChild(button);
+    });
+});
+</script>
+
+<i id="__PIKPAK_EXTENSION__" style="display: none;">1.8.4</i></body></html>
