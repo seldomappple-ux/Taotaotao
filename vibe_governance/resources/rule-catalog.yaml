@@ -17,8 +17,8 @@ rules:
     adapters: [root, copilot, cursor, claude, gemini, opencode]
   - rule_id: governance.onboarding_sequence
     title: Onboarding reads local context first
-    body: When taking over the repository, read README.md, SOURCE_MATERIALS.md, ARCHITECTURE.md, and .agents/PROGRESS.md before relying on generated adapter files. Align on local context first, then act.
-    body_zh: 接手仓库时, 先阅读 README.md、SOURCE_MATERIALS.md、ARCHITECTURE.md 和 .agents/PROGRESS.md, 再依赖生成的适配文件. 先对齐本地上下文, 再执行修改.
+    body: When taking over the repository, read README.md, docs/SOURCE_MATERIALS.md, ARCHITECTURE.md, and .agents/PROGRESS.md before relying on generated adapter files. Align on local context first, then act.
+    body_zh: 接手仓库时, 先阅读 README.md、docs/SOURCE_MATERIALS.md、ARCHITECTURE.md 和 .agents/PROGRESS.md, 再依赖生成的适配文件. 先对齐本地上下文, 再执行修改.
     scope: governance
     priority: 25
     immutable: true

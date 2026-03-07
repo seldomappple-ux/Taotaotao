@@ -1,4 +1,4 @@
-# 原始资料与思想来源
+﻿# 原始资料与思想来源
 
 这份文档只解决一件事:
 
@@ -12,9 +12,9 @@
 
 当前仓库内的归档位置在:
 
-- [references/original-articles/01-caoxin-vibe-coding.html](./references/original-articles/01-caoxin-vibe-coding.html)
-- [references/original-articles/02-caoxin-project-init.html](./references/original-articles/02-caoxin-project-init.html)
-- [references/original-articles/03-zhihu-managing-10-claude-code.html](./references/original-articles/03-zhihu-managing-10-claude-code.html)
+- [references/original-articles/01-caoxin-vibe-coding.html](../references/original-articles/01-caoxin-vibe-coding.html)
+- [references/original-articles/02-caoxin-project-init.html](../references/original-articles/02-caoxin-project-init.html)
+- [references/original-articles/03-zhihu-managing-10-claude-code.html](../references/original-articles/03-zhihu-managing-10-claude-code.html)
 
 这里保存的是网页快照 HTML 文件, 重点是把原文内容和上下文留在仓库里, 方便后续接手时本地查阅。它们不是生成器的输入, 但属于项目的重要背景资料。
 
@@ -63,7 +63,7 @@
 
 ### 2. 先把项目事实和边界结构化
 
-当前仓库把这些事实放进了 [`.agents/profile.yaml`](./.agents/profile.yaml):
+当前仓库把这些事实放进了 [`.agents/profile.yaml`](../.agents/profile.yaml):
 
 - 项目类型
 - 文档模式
@@ -80,7 +80,7 @@
 当前仓库有:
 
 - `.agents/progress/entries/*`
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
 - `progress promote / archive`
 
 这正对应原文里对长期记忆、上下文压缩、经验沉淀的强调。
@@ -103,10 +103,10 @@
 
 当前仓库把版本相关信息拆到了:
 
-- [CHANGELOG.md](./CHANGELOG.md)
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
-- [`pyproject.toml`](./pyproject.toml)
-- [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
+- [CHANGELOG.md](../CHANGELOG.md)
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
+- [`pyproject.toml`](../pyproject.toml)
+- [`vibe_governance/resources/release-manifest.yaml`](../vibe_governance/resources/release-manifest.yaml)
 
 这正对应“开发记录 -> 版本迭代 -> 经验回流 -> 内核升级”的闭环方向。
 
@@ -139,7 +139,8 @@
 
 推荐顺序:
 
-1. [ARCHITECTURE.md](./ARCHITECTURE.md)
-2. [QUICKSTART.md](./QUICKSTART.md)
-3. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
+1. [ARCHITECTURE.md](../ARCHITECTURE.md)
+2. [QUICKSTART.md](../QUICKSTART.md)
+3. [DIRECTORY_STRUCTURE.md](../DIRECTORY_STRUCTURE.md)
 4. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
+

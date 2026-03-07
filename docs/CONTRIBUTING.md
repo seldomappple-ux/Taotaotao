@@ -1,4 +1,4 @@
-# 迭代修改指南
+﻿# 迭代修改指南
 
 这份文档是写给准备继续维护这个仓库的人看的。
 
@@ -6,9 +6,9 @@
 
 如果你是第一次接手, 先读:
 
-1. [README.md](./README.md)
+1. [README.md](../README.md)
 2. [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)
-3. [ARCHITECTURE.md](./ARCHITECTURE.md)
+3. [ARCHITECTURE.md](../ARCHITECTURE.md)
 4. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
 
 ## 一、开始改之前, 先判断自己碰的是哪一层
@@ -28,12 +28,12 @@
 
 每次开始前, 至少看这些文件:
 
-- [README.md](./README.md)
+- [README.md](../README.md)
 - [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)
-- [ARCHITECTURE.md](./ARCHITECTURE.md)
+- [ARCHITECTURE.md](../ARCHITECTURE.md)
 - [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
-- [CHANGELOG.md](./CHANGELOG.md)
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+- [CHANGELOG.md](../CHANGELOG.md)
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
 
 ### 第 2 步: 明确这次改动应该落哪一层
 
@@ -95,11 +95,11 @@ python -m unittest discover -s tests -v
 
 常见需要一起更新的文件有:
 
-- [README.md](./README.md)
+- [README.md](../README.md)
 - [USAGE_GUIDE.md](./USAGE_GUIDE.md)
-- [ARCHITECTURE.md](./ARCHITECTURE.md)
+- [ARCHITECTURE.md](../ARCHITECTURE.md)
 - [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
-- [CHANGELOG.md](./CHANGELOG.md)
+- [CHANGELOG.md](../CHANGELOG.md)
 
 ## 三、不同类型改动的标准动作
 
@@ -116,7 +116,7 @@ python -m unittest discover -s tests -v
 1. 补 `PROGRESS`
 2. 修改文档
 3. 跑 `validate`
-4. 如果文档提到了新行为, 同步检查 [CHANGELOG.md](./CHANGELOG.md)
+4. 如果文档提到了新行为, 同步检查 [CHANGELOG.md](../CHANGELOG.md)
 
 ### 类型 B: 改 `.agents/` 真源
 
@@ -179,7 +179,7 @@ python -m unittest discover -s tests -v
 
 1. 拉取最新仓库
 2. 阅读 [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md)
-3. 阅读 [`.agents/PROGRESS.md`](./.agents/PROGRESS.md) 和最近的 entry
+3. 阅读 [`.agents/PROGRESS.md`](../.agents/PROGRESS.md) 和最近的 entry
 4. 运行:
 
 ```bash
@@ -211,7 +211,7 @@ python -m vibe_governance sync --target . --dry-run --json
 
 ## 六、哪些改动应该进 `CHANGELOG`
 
-建议进入 [CHANGELOG.md](./CHANGELOG.md) 的情况:
+建议进入 [CHANGELOG.md](../CHANGELOG.md) 的情况:
 
 - 对外使用方式变了
 - 根目录文档导航变了
@@ -241,3 +241,4 @@ python -m vibe_governance sync --target . --dry-run --json
 - 会不会让规则边界更模糊
 
 如果答案是会, 那就必须把解释写回仓库。
+

@@ -3,7 +3,7 @@ managed-by: vibe-governance 0.1.0
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 0.1.0
 upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: 6faf9e7abcc0202e752566c9854b9ad45b343a8c0302530192963cd77cc347e5
+checksum-sha256: 4018c973f1a85e4a25fbf76875865e59722c23a0ff69ba6946915d05dfe12d77
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -25,6 +25,7 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 
 | Page ID | Date | Title | Status | Path | Related Commit Message |
 | --- | --- | --- | --- | --- | --- |
+| `20260308-1` | `2026-03-08` | Slim root human docs to five entry files and move deep guides into docs | `draft` | `.agents/progress/entries/2026/2026-03-08-1.md` | docs(governance): slim root human docs and move deep guides to docs |
 | `20260307-4` | `2026-03-07` | Unify remaining human docs and add onboarding rule for generated adapters | `draft` | `.agents/progress/entries/2026/2026-03-07-4.md` | docs(governance): unify human docs and add onboarding adapter rule |
 | `20260307-3` | `2026-03-07` | Restructure onboarding docs and archive source articles in-repo | `draft` | `.agents/progress/entries/2026/2026-03-07-3.md` | docs(governance): restructure onboarding docs and archive source articles |
 | `20260307-2` | `2026-03-07` | Add root explanatory documentation set for human and cross-account handoff | `draft` | `.agents/progress/entries/2026/2026-03-07-2.md` | docs(governance): add root explanatory documentation set |

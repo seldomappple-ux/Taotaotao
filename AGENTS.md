@@ -3,7 +3,7 @@ managed-by: vibe-governance 0.1.0
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 0.1.0
 upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: 0cf9b14126f9d15d552fff11049b703b7031e004273cf2871ca432dbc149d80f
+checksum-sha256: df833a737a08e34eb59f64205ecbaf0ee9f93561c437f26a2d4577c2512d22a1
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -44,8 +44,8 @@ This repository uses a deterministic governance stack. Keep this file short and 
 - English: Do not edit generated adapter files directly. Apply durable changes in .agents/profile.yaml, .agents/overrides/rules.yaml, or canonical upstream templates, then rerender.
 
 ### `governance.onboarding_sequence`
-- 中文: 接手仓库时, 先阅读 README.md、SOURCE_MATERIALS.md、ARCHITECTURE.md 和 .agents/PROGRESS.md, 再依赖生成的适配文件. 先对齐本地上下文, 再执行修改.
-- English: When taking over the repository, read README.md, SOURCE_MATERIALS.md, ARCHITECTURE.md, and .agents/PROGRESS.md before relying on generated adapter files. Align on local context first, then act.
+- 中文: 接手仓库时, 先阅读 README.md、docs/SOURCE_MATERIALS.md、ARCHITECTURE.md 和 .agents/PROGRESS.md, 再依赖生成的适配文件. 先对齐本地上下文, 再执行修改.
+- English: When taking over the repository, read README.md, docs/SOURCE_MATERIALS.md, ARCHITECTURE.md, and .agents/PROGRESS.md before relying on generated adapter files. Align on local context first, then act.
 
 ### `git.flow`
 - 中文: 使用 Git Flow 风格的分支策略, 至少包含 main 与 dev. 除非项目 overlay 另有规定, feature 与 release 工作应从 dev 分出.

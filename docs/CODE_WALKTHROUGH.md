@@ -1,4 +1,4 @@
-# 核心代码走读
+﻿# 核心代码走读
 
 这份文档是给准备改生成器的人看的。
 
@@ -12,8 +12,8 @@
 
 当前实现可以直接理解成:
 
-- [`vibe_governance/cli.py`](./vibe_governance/cli.py) 负责接命令
-- [`vibe_governance/project.py`](./vibe_governance/project.py) 负责真正干活
+- [`vibe_governance/cli.py`](../vibe_governance/cli.py) 负责接命令
+- [`vibe_governance/project.py`](../vibe_governance/project.py) 负责真正干活
 
 所以读代码时, 最简单的顺序就是:
 
@@ -124,7 +124,7 @@ CLI 参数
 它解决的是:
 
 - 如何把零散的 entry 文件变成结构化对象
-- 如何只把最近 10 条活跃 entry 放进 [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+- 如何只把最近 10 条活跃 entry 放进 [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
 - 如何把更早或已沉淀的记录继续留在磁盘上可检索
 
 这部分代码直接对应了“长期记忆本地化”和“滑动窗口索引”的设计。
@@ -224,7 +224,7 @@ CLI 参数
 
 这是因为:
 
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md) 是生成文件
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md) 是生成文件
 - entry 状态一变, 滑动索引也必须跟着变
 
 ## 六、如果你想扩展功能, 应该从哪下手
@@ -233,27 +233,27 @@ CLI 参数
 
 先改:
 
-- [`vibe_governance/cli.py`](./vibe_governance/cli.py)
+- [`vibe_governance/cli.py`](../vibe_governance/cli.py)
 
 再改:
 
-- [`vibe_governance/project.py`](./vibe_governance/project.py)
+- [`vibe_governance/project.py`](../vibe_governance/project.py)
 
 最后补:
 
-- [tests/test_governance.py](./tests/test_governance.py)
+- [tests/test_governance.py](../tests/test_governance.py)
 - 根目录说明文档
 
 ### 场景 2: 新增一个规则字段或新 `rule_id`
 
 先改:
 
-- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
+- [`vibe_governance/resources/rule-catalog.yaml`](../vibe_governance/resources/rule-catalog.yaml)
 
 如有需要, 再改:
 
-- [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
-- [`vibe_governance/project.py`](./vibe_governance/project.py)
+- [`vibe_governance/resources/templates/`](../vibe_governance/resources/templates/)
+- [`vibe_governance/project.py`](../vibe_governance/project.py)
 
 ### 场景 3: 新增一个 IDE 适配器
 
@@ -282,22 +282,22 @@ CLI 参数
 
 ### 与版本号直接相关
 
-- [`pyproject.toml`](./pyproject.toml)
-- [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
+- [`pyproject.toml`](../pyproject.toml)
+- [`vibe_governance/resources/release-manifest.yaml`](../vibe_governance/resources/release-manifest.yaml)
 
 ### 与经验记录相关
 
 - `.agents/progress/entries/*`
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
-- [CHANGELOG.md](./CHANGELOG.md)
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
+- [CHANGELOG.md](../CHANGELOG.md)
 
 ### 与同步基线相关
 
-- [`.agents/.managed/upstream-rule-catalog.yaml`](./.agents/.managed/upstream-rule-catalog.yaml)
+- [`.agents/.managed/upstream-rule-catalog.yaml`](../.agents/.managed/upstream-rule-catalog.yaml)
 
 ### 与当前生成状态相关
 
-- [`.agents/.managed/generated-manifest.yaml`](./.agents/.managed/generated-manifest.yaml)
+- [`.agents/.managed/generated-manifest.yaml`](../.agents/.managed/generated-manifest.yaml)
 
 也就是说, 版本和状态并不是只放在一个文件里, 而是由发布清单、经验索引、版本说明和同步快照一起组成。
 
@@ -305,10 +305,10 @@ CLI 参数
 
 推荐顺序:
 
-1. [ARCHITECTURE.md](./ARCHITECTURE.md)
-2. [`vibe_governance/cli.py`](./vibe_governance/cli.py)
-3. [`vibe_governance/project.py`](./vibe_governance/project.py)
-4. [tests/test_governance.py](./tests/test_governance.py)
+1. [ARCHITECTURE.md](../ARCHITECTURE.md)
+2. [`vibe_governance/cli.py`](../vibe_governance/cli.py)
+3. [`vibe_governance/project.py`](../vibe_governance/project.py)
+4. [tests/test_governance.py](../tests/test_governance.py)
 5. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
 
 ## 九、最后的底线提醒
@@ -316,3 +316,4 @@ CLI 参数
 - 这个项目已经把解释层和执行层分开了, 不要再把它们混回去
 - 当前项目还没有真正的项目类型 overlay, 文档里提到的方向不等于现成功能
 - 想改行为时, 先确认自己在改真源、canonical 资源, 还是生成结果
+

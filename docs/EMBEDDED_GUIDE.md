@@ -1,4 +1,4 @@
-# 嵌入式项目专属使用指南
+﻿# 嵌入式项目专属使用指南
 
 这份文档专门回答一个问题:
 
@@ -62,7 +62,7 @@ python -m vibe_governance init --target .
 
 优先修改:
 
-- [`.agents/profile.yaml`](./.agents/profile.yaml)
+- [`.agents/profile.yaml`](../.agents/profile.yaml)
 
 建议至少先定清楚:
 
@@ -95,7 +95,7 @@ python -m vibe_governance init --target .
 
 去改:
 
-- [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
+- [`.agents/architecture-decisions.yaml`](../.agents/architecture-decisions.yaml)
 
 至少建议固化这些内容:
 
@@ -187,8 +187,8 @@ python -m vibe_governance init --target .
 推荐的最小闭环是:
 
 1. 在 `.agents/progress/entries/*` 记录联调和踩坑
-2. 在 [CHANGELOG.md](./CHANGELOG.md) 记录版本级变化
-3. 在 [ARCHITECTURE.md](./ARCHITECTURE.md) 或架构决策里写清边界变化
+2. 在 [CHANGELOG.md](../CHANGELOG.md) 记录版本级变化
+3. 在 [ARCHITECTURE.md](../ARCHITECTURE.md) 或架构决策里写清边界变化
 4. 在 [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md) 里补充新账号接手所需环境差异
 
 ## 七、跨账号同步时, 嵌入式项目要额外同步什么
@@ -235,3 +235,4 @@ python -m vibe_governance init --target .
 
 - 先用它把治理骨架搭稳
 - 再把嵌入式经验逐步沉淀成下一阶段能力
+

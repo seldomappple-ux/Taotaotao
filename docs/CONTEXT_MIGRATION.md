@@ -1,4 +1,4 @@
-# 上下文迁移专属指南
+﻿# 上下文迁移专属指南
 
 这份文档就是专门解决一个问题:
 
@@ -30,10 +30,10 @@
 - `.github/`
 - `.cursor/`
 - `.opencode/`
-- [AGENTS.md](./AGENTS.md)
-- [CLAUDE.md](./CLAUDE.md)
-- [GEMINI.md](./GEMINI.md)
-- [`pyproject.toml`](./pyproject.toml)
+- [AGENTS.md](../AGENTS.md)
+- [CLAUDE.md](../CLAUDE.md)
+- [GEMINI.md](../GEMINI.md)
+- [`pyproject.toml`](../pyproject.toml)
 - `.gitignore`
 
 ### 不需要同步
@@ -70,11 +70,11 @@ git --version
 
 建议顺序:
 
-1. [README.md](./README.md)
+1. [README.md](../README.md)
 2. [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)
-3. [CHANGELOG.md](./CHANGELOG.md)
-4. [ARCHITECTURE.md](./ARCHITECTURE.md)
-5. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
+3. [CHANGELOG.md](../CHANGELOG.md)
+4. [ARCHITECTURE.md](../ARCHITECTURE.md)
+5. [DIRECTORY_STRUCTURE.md](../DIRECTORY_STRUCTURE.md)
 6. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
 
 这一步的目的不是“补知识”, 而是先把项目为什么存在、当前边界在哪里、现在到了哪个版本阶段对齐。
@@ -83,10 +83,10 @@ git --version
 
 按这个顺序打开:
 
-1. [`.agents/profile.yaml`](./.agents/profile.yaml)
-2. [`.agents/RULES.md`](./.agents/RULES.md)
-3. [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
-4. [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+1. [`.agents/profile.yaml`](../.agents/profile.yaml)
+2. [`.agents/RULES.md`](../.agents/RULES.md)
+3. [`.agents/architecture-decisions.yaml`](../.agents/architecture-decisions.yaml)
+4. [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
 
 如果要继续接手最近工作, 还应继续看最近的 `.agents/progress/entries/*`。
 
@@ -106,7 +106,7 @@ python -m vibe_governance sync --target . --dry-run --json
 
 1. 先读根目录说明文档
 2. 再读 `.agents/` 真源
-3. 最后再看 [AGENTS.md](./AGENTS.md)、[CLAUDE.md](./CLAUDE.md)、[GEMINI.md](./GEMINI.md)
+3. 最后再看 [AGENTS.md](../AGENTS.md)、[CLAUDE.md](../CLAUDE.md)、[GEMINI.md](../GEMINI.md)
 
 原因很简单:
 
@@ -119,8 +119,8 @@ python -m vibe_governance sync --target . --dry-run --json
 - [ ] `render` 成功执行
 - [ ] `sync --dry-run --json` 能正常输出
 - [ ] 能从 [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md) 说清项目最初来源
-- [ ] 能从 [`.agents/profile.yaml`](./.agents/profile.yaml) 看懂当前项目事实
-- [ ] 能从 [`.agents/PROGRESS.md`](./.agents/PROGRESS.md) 找到最近状态
+- [ ] 能从 [`.agents/profile.yaml`](../.agents/profile.yaml) 看懂当前项目事实
+- [ ] 能从 [`.agents/PROGRESS.md`](../.agents/PROGRESS.md) 找到最近状态
 - [ ] 能说清哪些文件能改, 哪些不能直接改
 
 ## 五、常见问题和处理方式
@@ -129,7 +129,7 @@ python -m vibe_governance sync --target . --dry-run --json
 
 处理方式:
 
-1. 先让它读 [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
+1. 先让它读 [DIRECTORY_STRUCTURE.md](../DIRECTORY_STRUCTURE.md)
 2. 再让它读 [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
 3. 明确告诉它先改 `.agents/` 或 canonical 资源, 不直接改生成文件
 
@@ -138,16 +138,16 @@ python -m vibe_governance sync --target . --dry-run --json
 处理方式:
 
 1. 先读 [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)
-2. 再读 [ARCHITECTURE.md](./ARCHITECTURE.md)
+2. 再读 [ARCHITECTURE.md](../ARCHITECTURE.md)
 3. 再看 `references/original-articles/`
 
 ### 问题 3: 新账号不知道当前版本是什么
 
 处理方式:
 
-- 看 [CHANGELOG.md](./CHANGELOG.md)
-- 看 [`pyproject.toml`](./pyproject.toml)
-- 看 [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
+- 看 [CHANGELOG.md](../CHANGELOG.md)
+- 看 [`pyproject.toml`](../pyproject.toml)
+- 看 [`vibe_governance/resources/release-manifest.yaml`](../vibe_governance/resources/release-manifest.yaml)
 
 ### 问题 4: 新设备看到的生成文件和旧设备不一样
 
@@ -155,7 +155,7 @@ python -m vibe_governance sync --target . --dry-run --json
 
 1. 先跑 `validate`
 2. 再跑 `render`
-3. 再检查 [`.agents/.managed/generated-manifest.yaml`](./.agents/.managed/generated-manifest.yaml)
+3. 再检查 [`.agents/.managed/generated-manifest.yaml`](../.agents/.managed/generated-manifest.yaml)
 
 ### 问题 5: 只拷了代码, 没拷 `.agents/` 或 `references/`
 
@@ -190,3 +190,4 @@ python -m vibe_governance sync --target . --dry-run --json
 - AI 换了
 
 就回来按这份文档走一遍。
+

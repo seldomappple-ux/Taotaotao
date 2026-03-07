@@ -1,4 +1,4 @@
-# 完整全流程使用手册
+﻿# 完整全流程使用手册
 
 这份手册讲的是一条完整闭环:
 
@@ -6,9 +6,9 @@
 
 如果你刚接这个项目, 建议先读:
 
-1. [QUICKSTART.md](./QUICKSTART.md)
+1. [QUICKSTART.md](../QUICKSTART.md)
 2. [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)
-3. [ARCHITECTURE.md](./ARCHITECTURE.md)
+3. [ARCHITECTURE.md](../ARCHITECTURE.md)
 
 然后再回来看这份手册。
 
@@ -31,18 +31,18 @@
 
 建议顺序:
 
-1. [README.md](./README.md)
+1. [README.md](../README.md)
 2. [SOURCE_MATERIALS.md](./SOURCE_MATERIALS.md)
-3. [ARCHITECTURE.md](./ARCHITECTURE.md)
-4. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
+3. [ARCHITECTURE.md](../ARCHITECTURE.md)
+4. [DIRECTORY_STRUCTURE.md](../DIRECTORY_STRUCTURE.md)
 5. [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
 
 然后再看:
 
-- [`.agents/profile.yaml`](./.agents/profile.yaml)
-- [`.agents/RULES.md`](./.agents/RULES.md)
-- [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+- [`.agents/profile.yaml`](../.agents/profile.yaml)
+- [`.agents/RULES.md`](../.agents/RULES.md)
+- [`.agents/architecture-decisions.yaml`](../.agents/architecture-decisions.yaml)
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
 
 ### 第 2 步: 跑三条标准命令
 
@@ -99,9 +99,9 @@ python -m vibe_governance init --target .
 
 优先改:
 
-- [`.agents/profile.yaml`](./.agents/profile.yaml)
-- [`.agents/RULES.md`](./.agents/RULES.md)
-- [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
+- [`.agents/profile.yaml`](../.agents/profile.yaml)
+- [`.agents/RULES.md`](../.agents/RULES.md)
+- [`.agents/architecture-decisions.yaml`](../.agents/architecture-decisions.yaml)
 
 这一步要做的不是“赶紧开始写代码”, 而是先把:
 
@@ -135,8 +135,8 @@ python -m vibe_governance render --target .
 
 例如:
 
-- [README.md](./README.md)
-- [ARCHITECTURE.md](./ARCHITECTURE.md)
+- [README.md](../README.md)
+- [ARCHITECTURE.md](../ARCHITECTURE.md)
 - [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md)
 
 这类改动通常不影响生成逻辑, 但如果对接手方式、版本理解或治理边界有影响, 仍然建议补 `PROGRESS`。
@@ -145,9 +145,9 @@ python -m vibe_governance render --target .
 
 例如:
 
-- [`.agents/profile.yaml`](./.agents/profile.yaml)
-- [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml)
-- [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
+- [`.agents/profile.yaml`](../.agents/profile.yaml)
+- [`.agents/overrides/rules.yaml`](../.agents/overrides/rules.yaml)
+- [`.agents/architecture-decisions.yaml`](../.agents/architecture-decisions.yaml)
 - `.agents/progress/entries/*`
 
 这类改动通常要走:
@@ -161,10 +161,10 @@ python -m vibe_governance render --target .
 
 例如:
 
-- [`vibe_governance/project.py`](./vibe_governance/project.py)
-- [`vibe_governance/cli.py`](./vibe_governance/cli.py)
-- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
-- [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
+- [`vibe_governance/project.py`](../vibe_governance/project.py)
+- [`vibe_governance/cli.py`](../vibe_governance/cli.py)
+- [`vibe_governance/resources/rule-catalog.yaml`](../vibe_governance/resources/rule-catalog.yaml)
+- [`vibe_governance/resources/templates/`](../vibe_governance/resources/templates/)
 
 这类改动通常要走:
 
@@ -249,9 +249,9 @@ python -m vibe_governance render --target .
 
 当前版本信息至少分布在:
 
-- [`pyproject.toml`](./pyproject.toml)
-- [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
-- [CHANGELOG.md](./CHANGELOG.md)
+- [`pyproject.toml`](../pyproject.toml)
+- [`vibe_governance/resources/release-manifest.yaml`](../vibe_governance/resources/release-manifest.yaml)
+- [CHANGELOG.md](../CHANGELOG.md)
 
 ### 第 3 步: 发版前跑标准动作
 
@@ -264,8 +264,8 @@ python -m unittest discover -s tests -v
 
 然后人工确认:
 
-- [CHANGELOG.md](./CHANGELOG.md) 是否更新
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md) 是否能追到最近变化
+- [CHANGELOG.md](../CHANGELOG.md) 是否更新
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md) 是否能追到最近变化
 - 根目录说明文档是否需要同步更新
 
 ## 七、经验回流到治理内核怎么做
@@ -281,9 +281,9 @@ python -m unittest discover -s tests -v
 
 ### 回流到哪里
 
-- 通用规则: [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
-- 通用模板: [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
-- 初始化骨架: [`vibe_governance/resources/scaffold/`](./vibe_governance/resources/scaffold/)
+- 通用规则: [`vibe_governance/resources/rule-catalog.yaml`](../vibe_governance/resources/rule-catalog.yaml)
+- 通用模板: [`vibe_governance/resources/templates/`](../vibe_governance/resources/templates/)
+- 初始化骨架: [`vibe_governance/resources/scaffold/`](../vibe_governance/resources/scaffold/)
 - 解释层说明: 根目录说明文档
 
 ### 回流前必须先满足什么
@@ -298,11 +298,11 @@ python -m unittest discover -s tests -v
 
 先看它是否允许项目本地覆盖:
 
-- [`.agents/profile.yaml`](./.agents/profile.yaml) 里的 `override_whitelist`
+- [`.agents/profile.yaml`](../.agents/profile.yaml) 里的 `override_whitelist`
 
 如果允许, 去改:
 
-- [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml)
+- [`.agents/overrides/rules.yaml`](../.agents/overrides/rules.yaml)
 
 不要直接改:
 
@@ -314,12 +314,12 @@ python -m unittest discover -s tests -v
 
 去改:
 
-- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
+- [`vibe_governance/resources/rule-catalog.yaml`](../vibe_governance/resources/rule-catalog.yaml)
 
 必要时再改:
 
-- [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
-- [`vibe_governance/project.py`](./vibe_governance/project.py)
+- [`vibe_governance/resources/templates/`](../vibe_governance/resources/templates/)
+- [`vibe_governance/project.py`](../vibe_governance/project.py)
 
 ### 我换账号了, 还想继续做
 
@@ -333,3 +333,4 @@ python -m unittest discover -s tests -v
 - 经验先写 `PROGRESS`, 再谈升级规则和发版本.
 - 新账号接手靠文件闭环, 不靠聊天历史.
 - 当前 v1 只预留了嵌入式 / MCP 的入口, 不要把预留能力写成现成功能.
+

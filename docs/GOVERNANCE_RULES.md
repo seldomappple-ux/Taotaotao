@@ -1,4 +1,4 @@
-# 治理规则详解
+﻿# 治理规则详解
 
 这份文档不重复抄规则原文, 它只解释一件事:
 
@@ -48,9 +48,9 @@ AI 可以换, IDE 可以换, 但治理流程不能每次跟着换。
 
 位置:
 
-- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
-- [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
-- [`vibe_governance/resources/scaffold/`](./vibe_governance/resources/scaffold/)
+- [`vibe_governance/resources/rule-catalog.yaml`](../vibe_governance/resources/rule-catalog.yaml)
+- [`vibe_governance/resources/templates/`](../vibe_governance/resources/templates/)
+- [`vibe_governance/resources/scaffold/`](../vibe_governance/resources/scaffold/)
 
 这层负责:
 
@@ -67,10 +67,10 @@ AI 可以换, IDE 可以换, 但治理流程不能每次跟着换。
 
 位置:
 
-- [`.agents/profile.yaml`](./.agents/profile.yaml)
-- [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml)
-- [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
-- [`.agents/RULES.md`](./.agents/RULES.md)
+- [`.agents/profile.yaml`](../.agents/profile.yaml)
+- [`.agents/overrides/rules.yaml`](../.agents/overrides/rules.yaml)
+- [`.agents/architecture-decisions.yaml`](../.agents/architecture-decisions.yaml)
+- [`.agents/RULES.md`](../.agents/RULES.md)
 - `.agents/progress/entries/*`
 
 这层负责:
@@ -89,13 +89,13 @@ AI 可以换, IDE 可以换, 但治理流程不能每次跟着换。
 
 位置:
 
-- [AGENTS.md](./AGENTS.md)
-- [CLAUDE.md](./CLAUDE.md)
-- [GEMINI.md](./GEMINI.md)
+- [AGENTS.md](../AGENTS.md)
+- [CLAUDE.md](../CLAUDE.md)
+- [GEMINI.md](../GEMINI.md)
 - `.cursor/`
 - `.github/`
 - `.opencode/`
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
 
 这层负责:
 
@@ -142,7 +142,7 @@ AI 可以换, IDE 可以换, 但治理流程不能每次跟着换。
 
 ### 1. override whitelist 是第一层权限边界
 
-项目本地只有在 [`.agents/profile.yaml`](./.agents/profile.yaml) 的 `override_whitelist` 里声明过的 `rule_id`, 才能放进 [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml)。
+项目本地只有在 [`.agents/profile.yaml`](../.agents/profile.yaml) 的 `override_whitelist` 里声明过的 `rule_id`, 才能放进 [`.agents/overrides/rules.yaml`](../.agents/overrides/rules.yaml)。
 
 ### 2. immutable 规则是第二层红线
 
@@ -152,12 +152,12 @@ AI 可以换, IDE 可以换, 但治理流程不能每次跟着换。
 
 下面这些都不应该直接改:
 
-- [AGENTS.md](./AGENTS.md)
-- [CLAUDE.md](./CLAUDE.md)
-- [GEMINI.md](./GEMINI.md)
+- [AGENTS.md](../AGENTS.md)
+- [CLAUDE.md](../CLAUDE.md)
+- [GEMINI.md](../GEMINI.md)
 - `.cursor/rules/governance.mdc`
 - `.github/copilot-instructions.md`
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
 - `.agents/.managed/*`
 
 ## 六、冲突处理 SOP
@@ -217,9 +217,9 @@ AI 可以换, IDE 可以换, 但治理流程不能每次跟着换。
 
 当前项目至少有三处和版本直接相关:
 
-- [`pyproject.toml`](./pyproject.toml)
-- [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
-- [CHANGELOG.md](./CHANGELOG.md)
+- [`pyproject.toml`](../pyproject.toml)
+- [`vibe_governance/resources/release-manifest.yaml`](../vibe_governance/resources/release-manifest.yaml)
+- [CHANGELOG.md](../CHANGELOG.md)
 
 ### 什么情况下应该认真考虑发版
 
@@ -246,9 +246,9 @@ python -m unittest discover -s tests -v
 
 然后人工确认:
 
-- [CHANGELOG.md](./CHANGELOG.md) 是否更新
+- [CHANGELOG.md](../CHANGELOG.md) 是否更新
 - 根目录说明文档是否需要同步更新
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md) 是否能追溯这次变化
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md) 是否能追溯这次变化
 
 ### 当前 v1 的兼容底线
 
@@ -263,8 +263,8 @@ python -m unittest discover -s tests -v
 
 - 活跃经验写到 `.agents/progress/entries/*`
 - 已沉淀到上游的经验移到 `.agents/progress/archived/*`
-- 当前索引写到 [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
-- 版本级变化写到 [CHANGELOG.md](./CHANGELOG.md)
+- 当前索引写到 [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
+- 版本级变化写到 [CHANGELOG.md](../CHANGELOG.md)
 
 这就是“开发记录 -> 版本迭代 -> 经验回流 -> 内核升级”的闭环。
 
@@ -275,37 +275,38 @@ python -m unittest discover -s tests -v
 ### 可以直接改的
 
 - 根目录说明文档
-- [`.agents/profile.yaml`](./.agents/profile.yaml)
-- [`.agents/RULES.md`](./.agents/RULES.md)
-- [`.agents/overrides/rules.yaml`](./.agents/overrides/rules.yaml)
-- [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
+- [`.agents/profile.yaml`](../.agents/profile.yaml)
+- [`.agents/RULES.md`](../.agents/RULES.md)
+- [`.agents/overrides/rules.yaml`](../.agents/overrides/rules.yaml)
+- [`.agents/architecture-decisions.yaml`](../.agents/architecture-decisions.yaml)
 - `.agents/progress/entries/*`
 
 ### 不应该直接改的
 
-- [AGENTS.md](./AGENTS.md)
-- [CLAUDE.md](./CLAUDE.md)
-- [GEMINI.md](./GEMINI.md)
+- [AGENTS.md](../AGENTS.md)
+- [CLAUDE.md](../CLAUDE.md)
+- [GEMINI.md](../GEMINI.md)
 - `.cursor/rules/governance.mdc`
 - `.github/copilot-instructions.md`
-- [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+- [`.agents/PROGRESS.md`](../.agents/PROGRESS.md)
 - `.agents/.managed/*`
 
 ### 需要更高审查的
 
-- [`vibe_governance/project.py`](./vibe_governance/project.py)
-- [`vibe_governance/resources/rule-catalog.yaml`](./vibe_governance/resources/rule-catalog.yaml)
-- [`vibe_governance/resources/templates/`](./vibe_governance/resources/templates/)
-- [`pyproject.toml`](./pyproject.toml)
-- [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
+- [`vibe_governance/project.py`](../vibe_governance/project.py)
+- [`vibe_governance/resources/rule-catalog.yaml`](../vibe_governance/resources/rule-catalog.yaml)
+- [`vibe_governance/resources/templates/`](../vibe_governance/resources/templates/)
+- [`pyproject.toml`](../pyproject.toml)
+- [`vibe_governance/resources/release-manifest.yaml`](../vibe_governance/resources/release-manifest.yaml)
 
 ## 十、实际操作时的最短判断顺序
 
 出问题时就按这个顺序来:
 
-1. 看 [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md), 先判断自己碰的是哪一层.
+1. 看 [DIRECTORY_STRUCTURE.md](../DIRECTORY_STRUCTURE.md), 先判断自己碰的是哪一层.
 2. 看本文件, 先判断有没有越权或踩红线.
 3. 跑 `validate`.
 4. 需要时跑 `render`.
 5. 把经验写进 `PROGRESS`.
 6. 确定它真的是通用能力后, 再考虑回流上游.
+
