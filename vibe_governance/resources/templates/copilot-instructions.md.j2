@@ -1,0 +1,9 @@
+# GitHub Copilot Instructions
+
+Use these rules as the stable Copilot adapter layer for this repository.
+
+{% for rule in rules -%}
+- `{{ rule.rule_id }}`: {{ rule.body }}
+{% endfor %}
+
+Prefer deterministic, file-local edits. If a requested change conflicts with immutable governance rules, stop and surface the conflict instead of guessing.

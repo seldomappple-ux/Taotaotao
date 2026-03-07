@@ -1,0 +1,23 @@
+project_type: governance
+project_lang: zh
+comment_lang: zh
+doc_mode: bilingual
+agent_adapters:
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+upstream:
+  repo: https://github.com/example/vibe-governance
+  version: 0.1.0
+  sync_strategy: manual
+override_whitelist:
+  - comments.language
+  - docs.split
+  - copilot.style
+  - cursor.review
+mcp:
+  enabled: false
+  config_path: .agents/mcp/config.yaml
+  allowed_tools: []

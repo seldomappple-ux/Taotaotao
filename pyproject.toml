@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vibe-governance"
+version = "0.1.0"
+description = "Deterministic cross-IDE governance generator for AI-assisted projects."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "Jinja2>=3.1.0",
+  "PyYAML>=6.0.0",
+]
+
+[project.scripts]
+vibe-governance = "vibe_governance.cli:main"
+
+[tool.setuptools]
+packages = ["vibe_governance"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+vibe_governance = [
+  "resources/*.yaml",
+  "resources/templates/*.j2",
+  "resources/scaffold/*.md",
+  "resources/scaffold/*.yaml",
+  "resources/scaffold/overrides/*.yaml",
+  "resources/scaffold/progress/*.md",
+]

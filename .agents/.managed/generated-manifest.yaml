@@ -1,0 +1,21 @@
+managed_by: vibe-governance 0.1.0
+upstream_repo: https://github.com/example/vibe-governance
+upstream_version: 0.1.0
+upstream_published_at: '2026-03-07T00:00:00Z'
+files:
+- path: .agents/PROGRESS.md
+  checksum: 56c5e07cf6af25f2254ae4eb5454fddbff37223fb1e146cf1b1a5b4e1b449cf1
+- path: .cursor/rules/governance.mdc
+  checksum: 2bb46a56b2629dd26aaecda38da860352b498ee17fa1258fcf354456de248836
+- path: .github/copilot-instructions.md
+  checksum: 2b6c63b5cb1487a173645202de0054cca2c0020b5fc39e303431780166fe74e4
+- path: .github/instructions/project-governance.instructions.md
+  checksum: 26f465c5d4bf849b5a0f27338c28fb980bbf37a15cae75bc44cbc297151f7b3d
+- path: .opencode/AGENTS.md
+  checksum: 29b0d7eb5e8e96a9c78ef69e9d6591a43b18aa1cbf4c0f4e5f3c4683da0086b0
+- path: AGENTS.md
+  checksum: cad28edb08927efd5b431d6b7ff6d6705320bf430d9a22bb84032967200111ee
+- path: CLAUDE.md
+  checksum: a0a6c5f34f6a4a3583259a1a7b8fc621cf5455d668351f29dc6b1b3a34ab270b
+- path: GEMINI.md
+  checksum: f2d525a224f57ec8331ab1f78fc96ae97cb4bcd25aedb40d245c87cfa54e03f2

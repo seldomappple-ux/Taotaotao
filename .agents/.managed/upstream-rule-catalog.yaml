@@ -1,0 +1,152 @@
+rules:
+- rule_id: governance.entrypoint
+  title: Unified governance entrypoint
+  body: Root AGENTS.md is the stable human entrypoint. Treat .agents/ as the canonical
+    source tree for profile, local rules, structured overrides, and progress records.
+  scope: governance
+  priority: 10
+  immutable: true
+  adapters:
+  - root
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+- rule_id: governance.managed_outputs
+  title: Managed outputs are generated
+  body: Do not edit generated adapter files directly. Apply durable changes in .agents/profile.yaml,
+    .agents/overrides/rules.yaml, or canonical upstream templates, then rerender.
+  scope: governance
+  priority: 20
+  immutable: true
+  adapters:
+  - root
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+- rule_id: git.flow
+  title: Git Flow is mandatory
+  body: Use a Git Flow style branch strategy with at least main and dev. Feature and
+    release work should branch from dev unless a project-specific workflow overlay
+    says otherwise.
+  scope: git
+  priority: 30
+  immutable: true
+  adapters:
+  - root
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+- rule_id: git.conventional_commits
+  title: Conventional commits only
+  body: Commit messages must follow Angular or Conventional Commit format. Progress
+    entries must always record Related Commit Message and should also record Related
+    Commit Hash.
+  scope: git
+  priority: 40
+  immutable: true
+  adapters:
+  - root
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+- rule_id: comments.language
+  title: Comment language follows profile
+  body: Code comments must follow the configured comment language in profile.yaml.
+    Use English comments for English projects, and use Chinese comments with half-width
+    punctuation for Chinese projects.
+  scope: code
+  priority: 50
+  immutable: false
+  adapters:
+  - root
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+- rule_id: code.architecture
+  title: High cohesion and low coupling
+  body: Prefer high cohesion, low coupling, clear module boundaries, and concise Doxygen-style
+    API comments when the language or framework supports them.
+  scope: code
+  priority: 60
+  immutable: true
+  adapters:
+  - root
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+- rule_id: docs.split
+  title: User and developer docs are separate
+  body: User documentation and developer documentation must remain separate. The root
+    documentation should link to quick start, deployment, and developer-facing references
+    instead of mixing all detail into one file.
+  scope: docs
+  priority: 70
+  immutable: false
+  adapters:
+  - root
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+- rule_id: progress.lifecycle
+  title: Progress lifecycle is structured
+  body: Progress entries must move through draft, promotable, and upstreamed states.
+    PROGRESS.md is a sliding index, not a full transcript. Archive older or upstreamed
+    entries instead of expanding the index forever.
+  scope: progress
+  priority: 80
+  immutable: true
+  adapters:
+  - root
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+- rule_id: copilot.style
+  title: Copilot should stay concise
+  body: Copilot-facing instructions should stay concise, prefer direct edits over
+    long explanations, and prioritize file-level consistency over speculative rewrites.
+  scope: adapter
+  priority: 90
+  immutable: false
+  adapters:
+  - copilot
+- rule_id: cursor.review
+  title: Cursor rules should bias toward reviewable changes
+  body: Cursor rules should emphasize reviewable diffs, preserve existing repository
+    conventions, and avoid broad rewrites unless the task explicitly calls for them.
+  scope: adapter
+  priority: 100
+  immutable: false
+  adapters:
+  - cursor
+- rule_id: mcp.placeholder
+  title: MCP is reserved for phase 2 overlays
+  body: MCP can be enabled in profile.yaml, but v1 only emits placeholder guidance
+    and validation. Do not invent hardware tool contracts until a project-specific
+    overlay defines them.
+  scope: mcp
+  priority: 110
+  immutable: true
+  adapters:
+  - root
+  - copilot
+  - cursor
+  - claude
+  - gemini
+  - opencode
+  requires_mcp: true
