@@ -55,6 +55,8 @@ entry 里至少要写清:
 - 有哪些后续人需要知道的点
 - 推荐的 `related_commit_message`
 
+如果这次工作是一次升级整理, 先不要急着拆任务。应先把用户给出的零散材料统一归并到 [UPGRADE_FEEDBACK.md](./UPGRADE_FEEDBACK.md), 只保存原始记录; 后续再把总结、归类和行动项写到 [UPGRADE_SUMMARY.md](./UPGRADE_SUMMARY.md)。
+
 ### 第 4 步: 按层修改, 不要跨层乱改
 
 这一步只有三条硬纪律:

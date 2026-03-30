@@ -56,6 +56,8 @@
 根目录之外的说明文档都下沉到这里了, 包括:
 
 - `docs/SOURCE_MATERIALS.md`
+- `docs/UPGRADE_FEEDBACK.md`
+- `docs/UPGRADE_SUMMARY.md`
 - `docs/USAGE_GUIDE.md`
 - `docs/GOVERNANCE_RULES.md`
 - `docs/CODE_WALKTHROUGH.md`

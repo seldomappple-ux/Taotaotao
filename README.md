@@ -46,6 +46,8 @@ python -m vibe_governance sync --target . --dry-run --json
 深度资料现在都在 [`docs/`](./docs/) 里:
 
 - [docs/SOURCE_MATERIALS.md](./docs/SOURCE_MATERIALS.md)
+- [docs/UPGRADE_FEEDBACK.md](./docs/UPGRADE_FEEDBACK.md)
+- [docs/UPGRADE_SUMMARY.md](./docs/UPGRADE_SUMMARY.md)
 - [docs/USAGE_GUIDE.md](./docs/USAGE_GUIDE.md)
 - [docs/GOVERNANCE_RULES.md](./docs/GOVERNANCE_RULES.md)
 - [docs/CODE_WALKTHROUGH.md](./docs/CODE_WALKTHROUGH.md)
