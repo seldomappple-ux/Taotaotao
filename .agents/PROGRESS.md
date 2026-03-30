@@ -3,7 +3,7 @@ managed-by: vibe-governance 0.1.0
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 0.1.0
 upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: ea8473d40a7c742f29875ee35cd551cf092e79719cf22b0f90f8f92aa5d2d9d1
+checksum-sha256: dcc4447126165555a0deb1e11951bda17ab1410be33bd0952719ca1e48baa2a0
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -25,6 +25,7 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 
 | Page ID | Date | Title | Status | Path | Related Commit Message |
 | --- | --- | --- | --- | --- | --- |
+| `20260330-5` | `2026-03-30` | Align iteration plan with the three-layer upgrade document structure | `draft` | `.agents/progress/entries/2026/2026-03-30-5.md` | docs(governance): align iteration plan with versioned upgrade docs |
 | `20260330-4` | `2026-03-30` | Restructure upgrade documentation into three-layer system | `draft` | `.agents/progress/entries/2026/2026-03-30-4.md` | docs(governance): restructure upgrade docs into feedback/index/versioned-summary |
 | `20260330-3` | `2026-03-30` | Derive v1.0.0 root problems from upgrade raw records | `draft` | `.agents/progress/entries/2026/2026-03-30-3.md` | docs(governance): summarize v1.0.0 root problems from raw feedback |
 | `20260330-2` | `2026-03-30` | Import external Moss_Q progress entries into upgrade raw records | `draft` | `.agents/progress/entries/2026/2026-03-30-2.md` | docs(governance): import Moss_Q progress entries into upgrade raw records |

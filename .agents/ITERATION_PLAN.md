@@ -31,7 +31,8 @@
 ### 2. 经验提炼层
 
 **文件位置:**
-- `docs/UPGRADE_SUMMARY.md` - 问题归纳与行动项
+- `docs/UPGRADE_SUMMARY.md` - 升级总索引
+- `docs/upgrades/vX.Y.Z-summary.md` - 每个版本的独立问题归纳与行动项
 
 **提炼流程:**
 ```
@@ -69,7 +70,7 @@
 - Progress entry 状态流转: draft → promotable → upstreamed
 - 较旧条目 → 归档到 `.agents/progress/archived/`
 
-### 4. 适配生成层
+### 5. 适配生成层
 
 **生成命令:**
 ```bash
@@ -104,7 +105,7 @@ python -m vibe_governance render --target .
 原始记录 → 问题归类
 问题归类 → 优先级排序
 优先级排序 → 行动项拆解
-行动项拆解 → UPGRADE_SUMMARY.md
+行动项拆解 → 对应版本的 summary 文档
 ```
 
 ### Phase 3: 决策 (评审机制)
@@ -153,6 +154,11 @@ python -m vibe_governance sync --target . --dry-run --json
 # 运行单元测试 (修改生成器代码或 canonical 规则/模板时必须)
 python -m unittest discover -s tests -v
 ```
+
+补充检查:
+
+- 中文内容新增或修改后, 必须确认没有乱码.
+- 升级总索引与版本 summary 的链接必须正确.
 
 ### Phase 6: 沉淀 (经验固化)
 
@@ -277,7 +283,8 @@ python -m unittest discover -s tests -v
 # 手动编辑,保持格式和编码正确
 
 # 2. 定期整理(每周)
-# 手动编辑 docs/UPGRADE_SUMMARY.md
+# 先查看 docs/UPGRADE_SUMMARY.md 确认当前版本
+# 再编辑对应的 docs/upgrades/vX.Y.Z-summary.md
 
 # 3. 决策后实施
 # 修改 .agents/ 真源文件
@@ -288,11 +295,14 @@ python -m vibe_governance render --target .
 # 5. 验证变更
 python -m vibe_governance validate --target .
 
-# 6. 提交变更
+# 6. 检查中文和链接
+# 确认无乱码, 升级总索引和版本 summary 链接正确
+
+# 7. 提交变更
 git add .agents/ docs/
 git commit -m "feat(governance): 新规则描述"
 
-# 7. 对已实施的变更创建 progress entry
+# 8. 对已实施的变更创建 progress entry
 # 在 .agents/progress/entries/YYYY/ 下创建
 ```
 
@@ -301,17 +311,19 @@ git commit -m "feat(governance): 新规则描述"
 # 1. 导出外部项目经验
 # 手动复制 progress entries 到 UPGRADE_FEEDBACK.md
 
-# 2. 识别可复用规则
-# 在 UPGRADE_SUMMARY.md 中标记
+# 2. 在 UPGRADE_SUMMARY.md 中定位当前升级版本
 
-# 3. 判断规则层级
+# 3. 识别可复用规则
+# 在对应的 docs/upgrades/vX.Y.Z-summary.md 中标记
+
+# 4. 判断规则层级
 # 项目局部覆盖 → .agents/overrides/rules.yaml
 # 通用治理能力 → vibe_governance/resources/* (需上游 PR)
 
-# 4. 测试验证
+# 5. 测试验证
 python -m vibe_governance validate --target .
 
-# 5. 文档化
+# 6. 文档化
 # 更新相关 docs/ 文档
 ```
 
@@ -320,7 +332,7 @@ python -m vibe_governance validate --target .
 ### 立即执行
 1. ✅ 创建本迭代计划文档
 2. ⬜ 整理 UPGRADE_FEEDBACK.md 中的嵌入式开发反馈
-3. ⬜ 在 UPGRADE_SUMMARY.md 中提炼前 10 个问题
+3. ⬜ 在 docs/upgrades/v1.0.0-summary.md 中提炼前 10 个问题
 4. ⬜ 对已决定实施的行动项创建 progress entries
 
 ### 本周完成
