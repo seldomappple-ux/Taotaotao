@@ -3,7 +3,7 @@ managed-by: vibe-governance 0.1.0
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 0.1.0
 upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: df833a737a08e34eb59f64205ecbaf0ee9f93561c437f26a2d4577c2512d22a1
+checksum-sha256: 30a93f46a257445b21dff88f0d0032787c2dece73de0b294c138f59048dec569
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -16,6 +16,7 @@ This repository uses a deterministic governance stack. Keep this file short and 
 ## Profile / 配置
 
 - `project_type`: `governance`
+- `project_version`: `1.0.0`
 - `project_lang`: `zh`
 - `comment_lang`: `zh`
 - `doc_mode`: `bilingual`

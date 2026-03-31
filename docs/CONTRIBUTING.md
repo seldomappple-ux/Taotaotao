@@ -103,6 +103,66 @@ python -m unittest discover -s tests -v
 - [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
 - [CHANGELOG.md](../CHANGELOG.md)
 
+### 第 7 步: 保持版本号和提交消息口径稳定
+
+从 `v1.0.0` 开始, 建议把下面两条当成硬约束:
+
+- 机器真源版本号统一写在 `.agents/profile.yaml` 的 `project_version`
+- 提交消息继续遵循 Conventional Commit, 不让版本号自动漂移
+
+#### 版本号规则
+
+- 机器真源格式: `major.minor.patch`, 例如 `1.0.0`
+- 展示层文档可以写 `v1.0.0`
+- 默认不自动升版, 只能人工修改 `.agents/profile.yaml` 中的 `project_version`
+- 版本号变更后必须运行 `render` 同步到所有受管输出
+
+#### 提交消息规则
+
+必须遵循 Conventional Commit 格式:
+
+```
+<type>(<scope>): <subject>
+
+[optional body]
+
+[optional footer]
+```
+
+**type 类型:**
+- `feat`: 新功能
+- `fix`: 修复 bug
+- `docs`: 文档变更
+- `refactor`: 重构
+- `test`: 测试相关
+- `chore`: 构建/工具变更
+
+**scope 范围:**
+- `governance`: 治理体系核心
+- `embedded`: 嵌入式项目支持
+- `cli`: 命令行工具
+- `docs`: 文档系统
+- `validation`: 校验逻辑
+
+**示例:**
+```
+feat(embedded): add init --project-type embedded support
+
+docs(governance): restructure upgrade docs into three-layer system
+
+fix(validation): add UTF-8 encoding check for critical files
+```
+
+#### 命名规则样本
+
+文档标题和 progress entry 标题推荐格式: “版本 + 阶段 + 动作 + 目标”
+
+**示例:**
+- `v1.0.0 Phase 2 落地嵌入式骨架与前置规则`
+- `v1.0.0 Phase 3 扩展 validate 与 P0 校验闭环`
+- `Restructure upgrade documentation into three-layer system`
+- `Add init --project-type embedded support`
+
 ## 三、不同类型改动的标准动作
 
 ### 类型 A: 只改根目录说明文档
@@ -226,6 +286,8 @@ python -m vibe_governance sync --target . --dry-run --json
 - [ ] 我确认了改动层级, 没有直接手改生成文件
 - [ ] 我补了需要的 `PROGRESS`
 - [ ] 我更新了需要的说明文档
+- [ ] 我确认 `project_version` 没有被误升版
+- [ ] 我确认提交消息仍符合 Conventional Commit 和项目既有命名风格
 - [ ] `validate` 通过
 - [ ] 需要时我已经执行了 `render`
 - [ ] 需要时我已经跑了测试

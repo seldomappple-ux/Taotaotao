@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .project import (
     GovernanceError,
+    KNOWN_PROJECT_TYPES,
     archive_progress_entry,
     init_project,
     promote_progress_entry,
@@ -30,7 +31,17 @@ def _build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
-    subparsers.add_parser("init", parents=[target_parent], help="Initialize the .agents source tree.")
+    init_parser = subparsers.add_parser(
+        "init",
+        parents=[target_parent],
+        help="Initialize the .agents source tree.",
+    )
+    init_parser.add_argument(
+        "--project-type",
+        default="governance",
+        choices=sorted(KNOWN_PROJECT_TYPES),
+        help="Project scaffold type. Defaults to governance.",
+    )
     subparsers.add_parser("render", parents=[target_parent], help="Render all managed outputs.")
     subparsers.add_parser(
         "validate",
@@ -86,7 +97,7 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         if args.command == "init":
-            created = init_project(target)
+            created = init_project(target, project_type=args.project_type)
             for item in created:
                 print(item)
             return 0

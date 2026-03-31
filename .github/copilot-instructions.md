@@ -3,13 +3,15 @@ managed-by: vibe-governance 0.1.0
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 0.1.0
 upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: 2c107b4c4dce58f5d79ea436f232ddb37606e2c2900932378509eb5ffc6f195c
+checksum-sha256: 003704bd3a69df2b1bf1ac548006f23889979d7537dc2e49894345aa867e9449
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
 # GitHub Copilot Instructions
 
 Use these rules as the stable Copilot adapter layer for this repository.
+
+Current project version: `1.0.0`
 
 - `governance.entrypoint`: Root AGENTS.md is the stable human entrypoint. Treat .agents/ as the canonical source tree for profile, local rules, structured overrides, and progress records.
 - `governance.managed_outputs`: Do not edit generated adapter files directly. Apply durable changes in .agents/profile.yaml, .agents/overrides/rules.yaml, or canonical upstream templates, then rerender.

@@ -8,6 +8,14 @@ This is a thin adapter file. The stable governance entrypoint is `AGENTS.md`.
 This is a thin adapter file. The stable governance entrypoint is `AGENTS.md`.
 {% endif %}
 
+{% if is_bilingual -%}
+当前项目版本: `{{ profile.project_version }}`
+
+Current project version: `{{ profile.project_version }}`
+{% else -%}
+Current project version: `{{ profile.project_version }}`
+{% endif %}
+
 {% for rule in rules -%}
 {% if is_bilingual -%}
 - `{{ rule.rule_id }}`:

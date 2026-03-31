@@ -3,13 +3,15 @@ managed-by: vibe-governance 0.1.0
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 0.1.0
 upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: 25515f7094b773242307fcf5ef914f71d350cb69a1e8d91aa3034c02ed0b3437
+checksum-sha256: cb6214cc7cfb331fc0a6825c588c2113af87760b7d238a1b3ad87169c8cbee41
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
 # OPENCODE AGENTS
 
 This file adapts the repository governance stack to opencode-compatible tooling. The canonical policy lives in `AGENTS.md` and `.agents/`.
+
+Current project version: `1.0.0`
 
 - `governance.entrypoint`: Root AGENTS.md is the stable human entrypoint. Treat .agents/ as the canonical source tree for profile, local rules, structured overrides, and progress records.
 - `governance.managed_outputs`: Do not edit generated adapter files directly. Apply durable changes in .agents/profile.yaml, .agents/overrides/rules.yaml, or canonical upstream templates, then rerender.

@@ -3,11 +3,15 @@ managed-by: vibe-governance 0.1.0
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 0.1.0
 upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: dcc4447126165555a0deb1e11951bda17ab1410be33bd0952719ca1e48baa2a0
+checksum-sha256: 744d9344b48708fbcef2fcd8e9a6213c6782641b21f9c4415989fd9d3c09dcdb
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
 # PROGRESS
+
+## Project Version
+
+- Current project version: `1.0.0`
 
 ## Purpose
 
@@ -25,6 +29,7 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 
 | Page ID | Date | Title | Status | Path | Related Commit Message |
 | --- | --- | --- | --- | --- | --- |
+| `20260331-1` | `2026-03-31` | v1.0.0 落地 project_version、embedded init 与最小嵌入式校验闭环 | `draft` | `.agents/progress/entries/2026/2026-03-31-1.md` | feat(governance): implement v1.0.0 embedded scaffold and version guards |
 | `20260330-5` | `2026-03-30` | Align iteration plan with the three-layer upgrade document structure | `draft` | `.agents/progress/entries/2026/2026-03-30-5.md` | docs(governance): align iteration plan with versioned upgrade docs |
 | `20260330-4` | `2026-03-30` | Restructure upgrade documentation into three-layer system | `draft` | `.agents/progress/entries/2026/2026-03-30-4.md` | docs(governance): restructure upgrade docs into feedback/index/versioned-summary |
 | `20260330-3` | `2026-03-30` | Derive v1.0.0 root problems from upgrade raw records | `draft` | `.agents/progress/entries/2026/2026-03-30-3.md` | docs(governance): summarize v1.0.0 root problems from raw feedback |
@@ -34,7 +39,6 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 | `20260307-4` | `2026-03-07` | Unify remaining human docs and add onboarding rule for generated adapters | `draft` | `.agents/progress/entries/2026/2026-03-07-4.md` | docs(governance): unify human docs and add onboarding adapter rule |
 | `20260307-3` | `2026-03-07` | Restructure onboarding docs and archive source articles in-repo | `draft` | `.agents/progress/entries/2026/2026-03-07-3.md` | docs(governance): restructure onboarding docs and archive source articles |
 | `20260307-2` | `2026-03-07` | Add root explanatory documentation set for human and cross-account handoff | `draft` | `.agents/progress/entries/2026/2026-03-07-2.md` | docs(governance): add root explanatory documentation set |
-| `20260307-1` | `2026-03-07` | Bootstrap deterministic governance core | `draft` | `.agents/progress/entries/2026/2026-03-07-1.md` | chore(governance): bootstrap deterministic cross-IDE governance core |
 
 ## Archive
 

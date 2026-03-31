@@ -2,6 +2,8 @@
 
 Use these rules as the stable Copilot adapter layer for this repository.
 
+Current project version: `{{ profile.project_version }}`
+
 {% for rule in rules -%}
 - `{{ rule.rule_id }}`: {{ rule.body }}
 {% endfor %}

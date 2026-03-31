@@ -1,4 +1,5 @@
 project_type: governance
+project_version: __PROJECT_VERSION__
 project_lang: zh
 comment_lang: zh
 doc_mode: bilingual

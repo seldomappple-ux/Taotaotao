@@ -26,6 +26,11 @@
 - 维护方式: 一个版本一份
 - 包含: 问题清单、决策、实施范围、结果
 
+### docs/upgrades/vX.Y.Z-plan.md
+- 职责: 每个版本的独立实施计划
+- 维护方式: 一个版本一份
+- 包含: 阶段目标、接口约束、实施步骤、验收方式
+
 ## 当前进行中的版本
 
 ### v1.0.0
@@ -34,6 +39,7 @@
 - 启动日期: `2026-03-30`
 - 目标: 从通用治理原型升级到能够正式承接嵌入式治理的第一版
 - 详细文档: [v1.0.0-summary.md](./upgrades/v1.0.0-summary.md)
+- 实施计划: [v1.0.0-plan.md](./upgrades/v1.0.0-plan.md)
 - 输入来源:
   - UPGRADE_FEEDBACK.md 中的用户口述嵌入式反馈
   - 导入的 Moss_Q progress 原始记录 (153 条)
@@ -55,8 +61,9 @@
 
 1. 在 UPGRADE_FEEDBACK.md 中按批次追加原始记录
 2. 创建 `docs/upgrades/vX.Y.Z-summary.md`
-3. 在本文件的"当前进行中的版本"中添加条目
-4. 在版本 summary 中进行问题整理和决策
+3. 创建 `docs/upgrades/vX.Y.Z-plan.md`
+4. 在本文件的"当前进行中的版本"中添加条目
+5. 在版本 summary 中进行问题整理和决策
 
 ### 完成版本升级时
 

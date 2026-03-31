@@ -2,6 +2,8 @@
 
 This file adapts the repository governance stack to opencode-compatible tooling. The canonical policy lives in `AGENTS.md` and `.agents/`.
 
+Current project version: `{{ profile.project_version }}`
+
 {% for rule in rules -%}
 - `{{ rule.rule_id }}`: {{ rule.body }}
 {% endfor %}

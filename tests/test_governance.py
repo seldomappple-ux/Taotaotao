@@ -6,6 +6,7 @@ from pathlib import Path
 
 import yaml
 
+from vibe_governance.cli import main as cli_main
 from vibe_governance.project import (
     GovernanceError,
     _manifest_path,
@@ -68,6 +69,7 @@ class GovernanceCliTests(unittest.TestCase):
         render_project(self.root)
         second = self._read("AGENTS.md")
         self.assertEqual(first, second)
+        self.assertIn("`project_version`", first)
         self.assertEqual("Validation passed.", validate_project(self.root))
 
     def test_adapter_specific_override_only_changes_copilot_outputs(self) -> None:
@@ -194,11 +196,65 @@ class GovernanceCliTests(unittest.TestCase):
         claude = self._read("CLAUDE.md")
         gemini = self._read("GEMINI.md")
         self.assertIn("代理总则", agents)
+        self.assertIn("`project_version`", agents)
         self.assertIn("Core Rules / 核心规则", agents)
+        self.assertIn("Current project version", claude)
         self.assertIn("中文:", claude)
         self.assertIn("English:", claude)
+        self.assertIn("Current project version", gemini)
         self.assertIn("中文:", gemini)
         self.assertIn("English:", gemini)
+
+    def test_profile_requires_project_version(self) -> None:
+        profile_path = _profile_path(self.root)
+        profile = yaml.safe_load(profile_path.read_text(encoding="utf-8"))
+        profile.pop("project_version", None)
+        profile_path.write_text(yaml.safe_dump(profile, sort_keys=False, allow_unicode=True), encoding="utf-8")
+        with self.assertRaises(GovernanceError) as ctx:
+            validate_project(self.root, check_generated=False)
+        self.assertIn("project_version", str(ctx.exception))
+
+    def test_invalid_project_version_format_fails(self) -> None:
+        profile_path = _profile_path(self.root)
+        profile = yaml.safe_load(profile_path.read_text(encoding="utf-8"))
+        profile["project_version"] = "v1.0.0"
+        profile_path.write_text(yaml.safe_dump(profile, sort_keys=False, allow_unicode=True), encoding="utf-8")
+        with self.assertRaises(GovernanceError) as ctx:
+            validate_project(self.root, check_generated=False)
+        self.assertIn("major.minor.patch", str(ctx.exception))
+
+    def test_init_embedded_creates_embedded_scaffold_and_validates(self) -> None:
+        embedded_root = self.root.parent / f"{self._testMethodName}_embedded"
+        if embedded_root.exists():
+            shutil.rmtree(embedded_root)
+        embedded_root.mkdir(parents=True)
+        init_project(embedded_root, project_type="embedded")
+        profile = yaml.safe_load((embedded_root / ".agents" / "profile.yaml").read_text(encoding="utf-8"))
+        self.assertEqual(profile["project_type"], "embedded")
+        self.assertEqual(profile["project_version"], "1.0.0")
+        self.assertTrue((embedded_root / "docs" / "DEVELOPMENT_PLAN.md").exists())
+        self.assertTrue((embedded_root / "docs" / "PROTOCOL_SPEC.md").exists())
+        self.assertTrue((embedded_root / "docs" / "HARDWARE_BRINGUP.md").exists())
+        self.assertTrue((embedded_root / "docs" / "VALIDATION_PLAN.md").exists())
+        self.assertTrue((embedded_root / "docs" / "schema" / "protocol.schema.json").exists())
+        self.assertEqual("Validation passed.", validate_project(embedded_root))
+        shutil.rmtree(embedded_root)
+
+    def test_embedded_validate_checks_required_docs(self) -> None:
+        embedded_root = self.root.parent / f"{self._testMethodName}_embedded"
+        if embedded_root.exists():
+            shutil.rmtree(embedded_root)
+        embedded_root.mkdir(parents=True)
+        init_project(embedded_root, project_type="embedded")
+        (embedded_root / "docs" / "VALIDATION_PLAN.md").unlink()
+        with self.assertRaises(GovernanceError) as ctx:
+            validate_project(embedded_root, check_generated=False)
+        self.assertIn("VALIDATION_PLAN.md", str(ctx.exception))
+        shutil.rmtree(embedded_root)
+
+    def test_invalid_project_type_is_rejected_by_cli(self) -> None:
+        with self.assertRaises(SystemExit):
+            cli_main(["init", "--project-type", "invalid", "--target", str(self.root / "invalid")])
 
 
 if __name__ == "__main__":

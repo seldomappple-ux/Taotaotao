@@ -3,7 +3,7 @@ managed-by: vibe-governance 0.1.0
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 0.1.0
 upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: dcb759db8d16d2fe199a2496905cbf32e2c458a005fb5957b788b62dd38ee631
+checksum-sha256: 55ea2bfe6c4726c29305cd71f06195395b18174c1a0cb869264e94771cf5ec41
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -12,6 +12,10 @@ managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render`
 这是一个轻量适配文件. 请先阅读 `AGENTS.md`, 再查看 `.agents/` 中的结构化配置.
 
 This is a thin adapter file. Read `AGENTS.md` first, then consult `.agents/` for structured configuration.
+
+当前项目版本: `1.0.0`
+
+Current project version: `1.0.0`
 
 - `governance.entrypoint`:
   中文: 根目录 AGENTS.md 是稳定的人类入口, `.agents/` 是 profile、本地规则、结构化 override 与 progress 记录的规范真源目录.

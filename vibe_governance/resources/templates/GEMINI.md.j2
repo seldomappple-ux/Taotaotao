@@ -8,6 +8,14 @@ This is a thin adapter file. Read `AGENTS.md` first, then consult `.agents/` for
 This is a thin adapter file. Read `AGENTS.md` first, then consult `.agents/` for structured configuration.
 {% endif %}
 
+{% if is_bilingual -%}
+当前项目版本: `{{ profile.project_version }}`
+
+Current project version: `{{ profile.project_version }}`
+{% else -%}
+Current project version: `{{ profile.project_version }}`
+{% endif %}
+
 {% for rule in rules -%}
 {% if is_bilingual -%}
 - `{{ rule.rule_id }}`:

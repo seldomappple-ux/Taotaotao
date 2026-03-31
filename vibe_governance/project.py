@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import re
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -14,11 +15,27 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from . import __version__
 
 KNOWN_ADAPTERS = {"copilot", "cursor", "claude", "gemini", "opencode"}
+KNOWN_PROJECT_TYPES = {"governance", "embedded"}
 SYNC_STRATEGIES = {"incremental", "full", "manual"}
 DOC_MODES = {"zh", "en", "bilingual"}
 ACTIVE_PROGRESS_STATUSES = {"draft", "promotable"}
 ALL_PROGRESS_STATUSES = ACTIVE_PROGRESS_STATUSES | {"upstreamed"}
 FRONTMATTER_DELIMITER = "---"
+SEMVER_PATTERN = re.compile(r"^\d+\.\d+\.\d+$")
+EMBEDDED_REQUIRED_DOCS = (
+    "README.md",
+    "docs/DEVELOPMENT_PLAN.md",
+    "docs/PROTOCOL_SPEC.md",
+    "docs/HARDWARE_BRINGUP.md",
+    "docs/VALIDATION_PLAN.md",
+    "docs/schema/protocol.schema.json",
+)
+EMBEDDED_README_LINKS = (
+    "docs/DEVELOPMENT_PLAN.md",
+    "docs/PROTOCOL_SPEC.md",
+    "docs/HARDWARE_BRINGUP.md",
+    "docs/VALIDATION_PLAN.md",
+)
 
 
 class GovernanceError(RuntimeError):
@@ -156,6 +173,47 @@ def _load_profile(target: Path) -> dict[str, Any]:
     return _load_yaml_file(_profile_path(target))
 
 
+def _apply_scaffold_tokens(content: str, manifest: ReleaseManifest, project_version: str) -> str:
+    return (
+        content.replace("__UPSTREAM_REPO__", manifest.repo)
+        .replace("__UPSTREAM_VERSION__", manifest.version)
+        .replace("__PROJECT_VERSION__", project_version)
+    )
+
+
+def _embedded_profile_defaults() -> dict[str, Any]:
+    return {
+        "communication_mode": "decide-before-development",
+        "concurrency_model": "async",
+        "module_layout": {
+            "c_dir": "src",
+            "h_dir": "lib",
+            "paired_module_files": True,
+        },
+        "hardware": {
+            "baud_rate": 115200,
+            "wifi_band": "2.4GHz",
+            "ip_strategy": "decide-before-development",
+            "pin_map": "document-in-docs/HARDWARE_BRINGUP.md",
+            "onboard_led": "document-in-docs/HARDWARE_BRINGUP.md",
+            "flashing_interface": "document-in-docs/HARDWARE_BRINGUP.md",
+            "threshold_calibration": "document-in-docs/HARDWARE_BRINGUP.md",
+        },
+    }
+
+
+def _markdown_frontmatter(path: Path) -> dict[str, Any]:
+    text = path.read_text(encoding="utf-8")
+    if not text.startswith(f"{FRONTMATTER_DELIMITER}\n"):
+        return {}
+    _, rest = text.split(f"{FRONTMATTER_DELIMITER}\n", 1)
+    marker = f"\n{FRONTMATTER_DELIMITER}\n"
+    if marker not in rest:
+        return {}
+    metadata_text, _ = rest.split(marker, 1)
+    return yaml.safe_load(metadata_text) or {}
+
+
 def _load_overrides(target: Path) -> list[dict[str, Any]]:
     data = _load_yaml_file(_overrides_path(target), default={"overrides": []})
     overrides = data.get("overrides", [])
@@ -183,6 +241,7 @@ def _validate_profile(profile: dict[str, Any], catalog: dict[str, Any]) -> list[
     errors: list[str] = []
     required_fields = {
         "project_type",
+        "project_version",
         "project_lang",
         "comment_lang",
         "doc_mode",
@@ -194,6 +253,16 @@ def _validate_profile(profile: dict[str, Any], catalog: dict[str, Any]) -> list[
     missing = sorted(required_fields - set(profile))
     if missing:
         errors.append(f"Missing profile fields: {', '.join(missing)}")
+
+    project_type = str(profile.get("project_type", "")).strip()
+    if project_type not in KNOWN_PROJECT_TYPES:
+        errors.append("`project_type` must be one of: embedded, governance")
+
+    project_version = str(profile.get("project_version", "")).strip()
+    if not project_version:
+        errors.append("`project_version` is required.")
+    elif not SEMVER_PATTERN.fullmatch(project_version):
+        errors.append("`project_version` must use `major.minor.patch` format, for example `1.0.0`.")
 
     adapters = profile.get("agent_adapters", [])
     if not isinstance(adapters, list):
@@ -242,6 +311,44 @@ def _validate_profile(profile: dict[str, Any], catalog: dict[str, Any]) -> list[
             errors.append("`mcp.enabled` must be true or false.")
         if "allowed_tools" in mcp and not isinstance(mcp["allowed_tools"], list):
             errors.append("`mcp.allowed_tools` must be a list.")
+
+    if project_type == "embedded":
+        embedded = profile.get("embedded")
+        if not isinstance(embedded, dict):
+            errors.append("`embedded` is required when `project_type` is `embedded`.")
+            return errors
+
+        for field in ("communication_mode", "concurrency_model", "module_layout", "hardware"):
+            if field not in embedded:
+                errors.append(f"`embedded.{field}` is required.")
+
+        module_layout = embedded.get("module_layout", {})
+        if not isinstance(module_layout, dict):
+            errors.append("`embedded.module_layout` must be a mapping.")
+        else:
+            for field in ("c_dir", "h_dir", "paired_module_files"):
+                if field not in module_layout:
+                    errors.append(f"`embedded.module_layout.{field}` is required.")
+            if "paired_module_files" in module_layout and not isinstance(
+                module_layout["paired_module_files"], bool
+            ):
+                errors.append("`embedded.module_layout.paired_module_files` must be true or false.")
+
+        hardware = embedded.get("hardware", {})
+        if not isinstance(hardware, dict):
+            errors.append("`embedded.hardware` must be a mapping.")
+        else:
+            for field in (
+                "baud_rate",
+                "wifi_band",
+                "ip_strategy",
+                "pin_map",
+                "onboard_led",
+                "flashing_interface",
+                "threshold_calibration",
+            ):
+                if field not in hardware:
+                    errors.append(f"`embedded.hardware.{field}` is required.")
 
     return errors
 
@@ -364,6 +471,65 @@ def _load_entries(target: Path) -> list[ProgressEntry]:
     return entries
 
 
+def _validate_embedded_docs(target: Path, profile: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    project_version = str(profile["project_version"]).strip()
+
+    for relative_path in EMBEDDED_REQUIRED_DOCS:
+        path = target / relative_path
+        if not path.exists():
+            errors.append(f"Embedded project is missing required file: {path}")
+
+    readme_path = target / "README.md"
+    if readme_path.exists():
+        readme_text = readme_path.read_text(encoding="utf-8")
+        for link in EMBEDDED_README_LINKS:
+            if link not in readme_text:
+                errors.append(f"Embedded README must link to `{link}`.")
+
+    validation_plan = target / "docs" / "VALIDATION_PLAN.md"
+    if validation_plan.exists():
+        validation_text = validation_plan.read_text(encoding="utf-8")
+        for phase in ("## M0", "## M1", "## M2", "## M3"):
+            if phase not in validation_text:
+                errors.append(f"`docs/VALIDATION_PLAN.md` must include `{phase}`.")
+
+    versioned_markdown_paths = (
+        target / "docs" / "PROTOCOL_SPEC.md",
+        target / "docs" / "VALIDATION_PLAN.md",
+    )
+    for path in versioned_markdown_paths:
+        if not path.exists():
+            continue
+        metadata = _markdown_frontmatter(path)
+        if str(metadata.get("project_version", "")).strip() != project_version:
+            errors.append(f"`{path}` must declare `project_version: {project_version}` in front matter.")
+
+    schema_path = target / "docs" / "schema" / "protocol.schema.json"
+    if schema_path.exists():
+        schema_data = yaml.safe_load(schema_path.read_text(encoding="utf-8")) or {}
+        if str(schema_data.get("project_version", "")).strip() != project_version:
+            errors.append(f"`{schema_path}` must define `project_version: {project_version}`.")
+
+    # UTF-8 encoding validation
+    critical_files = [
+        target / ".agents" / "profile.yaml",
+        target / ".agents" / "RULES.md",
+        target / "README.md",
+        target / "docs" / "PROTOCOL_SPEC.md",
+        target / "docs" / "VALIDATION_PLAN.md",
+    ]
+    for path in critical_files:
+        if not path.exists():
+            continue
+        try:
+            path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            errors.append(f"File is not valid UTF-8: {path}")
+
+    return errors
+
+
 def _relative_to_target(target: Path, path: Path) -> str:
     return path.resolve().relative_to(target.resolve()).as_posix()
 
@@ -460,6 +626,7 @@ def _rules_for_adapter(
 def _render_progress_markdown(
     target: Path,
     manifest: ReleaseManifest,
+    profile: dict[str, Any],
     decisions: list[ArchitectureDecision],
     entries: list[ProgressEntry],
 ) -> tuple[str, str]:
@@ -477,6 +644,7 @@ def _render_progress_markdown(
     ][:10]
     template = ENVIRONMENT.get_template("PROGRESS.md.j2")
     body = template.render(
+        profile=profile,
         target=str(target),
         active_entries=active_entries,
         decisions=decisions,
@@ -526,7 +694,7 @@ def _expected_managed_outputs(target: Path) -> tuple[dict[str, str], dict[str, s
     checksums: dict[str, str] = {}
     for rel_path, template_name, adapter in _managed_targets(profile):
         if adapter == "progress":
-            content, checksum = _render_progress_markdown(target, manifest, decisions, entries)
+            content, checksum = _render_progress_markdown(target, manifest, profile, decisions, entries)
             actual_path = _progress_index_path(target)
         else:
             content, checksum = _render_template(
@@ -544,10 +712,15 @@ def _expected_managed_outputs(target: Path) -> tuple[dict[str, str], dict[str, s
     return outputs, checksums
 
 
-def init_project(target: Path) -> list[str]:
+def init_project(target: Path, project_type: str = "governance") -> list[str]:
     manifest = _load_release_manifest()
     created: list[str] = []
     target.mkdir(parents=True, exist_ok=True)
+
+    if project_type not in KNOWN_PROJECT_TYPES:
+        raise GovernanceError(f"Unsupported project_type `{project_type}`. Expected one of: embedded, governance.")
+
+    project_version = "1.0.0"
 
     directories = [
         target / ".agents",
@@ -571,9 +744,35 @@ def init_project(target: Path) -> list[str]:
     for destination, source_name in scaffold_files.items():
         if not destination.exists():
             destination.parent.mkdir(parents=True, exist_ok=True)
-            content = _read_scaffold(source_name)
-            content = content.replace("__UPSTREAM_REPO__", manifest.repo)
-            content = content.replace("__UPSTREAM_VERSION__", manifest.version)
+            content = _apply_scaffold_tokens(_read_scaffold(source_name), manifest, project_version)
+            if source_name == "profile.yaml":
+                profile_data = yaml.safe_load(content) or {}
+                profile_data["project_type"] = project_type
+                profile_data["project_version"] = project_version
+                if project_type == "embedded":
+                    profile_data["embedded"] = _embedded_profile_defaults()
+                destination.write_text(
+                    yaml.safe_dump(profile_data, sort_keys=False, allow_unicode=True),
+                    encoding="utf-8",
+                )
+            else:
+                destination.write_text(content, encoding="utf-8")
+            created.append(str(destination))
+
+    if project_type == "embedded":
+        embedded_scaffold_files = {
+            target / "README.md": "embedded/README.md",
+            target / "docs" / "DEVELOPMENT_PLAN.md": "embedded/docs/DEVELOPMENT_PLAN.md",
+            target / "docs" / "PROTOCOL_SPEC.md": "embedded/docs/PROTOCOL_SPEC.md",
+            target / "docs" / "HARDWARE_BRINGUP.md": "embedded/docs/HARDWARE_BRINGUP.md",
+            target / "docs" / "VALIDATION_PLAN.md": "embedded/docs/VALIDATION_PLAN.md",
+            target / "docs" / "schema" / "protocol.schema.json": "embedded/docs/schema/protocol.schema.json",
+        }
+        for destination, source_name in embedded_scaffold_files.items():
+            if destination.exists():
+                continue
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            content = _apply_scaffold_tokens(_read_scaffold(source_name), manifest, project_version)
             destination.write_text(content, encoding="utf-8")
             created.append(str(destination))
 
@@ -619,6 +818,8 @@ def validate_project(target: Path, check_generated: bool = True) -> str:
     errors = []
     errors.extend(_validate_profile(profile, catalog))
     errors.extend(_validate_overrides(profile, catalog, overrides))
+    if profile.get("project_type") == "embedded":
+        errors.extend(_validate_embedded_docs(target, profile))
 
     entries = _load_entries(target)
     for entry in entries:

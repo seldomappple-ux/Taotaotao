@@ -16,7 +16,7 @@
 
 当前 v1 还没有做好的, 也必须直接说清楚:
 
-- 还没有独立的 `embedded` overlay 体系
+- 还没有完整的嵌入式自动化工作流
 - 还没有自动生成的烧录、串口、联调规则
 - 还没有完整的硬件 red line 规则包
 - 还没有可直接拿来用的 MCP 工具契约
@@ -55,7 +55,7 @@
 在嵌入式项目根目录运行:
 
 ```bash
-python -m vibe_governance init --target .
+python -m vibe_governance init --target . --project-type embedded
 ```
 
 ### 第 2 步: 先填项目事实, 不要先填技巧
@@ -76,6 +76,13 @@ python -m vibe_governance init --target .
 - `mcp.allowed_tools`
 
 如果这是一个真正的嵌入式项目, `project_type` 建议明确写成诸如 `embedded` 这样的值, 方便后续 overlay 演进时有稳定落点。
+
+当前 `v1.0.0` 的最小落地能力已经包括:
+
+- `init --project-type embedded` 生成默认治理骨架
+- `project_version` 作为机器真源版本号
+- `docs/VALIDATION_PLAN.md` 的 `M0 / M1 / M2 / M3` 模板骨架
+- `validate` 对嵌入式最小文档和版本一致性做检查
 
 ### 第 3 步: 把硬件红线先写进 `.agents/RULES.md`
 
@@ -216,7 +223,49 @@ python -m vibe_governance init --target .
 3. 再决定是否引入真正的 `embedded` overlay
 4. 最后才补 MCP 工具契约和自动生成逻辑
 
-## 九、给嵌入式维护者的一句提醒
+## 九、环境兼容性规则
+
+嵌入式项目经常涉及跨平台开发和多工具链协同, 以下是必须遵守的环境规则:
+
+### PowerShell 中文输出
+
+- Windows 环境下使用 PowerShell 时, 如果输出包含中文, 必须确保终端编码为 UTF-8
+- 推荐在脚本开头添加: `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8`
+- 或在 PowerShell 配置中设置: `$OutputEncoding = [System.Text.Encoding]::UTF8`
+
+### UTF-8 文件编码
+
+- 所有文本文件必须使用 UTF-8 编码保存
+- 特别注意:
+  - Python 源文件
+  - Markdown 文档
+  - YAML 配置文件
+  - 协议文档
+  - 测试计划
+- 避免使用 UTF-8 BOM, 优先使用无 BOM 的 UTF-8
+
+### pytest 临时文件清理
+
+- pytest 运行后会在 `__pycache__` 和 `.pytest_cache` 目录生成临时文件
+- 这些目录已在 `.gitignore` 中排除, 不应提交到版本库
+- 如需清理, 运行: `find . -type d -name "__pycache__" -exec rm -rf {} +` (Linux/macOS) 或 `Get-ChildItem -Recurse -Directory -Filter "__pycache__" | Remove-Item -Recurse -Force` (PowerShell)
+
+### 路径兼容性
+
+- 代码中的路径分隔符使用 `os.path.join()` 或 `pathlib.Path` 处理
+- 避免硬编码 `/` 或 `\`
+- 脚本中的路径使用相对路径或通过配置文件指定
+
+### 工具链版本
+
+- 在 `docs/HARDWARE_BRINGUP.md` 中明确记录:
+  - Python 版本要求
+  - 编译器版本
+  - 烧录工具版本
+  - 串口工具版本
+- 版本不一致可能导致编译失败或烧录异常
+
+## 十、给嵌入式维护者的一句提醒
 
 当前 v1 已经能帮你解决:
 
