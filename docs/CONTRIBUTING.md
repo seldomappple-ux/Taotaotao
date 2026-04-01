@@ -119,14 +119,33 @@ python -m unittest discover -s tests -v
 
 #### 版本号规则
 
-- 机器真源格式: `major.minor.patch`, 例如 `1.0.0`
-- 当前仓库的版本同步点必须保持一致:
-  - `pyproject.toml` 的 `[project].version`
-  - `vibe_governance/resources/release-manifest.yaml` 的 `version`
-  - `.agents/profile.yaml` 的 `project_version`
-- 展示层文档和 Git tag 可以写 `v1.0.0`
-- 默认不自动升版, 只能人工修改真源后再运行 `render`
-- 不允许再把“包版本”和“仓库升级版本”写成两套正式版本体系
+从 `v1.2.0` 开始, 当前仓库采用**统一版本号**策略:
+
+- 工具版本（Package Version）和项目版本（Project Version）保持一致
+- 不再区分”包版本”和”治理版本”
+- 治理机制升级也会触发工具版本号升级
+
+**版本号真源（3 个文件必须同步）**:
+
+1. `.agents/profile.yaml` 的 `project_version`
+2. `pyproject.toml` 的 `[project].version`
+3. `vibe_governance/resources/release-manifest.yaml` 的 `version`
+
+**版本号格式**:
+
+- 机器真源格式: `major.minor.patch`, 例如 `1.2.0`
+- 展示层文档和 Git tag 可以写 `v1.2.0`
+
+**版本号变更规则**:
+
+- 版本号只能递增, 不允许回退或重复
+- 默认不自动升版, 只能人工修改 3 个真源后再运行 `render`
+- 每次版本号变更必须:
+  1. 同时修改 3 个真源文件
+  2. 运行 `render` 更新受管文件
+  3. 运行 `validate` 确认一致性
+  4. 创建对应的 progress entry
+  5. 提交时使用 `chore(release): bump version to x.y.z` 格式
 
 ### 第 8 步: 修复后先判断是否影响跨层契约
 

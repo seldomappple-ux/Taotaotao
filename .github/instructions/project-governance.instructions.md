@@ -1,9 +1,9 @@
 <!--
 managed-by: vibe-governance 1.0.0
 upstream-repo: https://github.com/example/vibe-governance
-upstream-version: 1.0.0
+upstream-version: 1.2.0
 upstream-published-at: 2026-04-01T00:00:00Z
-checksum-sha256: 5046456e19ccd629807f0e1d372d64239cbc1d1099e359cda182080c1e0c6989
+checksum-sha256: 997e501fab2751b9d3e73cec5d1919ebb5481271012e0d8c5613dba9ab80624b
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -11,7 +11,7 @@ managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render`
 
 This file exists for GitHub-specific instruction routing. Keep it aligned with `AGENTS.md` and do not add repository-only rules here.
 
-Current project version: `1.0.0`
+Current project version: `1.2.0`
 
 ## `governance.entrypoint`
 Root AGENTS.md is the stable human entrypoint. Treat .agents/ as the canonical source tree for profile, local rules, structured overrides, and progress records.

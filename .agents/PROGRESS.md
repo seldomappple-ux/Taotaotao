@@ -1,9 +1,9 @@
 <!--
 managed-by: vibe-governance 1.0.0
 upstream-repo: https://github.com/example/vibe-governance
-upstream-version: 1.0.0
+upstream-version: 1.2.0
 upstream-published-at: 2026-04-01T00:00:00Z
-checksum-sha256: ad2a6fb9f7aa53ade5baf50336dd3b4019da2a3ad6f24ccc14c6691e7da2d889
+checksum-sha256: 9198327c1bd7ed8426c0b7978d8b02b906c5b604b1f7c2e6ebcdf4844f7ccf37
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -11,7 +11,7 @@ managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render`
 
 ## Project Version
 
-- Current project version: `1.0.0`
+- Current project version: `1.2.0`
 
 ## Purpose
 
@@ -29,6 +29,7 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 
 | Page ID | Date | Title | Status | Path | Related Commit Message |
 | --- | --- | --- | --- | --- | --- |
+| `20260401-3` | `2026-04-01` | Unify version numbering strategy and bump to 1.2.0 | `draft` | `.agents/progress/entries/2026/2026-04-01-3.md` | chore(release): unify version strategy and bump to 1.2.0 |
 | `20260401-2` | `2026-04-01` | Land v1.2.0 delta decision and next-iteration baseline workflow | `promotable` | `.agents/progress/entries/2026/2026-04-01-2.md` | docs(governance): land v1.2.0 delta and iteration baseline workflow |
 | `20260401-1` | `2026-04-01` | Unify repository package and project version to 1.0.0 | `draft` | `.agents/progress/entries/2026/2026-04-01-1.md` | chore(release): unify repository version to 1.0.0 |
 | `20260331-4` | `2026-03-31` | Add canonical Chinese directory explainer rule for current and future projects | `draft` | `.agents/progress/entries/2026/2026-03-31-4.md` | docs(governance): require Chinese explainer files for stable directories |
@@ -38,7 +39,6 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 | `20260330-5` | `2026-03-30` | Align iteration plan with the three-layer upgrade document structure | `draft` | `.agents/progress/entries/2026/2026-03-30-5.md` | docs(governance): align iteration plan with versioned upgrade docs |
 | `20260330-4` | `2026-03-30` | Restructure upgrade documentation into three-layer system | `draft` | `.agents/progress/entries/2026/2026-03-30-4.md` | docs(governance): restructure upgrade docs into feedback/index/versioned-summary |
 | `20260330-3` | `2026-03-30` | Derive v1.0.0 root problems from upgrade raw records | `draft` | `.agents/progress/entries/2026/2026-03-30-3.md` | docs(governance): summarize v1.0.0 root problems from raw feedback |
-| `20260330-2` | `2026-03-30` | Import external Moss_Q progress entries into upgrade raw records | `draft` | `.agents/progress/entries/2026/2026-03-30-2.md` | docs(governance): import Moss_Q progress entries into upgrade raw records |
 
 ## Archive
 
