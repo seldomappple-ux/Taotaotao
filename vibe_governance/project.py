@@ -744,6 +744,7 @@ def init_project(target: Path, project_type: str = "governance") -> list[str]:
         target / ".agents" / "progress" / "README_中文.md": "agents/progress/README_中文.md",
         target / ".agents" / "progress" / "entries" / "README_中文.md": "agents/progress/entries/README_中文.md",
         _entry_template_path(target): "progress/ENTRY_TEMPLATE.md",
+        target / ".gitmessage": ".gitmessage",
     }
     for destination, source_name in scaffold_files.items():
         if not destination.exists():
@@ -787,6 +788,18 @@ def init_project(target: Path, project_type: str = "governance") -> list[str]:
     if not _snapshot_path(target).exists():
         _write_yaml_file(_snapshot_path(target), _load_catalog())
         created.append(str(_snapshot_path(target)))
+
+    # 配置 git commit template
+    import subprocess
+    try:
+        subprocess.run(
+            ["git", "config", "commit.template", ".gitmessage"],
+            cwd=target,
+            check=True,
+            capture_output=True,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        pass  # Git 未安装或配置失败，不影响初始化
 
     return created
 

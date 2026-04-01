@@ -24,6 +24,7 @@ include-package-data = true
 vibe_governance = [
   "resources/*.yaml",
   "resources/templates/*.j2",
+  "resources/scaffold/.gitmessage",
   "resources/scaffold/*.md",
   "resources/scaffold/*.yaml",
   "resources/scaffold/*/*.md",
