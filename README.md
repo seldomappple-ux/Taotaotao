@@ -48,12 +48,23 @@ python -m vibe_governance sync --target . --dry-run --json
 - [docs/SOURCE_MATERIALS.md](./docs/SOURCE_MATERIALS.md)
 - [docs/UPGRADE_FEEDBACK.md](./docs/UPGRADE_FEEDBACK.md)
 - [docs/UPGRADE_SUMMARY.md](./docs/UPGRADE_SUMMARY.md)
+- [docs/DELTA_DECISIONS.md](./docs/DELTA_DECISIONS.md)
+- [docs/NEXT_ITERATION_BASELINE.md](./docs/NEXT_ITERATION_BASELINE.md)
 - [docs/USAGE_GUIDE.md](./docs/USAGE_GUIDE.md)
 - [docs/GOVERNANCE_RULES.md](./docs/GOVERNANCE_RULES.md)
 - [docs/CODE_WALKTHROUGH.md](./docs/CODE_WALKTHROUGH.md)
 - [docs/CONTEXT_MIGRATION.md](./docs/CONTEXT_MIGRATION.md)
 - [docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md)
 - [docs/EMBEDDED_GUIDE.md](./docs/EMBEDDED_GUIDE.md)
+
+## 当前迭代先看哪里
+
+如果你现在要承接 `v1.2.0`, 建议按这个顺序看:
+
+1. [docs/upgrades/v1.2.0-summary.md](./docs/upgrades/v1.2.0-summary.md)
+2. [docs/upgrades/v1.2.0-plan.md](./docs/upgrades/v1.2.0-plan.md)
+3. [docs/DELTA_DECISIONS.md](./docs/DELTA_DECISIONS.md)
+4. [docs/NEXT_ITERATION_BASELINE.md](./docs/NEXT_ITERATION_BASELINE.md)
 
 ## 最后只记住一句话
 

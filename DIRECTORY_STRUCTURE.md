@@ -86,6 +86,8 @@
 - `docs/CONTEXT_MIGRATION.md`
 - `docs/CONTRIBUTING.md`
 - `docs/EMBEDDED_GUIDE.md`
+- `docs/DELTA_DECISIONS.md`
+- `docs/NEXT_ITERATION_BASELINE.md`
 - `docs/ROOT_DIRECTORY_PHYSICAL_GOVERNANCE_CHECKLIST.md`
 
 ### 4. `references/`

@@ -194,9 +194,33 @@ python -m vibe_governance init --target . --project-type embedded
 推荐的最小闭环是:
 
 1. 在 `.agents/progress/entries/*` 记录联调和踩坑
-2. 在 [CHANGELOG.md](../CHANGELOG.md) 记录版本级变化
-3. 在 [ARCHITECTURE.md](../ARCHITECTURE.md) 或架构决策里写清边界变化
-4. 在 [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md) 里补充新账号接手所需环境差异
+2. 在 `docs/DELTA_DECISIONS.md` 记录仍然生效的增量决议
+3. 在 `docs/NEXT_ITERATION_BASELINE.md` 维护下一轮必读索引
+4. 在 [CHANGELOG.md](../CHANGELOG.md) 记录版本级变化
+5. 在 [ARCHITECTURE.md](../ARCHITECTURE.md) 或架构决策里写清边界变化
+6. 在 [CONTEXT_MIGRATION.md](./CONTEXT_MIGRATION.md) 里补充新账号接手所需环境差异
+
+## 六点五、如何判断是 L0 / L1 / L2
+
+嵌入式三层项目建议按“是否影响跨层契约”来判断:
+
+### L0 示例
+
+- 固件内部重构, 但不改对外状态语义
+- 网关内部容错实现优化, 但超时表现和错误语义对外不变
+
+### L1 示例
+
+- 某个实现层补丁会影响下一轮 AI 对行为的理解
+- 但协议文档、schema、硬件清单里还没有明文要求
+
+### L2 示例
+
+- 硬件采样窗口变化, 且影响校准口径或验收标准
+- 网关 ACK 超时从 3s 变到 5s, 且协议或对外状态机依赖该表现
+- 前端消费的状态字段、错误码或阶段语义发生变化
+
+有疑问时, 优先判为 `L2`。
 
 ## 七、跨账号同步时, 嵌入式项目要额外同步什么
 

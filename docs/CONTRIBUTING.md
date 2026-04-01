@@ -128,6 +128,82 @@ python -m unittest discover -s tests -v
 - 默认不自动升版, 只能人工修改真源后再运行 `render`
 - 不允许再把“包版本”和“仓库升级版本”写成两套正式版本体系
 
+### 第 8 步: 修复后先判断是否影响跨层契约
+
+从 `v1.2.0` 开始, 修复不再默认全量回写, 而是先走判定决策树。
+
+#### 判定决策树
+
+1. 是否在协议文档 / schema / 硬件清单 / 目录约定中明文规定?
+   - 是 -> `L2`
+   - 否 -> 继续判断
+
+2. 是否改变外部可观察行为?
+   - 包括:
+     - 错误码
+     - 状态转换
+     - 超时表现
+     - 前端消费语义
+     - 硬件前提
+   - 是 -> `L2`
+   - 否 -> 继续判断
+
+3. 是否影响下一轮 AI 对系统行为的理解?
+   - 是 -> `L1`
+   - 否 -> `L0`
+
+关键原则:
+
+- 有疑问时, 优先判为更高级别
+- 宁可多回写, 不要漏回写
+
+#### L0 / L1 / L2 规则
+
+- `L0`
+  - 不影响跨层契约
+  - 只进 `progress`, 必要时不写入 `DELTA_DECISIONS`
+- `L1`
+  - 不影响正式跨层契约, 但影响下一轮 AI 的理解
+  - 必须写入 `docs/DELTA_DECISIONS.md`
+  - 最多存活 2 个迭代周期
+- `L2`
+  - 已影响跨层契约
+  - 必须回写对应真源
+  - 回写后更新 `DELTA_DECISIONS` 状态
+
+#### DELTA 维护规则
+
+- `docs/DELTA_DECISIONS.md` 是唯一增量真源
+- `docs/NEXT_ITERATION_BASELINE.md` 只是纯索引
+- 连续 2 个迭代仍依赖同一条 `L1`, 必须升格或废弃
+- 如果同一模块连续出现 3 次 `L0`, 必须人工复核是否应补 `L1` 或升格 `L2`
+
+#### 重跑成本和回退锚点
+
+涉及 `L2` 回写时, 先记录:
+
+- `rerun_cost`: `low | medium | high`
+- `rollback_anchor`: 对应 tag 或 commit
+
+规则:
+
+- `low`: 可直接执行
+- `medium`: 先写进计划排期
+- `high`: 先拆方案, 不直接全量重跑
+
+### 第 9 步: 合并前做人工门禁检查
+
+每次 PR 或合并前, 至少检查:
+
+- [ ] 是否新增了 `L1 / L2`
+- [ ] 如果存在 `L2`, 对应真源是否已回写
+- [ ] 回写后是否运行了 `render`
+- [ ] 回写后是否运行了 `validate`
+- [ ] `docs/DELTA_DECISIONS.md` 状态是否已更新
+- [ ] `docs/NEXT_ITERATION_BASELINE.md` 的 `delta_id` 是否已更新
+- [ ] 是否记录了重跑成本
+- [ ] 是否记录了回退锚点
+
 #### 提交消息规则
 
 必须遵循 Conventional Commit 格式:
@@ -298,6 +374,8 @@ python -m vibe_governance sync --target . --dry-run --json
 - [ ] 我补了需要的 `PROGRESS`
 - [ ] 我更新了需要的说明文档
 - [ ] 我确认 `project_version` 没有被误升版
+- [ ] 我确认 `DELTA_DECISIONS.md` 是唯一增量真源
+- [ ] 我确认 `NEXT_ITERATION_BASELINE.md` 没有写成摘要文档
 - [ ] 我确认提交消息仍符合 Conventional Commit 和项目既有命名风格
 - [ ] `validate` 通过
 - [ ] 需要时我已经执行了 `render`
