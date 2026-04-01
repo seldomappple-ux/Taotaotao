@@ -77,10 +77,12 @@ python -m vibe_governance init --target . --project-type embedded
 
 如果这是一个真正的嵌入式项目, `project_type` 建议明确写成诸如 `embedded` 这样的值, 方便后续 overlay 演进时有稳定落点。
 
-当前 `v1.0.0` 的最小落地能力已经包括:
+当前治理仓已经具备的最小落地能力包括:
 
 - `init --project-type embedded` 生成默认治理骨架
 - `project_version` 作为机器真源版本号
+- `docs/DELTA_DECISIONS.md` 作为唯一增量真源模板
+- `docs/NEXT_ITERATION_BASELINE.md` 作为下一轮纯索引模板
 - `docs/VALIDATION_PLAN.md` 的 `M0 / M1 / M2 / M3` 模板骨架
 - `validate` 对嵌入式最小文档和版本一致性做检查
 

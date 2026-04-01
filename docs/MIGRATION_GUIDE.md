@@ -175,7 +175,10 @@ git commit -m "docs(governance): land v1.2.0 delta and iteration baseline workfl
 vibe-governance init --project-type embedded
 ```
 
-当前 `v1.2.0` 阶段, `DELTA_DECISIONS.md` 和 `NEXT_ITERATION_BASELINE.md` 可以手工补入; 后续脚手架可默认带出。
+当前 `v1.2.0` 已支持在嵌入式脚手架中直接带出:
+
+- `docs/DELTA_DECISIONS.md`
+- `docs/NEXT_ITERATION_BASELINE.md`
 
 ### 现有项目首次接入
 

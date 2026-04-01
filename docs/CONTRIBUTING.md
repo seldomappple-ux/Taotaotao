@@ -240,6 +240,23 @@ docs(governance): restructure upgrade docs into three-layer system
 fix(validation): add UTF-8 encoding check for critical files
 ```
 
+#### 提交消息里的版本号使用规则
+
+- 提交消息里的版本号默认只作为“上下文标签”, 不作为正式升版声明
+- 正式版本号只认真源:
+  - `pyproject.toml`
+  - `vibe_governance/resources/release-manifest.yaml`
+  - `.agents/profile.yaml`
+- 如果提交消息里写了 `v1.2.0`、`v1.2.1` 之类的字样, 默认表示“本次改动属于该轮升级上下文”, 不表示仓库正式版本已经变成该值
+- 不要把提交标题里的版本号当作正式版本发布依据
+- 如果一次提交只是落地某轮升级中的一个子步骤, 推荐写法是:
+  - `docs(governance): land v1.2.0 delta workflow`
+  - `feat(embedded): align v1.2.0 scaffold outputs`
+- 避免使用会让人误解为“仓库正式版本已升级”的写法, 例如:
+  - `v1.2.2 完成升级`
+  - `v1.3.0 发布`
+  - `升级到 1.2.2`
+
 #### 命名规则样本
 
 文档标题和 progress entry 标题推荐格式: “版本 + 阶段 + 动作 + 目标”

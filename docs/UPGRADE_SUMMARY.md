@@ -33,18 +33,25 @@
 
 ## 当前进行中的版本
 
+当前无进行中的升级版本。
+
+## 已完成的版本
+
 ### v1.2.0
 
-- 状态: `in_progress`
+- 状态: `completed`
 - 启动日期: `2026-04-01`
+- 完成日期: `2026-04-01`
 - 目标: 建立单体系真源、增量分流、纯索引基线与人读友好的迭代治理机制
 - 详细文档: [v1.2.0-summary.md](./upgrades/v1.2.0-summary.md)
 - 实施计划: [v1.2.0-plan.md](./upgrades/v1.2.0-plan.md)
+- 收口锚点:
+  - 正式版本号仍为: `1.0.0`
+  - Progress entry: `.agents/progress/entries/2026/2026-04-01-2.md`
+  - 验证命令: `python -m vibe_governance render --target .`、`python -m vibe_governance validate --target .`、`python -m unittest discover -s tests -v`
 - 输入来源:
   - `v1.0.0` 实施后的使用反馈
   - 对“上游稳定 + 增量分流 + 下一轮基线包”的进一步治理要求
-
-## 已完成的版本
 
 ### v1.0.0
 
