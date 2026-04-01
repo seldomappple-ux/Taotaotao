@@ -7,16 +7,16 @@ alwaysApply: true
 <!--
 managed-by: vibe-governance 1.0.0
 upstream-repo: https://github.com/example/vibe-governance
-upstream-version: 1.2.0
+upstream-version: 1.2.1
 upstream-published-at: 2026-04-01T00:00:00Z
-checksum-sha256: d6b3c10519b292ad83808041eeeae57241f155464671fd3dcbd1b14c652c1bf0
+checksum-sha256: 8cdc59a8580f67dc7477956f6df4d1526ad08f6dc324210e81e0f5654dc34bd2
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
 
 # Cursor Governance
 
-Current project version: `1.2.0`
+Current project version: `1.2.1`
 
 ## `governance.entrypoint`
 Root AGENTS.md is the stable human entrypoint. Treat .agents/ as the canonical source tree for profile, local rules, structured overrides, and progress records.

@@ -1,9 +1,9 @@
 <!--
 managed-by: vibe-governance 1.0.0
 upstream-repo: https://github.com/example/vibe-governance
-upstream-version: 1.2.0
+upstream-version: 1.2.1
 upstream-published-at: 2026-04-01T00:00:00Z
-checksum-sha256: 9198327c1bd7ed8426c0b7978d8b02b906c5b604b1f7c2e6ebcdf4844f7ccf37
+checksum-sha256: 60b60133cf103d3ac21332297c4cb62b57d33d55284dd0135e4f58b831016b88
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -11,7 +11,7 @@ managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render`
 
 ## Project Version
 
-- Current project version: `1.2.0`
+- Current project version: `1.2.1`
 
 ## Purpose
 
@@ -29,7 +29,7 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 
 | Page ID | Date | Title | Status | Path | Related Commit Message |
 | --- | --- | --- | --- | --- | --- |
-| `20260401-3` | `2026-04-01` | Unify version numbering strategy and bump to 1.2.0 | `draft` | `.agents/progress/entries/2026/2026-04-01-3.md` | chore(release): unify version strategy and bump to 1.2.0 |
+| `20260401-3` | `2026-04-01` | Unify version numbering strategy and bump to 1.2.1 | `draft` | `.agents/progress/entries/2026/2026-04-01-3.md` | v1.2.1 统一版本号策略，明确工具版本与项目版本保持一致，补充版本递增规则 |
 | `20260401-2` | `2026-04-01` | Land v1.2.0 delta decision and next-iteration baseline workflow | `promotable` | `.agents/progress/entries/2026/2026-04-01-2.md` | docs(governance): land v1.2.0 delta and iteration baseline workflow |
 | `20260401-1` | `2026-04-01` | Unify repository package and project version to 1.0.0 | `draft` | `.agents/progress/entries/2026/2026-04-01-1.md` | chore(release): unify repository version to 1.0.0 |
 | `20260331-4` | `2026-03-31` | Add canonical Chinese directory explainer rule for current and future projects | `draft` | `.agents/progress/entries/2026/2026-03-31-4.md` | docs(governance): require Chinese explainer files for stable directories |
