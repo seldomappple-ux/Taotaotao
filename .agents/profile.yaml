@@ -11,7 +11,7 @@ agent_adapters:
   - opencode
 upstream:
   repo: https://github.com/example/vibe-governance
-  version: 0.1.0
+  version: 1.0.0
   sync_strategy: manual
 override_whitelist:
   - comments.language

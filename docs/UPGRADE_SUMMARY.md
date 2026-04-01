@@ -33,20 +33,25 @@
 
 ## 当前进行中的版本
 
-### v1.0.0
-
-- 状态: `in_progress`
-- 启动日期: `2026-03-30`
-- 目标: 从通用治理原型升级到能够正式承接嵌入式治理的第一版
-- 详细文档: [v1.0.0-summary.md](./upgrades/v1.0.0-summary.md)
-- 实施计划: [v1.0.0-plan.md](./upgrades/v1.0.0-plan.md)
-- 输入来源:
-  - UPGRADE_FEEDBACK.md 中的用户口述嵌入式反馈
-  - 导入的 Moss_Q progress 原始记录 (153 条)
+暂无。
 
 ## 已完成的版本
 
-暂无。
+### v1.0.0
+
+- 状态: `completed`
+- 启动日期: `2026-03-30`
+- 完成日期: `2026-03-31`
+- 目标: 从通用治理原型升级到能够正式承接嵌入式治理的第一版
+- 详细文档: [v1.0.0-summary.md](./upgrades/v1.0.0-summary.md)
+- 实施计划: [v1.0.0-plan.md](./upgrades/v1.0.0-plan.md)
+- 发布锚点:
+  - Commit: `532d1545bad666aa52305e66a9adbece1c733b9b`
+  - Tag: `v1.0.0`
+  - Progress entry: `.agents/progress/entries/2026/2026-03-31-2.md`
+- 输入来源:
+  - UPGRADE_FEEDBACK.md 中的用户口述嵌入式反馈
+  - 导入的 Moss_Q progress 原始记录 (153 条)
 
 ## 版本状态说明
 

@@ -464,7 +464,7 @@ def _load_entries(target: Path) -> list[ProgressEntry]:
         if not base.exists():
             continue
         for entry_path in sorted(base.rglob("*.md")):
-            if entry_path.name == "ENTRY_TEMPLATE.md":
+            if entry_path.name in {"ENTRY_TEMPLATE.md", "README_中文.md"}:
                 continue
             entries.append(_load_entry(entry_path))
     entries.sort(key=lambda item: (item.entry_date, item.page_id), reverse=True)
@@ -720,7 +720,7 @@ def init_project(target: Path, project_type: str = "governance") -> list[str]:
     if project_type not in KNOWN_PROJECT_TYPES:
         raise GovernanceError(f"Unsupported project_type `{project_type}`. Expected one of: embedded, governance.")
 
-    project_version = "1.0.0"
+    project_version = manifest.version
 
     directories = [
         target / ".agents",
@@ -737,8 +737,12 @@ def init_project(target: Path, project_type: str = "governance") -> list[str]:
     scaffold_files = {
         _profile_path(target): "profile.yaml",
         _rules_path(target): "RULES.md",
+        target / ".agents" / "README_中文.md": "agents/README_中文.md",
         _overrides_path(target): "overrides/rules.yaml",
+        target / ".agents" / "overrides" / "README_中文.md": "agents/overrides/README_中文.md",
         _decisions_path(target): "architecture-decisions.yaml",
+        target / ".agents" / "progress" / "README_中文.md": "agents/progress/README_中文.md",
+        target / ".agents" / "progress" / "entries" / "README_中文.md": "agents/progress/entries/README_中文.md",
         _entry_template_path(target): "progress/ENTRY_TEMPLATE.md",
     }
     for destination, source_name in scaffold_files.items():
@@ -762,10 +766,12 @@ def init_project(target: Path, project_type: str = "governance") -> list[str]:
     if project_type == "embedded":
         embedded_scaffold_files = {
             target / "README.md": "embedded/README.md",
+            target / "docs" / "README_中文.md": "embedded/docs/README_中文.md",
             target / "docs" / "DEVELOPMENT_PLAN.md": "embedded/docs/DEVELOPMENT_PLAN.md",
             target / "docs" / "PROTOCOL_SPEC.md": "embedded/docs/PROTOCOL_SPEC.md",
             target / "docs" / "HARDWARE_BRINGUP.md": "embedded/docs/HARDWARE_BRINGUP.md",
             target / "docs" / "VALIDATION_PLAN.md": "embedded/docs/VALIDATION_PLAN.md",
+            target / "docs" / "schema" / "README_中文.md": "embedded/docs/schema/README_中文.md",
             target / "docs" / "schema" / "protocol.schema.json": "embedded/docs/schema/protocol.schema.json",
         }
         for destination, source_name in embedded_scaffold_files.items():

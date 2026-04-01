@@ -103,19 +103,30 @@ python -m unittest discover -s tests -v
 - [GOVERNANCE_RULES.md](./GOVERNANCE_RULES.md)
 - [CHANGELOG.md](../CHANGELOG.md)
 
+目录级文档还有一条固定要求:
+
+- 每个稳定且人工维护的目录都应该有一份中文说明文件
+- 默认文件名使用 `README_中文.md`
+- 如果目录里已经有承担目录说明职责的中文 `README.md`, 则不必重复创建
+- Git 内部目录、缓存目录、生成态临时目录不在此要求内
+
 ### 第 7 步: 保持版本号和提交消息口径稳定
 
-从 `v1.0.0` 开始, 建议把下面两条当成硬约束:
+从 `1.0.0` 开始, 建议把下面两条当成硬约束:
 
-- 机器真源版本号统一写在 `.agents/profile.yaml` 的 `project_version`
+- 当前仓库只维护一套正式版本号
 - 提交消息继续遵循 Conventional Commit, 不让版本号自动漂移
 
 #### 版本号规则
 
 - 机器真源格式: `major.minor.patch`, 例如 `1.0.0`
-- 展示层文档可以写 `v1.0.0`
-- 默认不自动升版, 只能人工修改 `.agents/profile.yaml` 中的 `project_version`
-- 版本号变更后必须运行 `render` 同步到所有受管输出
+- 当前仓库的版本同步点必须保持一致:
+  - `pyproject.toml` 的 `[project].version`
+  - `vibe_governance/resources/release-manifest.yaml` 的 `version`
+  - `.agents/profile.yaml` 的 `project_version`
+- 展示层文档和 Git tag 可以写 `v1.0.0`
+- 默认不自动升版, 只能人工修改真源后再运行 `render`
+- 不允许再把“包版本”和“仓库升级版本”写成两套正式版本体系
 
 #### 提交消息规则
 

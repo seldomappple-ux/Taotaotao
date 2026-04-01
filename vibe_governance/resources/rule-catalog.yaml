@@ -63,6 +63,14 @@ rules:
     priority: 70
     immutable: false
     adapters: [root, copilot, cursor, claude, gemini, opencode]
+  - rule_id: docs.directory_readme
+    title: Stable directories need Chinese explainer files
+    body: Every stable manually maintained directory must include a Chinese Markdown explainer file, preferably `README_中文.md`. A Chinese `README.md` also counts if it already explains the directory's purpose. Skip VCS internals, caches, and generated transient directories.
+    body_zh: 每个稳定且人工维护的目录都必须包含一份中文 Markdown 说明文件, 默认使用 `README_中文.md`. 如果目录里已经有承担目录说明职责的中文 `README.md`, 也可视为满足要求. Git 内部目录、缓存目录和生成态临时目录除外.
+    scope: docs
+    priority: 75
+    immutable: true
+    adapters: [root, copilot, cursor, claude, gemini, opencode]
   - rule_id: progress.lifecycle
     title: Progress lifecycle is structured
     body: Progress entries must move through draft, promotable, and upstreamed states. PROGRESS.md is a sliding index, not a full transcript. Archive older or upstreamed entries instead of expanding the index forever.

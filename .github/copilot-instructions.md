@@ -1,9 +1,9 @@
 <!--
-managed-by: vibe-governance 0.1.0
+managed-by: vibe-governance 1.0.0
 upstream-repo: https://github.com/example/vibe-governance
-upstream-version: 0.1.0
-upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: 003704bd3a69df2b1bf1ac548006f23889979d7537dc2e49894345aa867e9449
+upstream-version: 1.0.0
+upstream-published-at: 2026-04-01T00:00:00Z
+checksum-sha256: d673b985ed26c47fce747962f64d307d2b7142b7ae603bd433aaf196e8c7018b
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -21,6 +21,7 @@ Current project version: `1.0.0`
 - `comments.language`: Code comments must follow the configured comment language in profile.yaml. Use English comments for English projects, and use Chinese comments with half-width punctuation for Chinese projects.
 - `code.architecture`: Prefer high cohesion, low coupling, clear module boundaries, and concise Doxygen-style API comments when the language or framework supports them.
 - `docs.split`: User documentation and developer documentation must remain separate. The root documentation should link to quick start, deployment, and developer-facing references instead of mixing all detail into one file.
+- `docs.directory_readme`: Every stable manually maintained directory must include a Chinese Markdown explainer file, preferably `README_中文.md`. A Chinese `README.md` also counts if it already explains the directory's purpose. Skip VCS internals, caches, and generated transient directories.
 - `progress.lifecycle`: Progress entries must move through draft, promotable, and upstreamed states. PROGRESS.md is a sliding index, not a full transcript. Archive older or upstreamed entries instead of expanding the index forever.
 - `copilot.style`: Copilot-facing instructions should stay concise, prefer direct edits over long explanations, and prioritize file-level consistency over speculative rewrites.
 

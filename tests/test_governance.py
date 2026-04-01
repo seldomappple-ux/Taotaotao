@@ -22,17 +22,17 @@ from vibe_governance.project import (
 
 class GovernanceCliTests(unittest.TestCase):
     def setUp(self) -> None:
-        temp_root = Path.cwd() / ".tmp-tests"
-        temp_root.mkdir(exist_ok=True)
-        self.root = temp_root / self._testMethodName
+        self.temp_root = Path.cwd() / "tests" / ".tmp-tests"
+        self.temp_root.mkdir(parents=True, exist_ok=True)
+        self.root = self.temp_root / self._testMethodName
         if self.root.exists():
             shutil.rmtree(self.root)
         self.root.mkdir(parents=True)
         init_project(self.root)
 
     def tearDown(self) -> None:
-        if self.root.exists():
-            shutil.rmtree(self.root)
+        if self.temp_root.exists():
+            shutil.rmtree(self.temp_root)
 
     def _read(self, relative_path: str) -> str:
         return (self.root / relative_path).read_text(encoding="utf-8")
@@ -70,6 +70,10 @@ class GovernanceCliTests(unittest.TestCase):
         second = self._read("AGENTS.md")
         self.assertEqual(first, second)
         self.assertIn("`project_version`", first)
+        self.assertTrue((self.root / ".agents" / "README_中文.md").exists())
+        self.assertTrue((self.root / ".agents" / "overrides" / "README_中文.md").exists())
+        self.assertTrue((self.root / ".agents" / "progress" / "README_中文.md").exists())
+        self.assertTrue((self.root / ".agents" / "progress" / "entries" / "README_中文.md").exists())
         self.assertEqual("Validation passed.", validate_project(self.root))
 
     def test_adapter_specific_override_only_changes_copilot_outputs(self) -> None:
@@ -232,10 +236,16 @@ class GovernanceCliTests(unittest.TestCase):
         profile = yaml.safe_load((embedded_root / ".agents" / "profile.yaml").read_text(encoding="utf-8"))
         self.assertEqual(profile["project_type"], "embedded")
         self.assertEqual(profile["project_version"], "1.0.0")
+        self.assertTrue((embedded_root / ".agents" / "README_中文.md").exists())
+        self.assertTrue((embedded_root / ".agents" / "overrides" / "README_中文.md").exists())
+        self.assertTrue((embedded_root / ".agents" / "progress" / "README_中文.md").exists())
+        self.assertTrue((embedded_root / ".agents" / "progress" / "entries" / "README_中文.md").exists())
+        self.assertTrue((embedded_root / "docs" / "README_中文.md").exists())
         self.assertTrue((embedded_root / "docs" / "DEVELOPMENT_PLAN.md").exists())
         self.assertTrue((embedded_root / "docs" / "PROTOCOL_SPEC.md").exists())
         self.assertTrue((embedded_root / "docs" / "HARDWARE_BRINGUP.md").exists())
         self.assertTrue((embedded_root / "docs" / "VALIDATION_PLAN.md").exists())
+        self.assertTrue((embedded_root / "docs" / "schema" / "README_中文.md").exists())
         self.assertTrue((embedded_root / "docs" / "schema" / "protocol.schema.json").exists())
         self.assertEqual("Validation passed.", validate_project(embedded_root))
         shutil.rmtree(embedded_root)

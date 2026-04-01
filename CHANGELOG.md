@@ -12,10 +12,11 @@
 
 ## 维护规则
 
-每次正式发版时, 至少要同步更新这三处:
+每次正式发版时, 至少要同步更新这四处:
 
 - [`pyproject.toml`](./pyproject.toml)
 - [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
+- [`.agents/profile.yaml`](./.agents/profile.yaml)
 - 本文件
 
 同时还要确认:
@@ -24,23 +25,67 @@
 - 相关根目录说明文档已经更新
 - 新账号接手路径没有被文档改乱
 
+## 版本口径说明
+
+当前仓库只维护一套正式版本号。
+
+- 正式版本号: `1.0.0`
+- 机器真源同步点:
+  - [`pyproject.toml`](./pyproject.toml) 的 `[project].version`
+  - [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml) 的 `version`
+  - [`.agents/profile.yaml`](./.agents/profile.yaml) 的 `project_version`
+- 展示层可以写 `v1.0.0`
+- Git tag 也可以使用 `v1.0.0`
+
+注意:
+
+- `v1.0.0` 只是 `1.0.0` 的展示写法, 不是第二套版本号
+- 默认不自动升版, 必须人工改真源后再执行 `render`
+
+## [1.0.0] - 2026-04-01
+
+### 版本定位
+
+这是当前仓库第一次把“通用治理原型”正式收口为“可承接嵌入式治理项目的治理栈”的稳定版本。
+
+这一版同时完成了两件事:
+
+- 完成 `docs/upgrades/v1.0.0-*` 这轮治理升级闭环
+- 把仓库包版本、发布清单版本和项目版本统一到同一个 `1.0.0`
+
+### 本版完成内容
+
+- 落地 `project_version` 机器真源, 固定格式为 `major.minor.patch`
+- 实现 `init --project-type embedded` 和嵌入式默认骨架
+- 扩展 `validate`, 覆盖嵌入式关键文档、关键字段、`M0 / M1 / M2 / M3` 与版本一致性检查
+- 完成 `P1` 最小护栏:
+  - 版本引用统一到 `project_version`
+  - 环境兼容性与 UTF-8 最小护栏落盘
+  - 根目录阅读顺序和目录说明收口
+  - 提交消息与命名规律约束落盘
+- 统一仓库版本口径:
+  - `pyproject.toml`
+  - `release-manifest.yaml`
+  - `.agents/profile.yaml`
+  - 受管输出头信息
+
+### 发布锚点
+
+- 正式版本号: `1.0.0`
+- 展示标签: `v1.0.0`
+- 发布清单: [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
+- 升级总结: [docs/upgrades/v1.0.0-summary.md](./docs/upgrades/v1.0.0-summary.md)
+- 实施计划: [docs/upgrades/v1.0.0-plan.md](./docs/upgrades/v1.0.0-plan.md)
+
 ## 当前工作区说明
 
-当前工作区相对 `0.1.0` 基线, 已经完成两类解释层增强:
+当前工作区相对 `1.0.0` 基线, 已经完成的解释层和治理层增强包括:
 
-1. 把根目录入门文档重构为更清晰的接手顺序
-2. 把最初三篇原文纳入仓库内资料归档, 并把其中心思想映射到当前实现
+1. 补了一轮根目录“物理治理清单”, 明确哪些目录可迁、必须留、应清理
+2. 把“每个稳定目录都要有中文说明文件”写进 canonical 规则和初始化骨架
+3. 让测试临时目录下沉到 `tests/.tmp-tests/`, 减少根目录噪音
 
-这部分变化目前仍然是“当前工作区说明”, 不是单独的已发布版本段落。
-
-当前工作区可对应的本地经验记录包括:
-
-- `20260307-2`: 根目录解释性文档补全
-- `20260307-3`: 重构 onboarding 文档并补齐原始资料归档
-- `20260307-4`: 统一剩余人读文档并补充适配层 onboarding 规则
-- `20260308-1`: 根目录人读文档瘦身为 5 个入口文件, 其余说明下沉到 docs
-
-如果后续要把这些变化并入正式版本, 应在下一个版本段落里明确写入。
+这部分变化目前仍然是“当前工作区说明”, 不是新的正式版本段落。
 
 ## [0.1.0] - 2026-03-07
 
@@ -89,20 +134,3 @@
 - 基线 Commit Hash: `df203b9672d47e39fd29926e25dfe5cb2ffbaa91`
 - 基线 Commit 标题: `初版_5.4生成`
 - 基线提交时间: `2026-03-07T15:42:15+08:00`
-
-### 关联上下文
-
-- 关联 `PROGRESS`:
-  - `20260307-1` -> `.agents/progress/entries/2026/2026-03-07-1.md`
-- 关联发布清单:
-  - [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
-- 关联包版本:
-  - [`pyproject.toml`](./pyproject.toml)
-
-### 对后续版本的要求
-
-从这个版本开始, 后续发版至少要保证:
-
-1. `CHANGELOG` 能解释版本为什么变
-2. `PROGRESS` 能追溯经验从哪里来
-3. 新账号只看本地文件就能接手

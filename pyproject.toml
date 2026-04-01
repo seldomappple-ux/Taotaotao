@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vibe-governance"
-version = "0.1.0"
+version = "1.0.0"
 description = "Deterministic cross-IDE governance generator for AI-assisted projects."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -26,6 +26,12 @@ vibe_governance = [
   "resources/templates/*.j2",
   "resources/scaffold/*.md",
   "resources/scaffold/*.yaml",
+  "resources/scaffold/*/*.md",
+  "resources/scaffold/*/*.yaml",
+  "resources/scaffold/*/*/*.md",
+  "resources/scaffold/*/*/*.yaml",
+  "resources/scaffold/*/*/*/*.md",
+  "resources/scaffold/*/*/*/*.json",
   "resources/scaffold/overrides/*.yaml",
   "resources/scaffold/progress/*.md",
 ]

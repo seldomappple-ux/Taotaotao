@@ -182,7 +182,7 @@ python -m unittest discover -s tests -v
 
 ### 上游资源
 - 规则目录: `https://github.com/example/vibe-governance`
-- 版本: `0.1.0`
+- 版本: `1.0.0`
 - 同步策略: `manual`
 
 ## Skills 导入机制

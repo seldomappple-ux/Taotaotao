@@ -1,9 +1,9 @@
 <!--
-managed-by: vibe-governance 0.1.0
+managed-by: vibe-governance 1.0.0
 upstream-repo: https://github.com/example/vibe-governance
-upstream-version: 0.1.0
-upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: 30a93f46a257445b21dff88f0d0032787c2dece73de0b294c138f59048dec569
+upstream-version: 1.0.0
+upstream-published-at: 2026-04-01T00:00:00Z
+checksum-sha256: 83678b31f0ff32e81da5644296bcce4485a91927e2000750616e36d9c277e483
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -22,7 +22,7 @@ This repository uses a deterministic governance stack. Keep this file short and 
 - `doc_mode`: `bilingual`
 - `agent_adapters`: `copilot, cursor, claude, gemini, opencode`
 - `upstream.repo`: `https://github.com/example/vibe-governance`
-- `upstream.version`: `0.1.0`
+- `upstream.version`: `1.0.0`
 - `upstream.sync_strategy`: `manual`
 - `mcp.enabled`: `False`
 
@@ -67,6 +67,10 @@ This repository uses a deterministic governance stack. Keep this file short and 
 ### `docs.split`
 - 中文: 用户文档与开发文档必须分离. 根文档应链接到快速开始、部署说明与开发资料, 不应把全部细节混在一个文件里.
 - English: User documentation and developer documentation must remain separate. The root documentation should link to quick start, deployment, and developer-facing references instead of mixing all detail into one file.
+
+### `docs.directory_readme`
+- 中文: 每个稳定且人工维护的目录都必须包含一份中文 Markdown 说明文件, 默认使用 `README_中文.md`. 如果目录里已经有承担目录说明职责的中文 `README.md`, 也可视为满足要求. Git 内部目录、缓存目录和生成态临时目录除外.
+- English: Every stable manually maintained directory must include a Chinese Markdown explainer file, preferably `README_中文.md`. A Chinese `README.md` also counts if it already explains the directory's purpose. Skip VCS internals, caches, and generated transient directories.
 
 ### `progress.lifecycle`
 - 中文: Progress entry 必须经历 draft、promotable、upstreamed 三种状态. PROGRESS.md 是滑动索引, 不是完整流水账. 较旧或已沉淀的条目应归档, 不应无限膨胀.
