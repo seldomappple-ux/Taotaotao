@@ -17,8 +17,14 @@
 ## 文件头
 
 - current_iteration: `v1.2.0`
+- current_repo_version: `1.2.1`
 - last_cleanup_version: `v1.2.0`
 - next_cleanup_due: `v1.4.0`
+
+说明:
+
+- `current_iteration` 表示最近一次已完成的治理迭代标签
+- `current_repo_version` 表示当前正式版本号
 
 ## 字段说明
 
@@ -71,4 +77,3 @@
   - 或标记为 `deprecated`
   - 或从活跃区移除
 - 如果同一模块连续出现 3 次 `L0`, 必须人工复核是否应补 `L1` 或直接升格 `L2`
-

@@ -10,6 +10,12 @@
 ## 当前版本
 
 - current_iteration: `v1.2.0`
+- current_repo_version: `1.2.1`
+
+说明:
+
+- `current_iteration` 表示最近一次已完成的治理迭代标签
+- `current_repo_version` 表示当前正式版本号
 
 ## 建议阅读顺序
 
@@ -17,9 +23,10 @@
 2. `ARCHITECTURE.md`
 3. `docs/upgrades/v1.2.0-summary.md`
 4. `docs/upgrades/v1.2.0-plan.md`
-5. `docs/DELTA_DECISIONS.md`
-6. `docs/MIGRATION_GUIDE.md`
-7. `docs/CONTRIBUTING.md`
+5. `CHANGELOG.md`
+6. `docs/DELTA_DECISIONS.md`
+7. `docs/MIGRATION_GUIDE.md`
+8. `docs/CONTRIBUTING.md`
 
 ## 必读文件索引
 
@@ -31,6 +38,8 @@
   - 本轮为什么做、边界是什么
 - `docs/upgrades/v1.2.0-plan.md`
   - 本轮怎么做
+- `CHANGELOG.md`
+  - 当前正式版本号与版本演进锚点
 - `docs/DELTA_DECISIONS.md`
   - 当前有效的增量决议真源
 - `docs/MIGRATION_GUIDE.md`
@@ -49,4 +58,3 @@
 - 目录导航仍然清晰
 - `DELTA_DECISIONS.md` 仍是唯一增量真源
 - 新增决议没有重复写进其他正文文件
-

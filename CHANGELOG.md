@@ -29,18 +29,44 @@
 
 当前仓库只维护一套正式版本号。
 
-- 正式版本号: `1.0.0`
+- 当前正式版本号: `1.2.1`
 - 机器真源同步点:
   - [`pyproject.toml`](./pyproject.toml) 的 `[project].version`
   - [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml) 的 `version`
   - [`.agents/profile.yaml`](./.agents/profile.yaml) 的 `project_version`
-- 展示层可以写 `v1.0.0`
-- Git tag 也可以使用 `v1.0.0`
+- 展示层可以写 `v1.2.1`
+- Git tag 也可以使用 `v1.2.1`
 
 注意:
 
-- `v1.0.0` 只是 `1.0.0` 的展示写法, 不是第二套版本号
+- `v1.2.1` 只是 `1.2.1` 的展示写法, 不是第二套版本号
 - 默认不自动升版, 必须人工改真源后再执行 `render`
+
+## [1.2.1] - 2026-04-01
+
+### 版本定位
+
+这一版用于把仓库正式版本号、工具版本号和解释层文档口径重新收口到同一套 `1.2.1` 真源。
+
+它承接了 `v1.2.0` 已完成的治理机制升级, 但额外解决了一个新问题:
+
+- 机器真源已经升到 `1.2.1`, 历史文档里仍残留“当前正式版本号是 `1.0.0`”的现在时表述
+
+### 本版完成内容
+
+- 保持 `pyproject.toml`、`release-manifest.yaml` 和 `.agents/profile.yaml` 三处版本真源一致
+- 明确 `v1.2.0` 是治理迭代标签, `1.2.1` 是当前正式版本号
+- 修正 `CHANGELOG.md`、`docs/UPGRADE_SUMMARY.md`、`docs/upgrades/v1.2.0-summary.md` 中会误导当前状态判断的旧表述
+- 在 `docs/DELTA_DECISIONS.md` 与 `docs/NEXT_ITERATION_BASELINE.md` 中补充“迭代标签”和“正式版本号”的区分
+- 更新 `vibe_governance.__version__`, 让受管输出头信息与当前版本口径一致
+
+### 发布锚点
+
+- 正式版本号: `1.2.1`
+- 展示标签: `v1.2.1`
+- 发布清单: [`vibe_governance/resources/release-manifest.yaml`](./vibe_governance/resources/release-manifest.yaml)
+- 版本策略条目: [`.agents/progress/entries/2026/2026-04-01-3.md`](./.agents/progress/entries/2026/2026-04-01-3.md)
+- 文档收口条目: [`.agents/progress/entries/2026/2026-04-01-4.md`](./.agents/progress/entries/2026/2026-04-01-4.md)
 
 ## [1.0.0] - 2026-04-01
 
@@ -79,15 +105,14 @@
 
 ## 当前工作区说明
 
-当前工作区相对 `1.0.0` 基线, 已经完成的解释层和治理层增强包括:
+当前工作区的正式版本口径已经收口到 `1.2.1`。
 
-1. 完成 `v1.2.0` 治理迭代收口, 建立 `DELTA_DECISIONS.md` 与 `NEXT_ITERATION_BASELINE.md` 两个新入口
-2. 补了一轮根目录“物理治理清单”, 明确哪些目录可迁、必须留、应清理
-3. 把“每个稳定目录都要有中文说明文件”写进 canonical 规则和初始化骨架
-4. 让测试临时目录下沉到 `tests/.tmp-tests/`, 减少根目录噪音
-5. 让嵌入式初始化骨架直接生成增量决议与下一轮基线模板
+如果你要追溯 `1.0.0 -> v1.2.0 -> 1.2.1` 的演进链路, 建议依次查看:
 
-这部分变化属于已完成的治理迭代结果, 但尚未触发新的正式包版本发布, 因此正式版本号仍是 `1.0.0`。
+1. [docs/upgrades/v1.0.0-summary.md](./docs/upgrades/v1.0.0-summary.md)
+2. [docs/upgrades/v1.2.0-summary.md](./docs/upgrades/v1.2.0-summary.md)
+3. [docs/UPGRADE_SUMMARY.md](./docs/UPGRADE_SUMMARY.md)
+4. [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
 
 ## [0.1.0] - 2026-03-07
 

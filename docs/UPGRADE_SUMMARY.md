@@ -35,6 +35,17 @@
 
 当前无进行中的升级版本。
 
+## 当前仓库版本
+
+- 当前正式版本号: `1.2.1`
+- 机器真源:
+  - `pyproject.toml`
+  - `.agents/profile.yaml`
+  - `vibe_governance/resources/release-manifest.yaml`
+- 说明:
+  - `v1.2.0` 是最近一次已完成的治理迭代文档标签
+  - `1.2.1` 是随后完成的统一版本号收口结果, 不是另一轮独立的升级计划
+
 ## 已完成的版本
 
 ### v1.2.0
@@ -46,7 +57,8 @@
 - 详细文档: [v1.2.0-summary.md](./upgrades/v1.2.0-summary.md)
 - 实施计划: [v1.2.0-plan.md](./upgrades/v1.2.0-plan.md)
 - 收口锚点:
-  - 正式版本号仍为: `1.0.0`
+  - `v1.2.0` 收口当日正式版本号为: `1.0.0`
+  - 当前仓库正式版本号已在后续版本策略收口中更新为: `1.2.1`
   - Progress entry: `.agents/progress/entries/2026/2026-04-01-2.md`
   - 验证命令: `python -m vibe_governance render --target .`、`python -m vibe_governance validate --target .`、`python -m unittest discover -s tests -v`
 - 输入来源:

@@ -9,6 +9,7 @@ import yaml
 from vibe_governance.cli import main as cli_main
 from vibe_governance.project import (
     GovernanceError,
+    _load_release_manifest,
     _manifest_path,
     _overrides_path,
     _profile_path,
@@ -233,9 +234,10 @@ class GovernanceCliTests(unittest.TestCase):
             shutil.rmtree(embedded_root)
         embedded_root.mkdir(parents=True)
         init_project(embedded_root, project_type="embedded")
+        manifest = _load_release_manifest()
         profile = yaml.safe_load((embedded_root / ".agents" / "profile.yaml").read_text(encoding="utf-8"))
         self.assertEqual(profile["project_type"], "embedded")
-        self.assertEqual(profile["project_version"], "1.0.0")
+        self.assertEqual(profile["project_version"], manifest.version)
         self.assertTrue((embedded_root / ".agents" / "README_中文.md").exists())
         self.assertTrue((embedded_root / ".agents" / "overrides" / "README_中文.md").exists())
         self.assertTrue((embedded_root / ".agents" / "progress" / "README_中文.md").exists())

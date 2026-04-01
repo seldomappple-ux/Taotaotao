@@ -59,12 +59,13 @@ python -m vibe_governance sync --target . --dry-run --json
 
 ## 当前迭代先看哪里
 
-如果你现在要承接 `v1.2.0`, 建议按这个顺序看:
+如果你现在要承接当前 `1.2.x` 这轮治理上下文, 建议按这个顺序看:
 
 1. [docs/upgrades/v1.2.0-summary.md](./docs/upgrades/v1.2.0-summary.md)
 2. [docs/upgrades/v1.2.0-plan.md](./docs/upgrades/v1.2.0-plan.md)
 3. [docs/DELTA_DECISIONS.md](./docs/DELTA_DECISIONS.md)
 4. [docs/NEXT_ITERATION_BASELINE.md](./docs/NEXT_ITERATION_BASELINE.md)
+5. [CHANGELOG.md](./CHANGELOG.md)
 
 ## 最后只记住一句话
 

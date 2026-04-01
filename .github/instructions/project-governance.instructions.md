@@ -1,5 +1,5 @@
 <!--
-managed-by: vibe-governance 1.0.0
+managed-by: vibe-governance 1.2.1
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 1.2.1
 upstream-published-at: 2026-04-01T00:00:00Z
