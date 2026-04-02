@@ -5,8 +5,15 @@ Use this file as the only source of truth for active incremental decisions that 
 ## File Header
 
 - current_iteration: `__PROJECT_VERSION__`
+- current_repo_version: `__PROJECT_VERSION__`
 - last_cleanup_version: `__PROJECT_VERSION__`
-- next_cleanup_due: `__PROJECT_VERSION__`
+- next_cleanup_due: `__NEXT_CLEANUP_VERSION__`
+
+## Notes
+
+- `current_iteration` is the current project iteration label.
+- `current_repo_version` is the current formal project version.
+- They can stay the same at init time, but keep the distinction explicit once the project starts evolving.
 
 ## Fields
 
@@ -33,7 +40,7 @@ Start empty. Add the first entry only when the first post-init change is classif
   status: active
   level: L1
   created: __PROJECT_VERSION__
-  expires: __PROJECT_VERSION__
+  expires: __NEXT_CLEANUP_VERSION__
   promotion_target: ""
   source_entries: []
 ```

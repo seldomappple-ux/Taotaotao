@@ -254,6 +254,22 @@ class GovernanceCliTests(unittest.TestCase):
         self.assertEqual("Validation passed.", validate_project(embedded_root))
         shutil.rmtree(embedded_root)
 
+    def test_init_embedded_accepts_custom_project_version(self) -> None:
+        embedded_root = self.root.parent / f"{self._testMethodName}_embedded"
+        if embedded_root.exists():
+            shutil.rmtree(embedded_root)
+        embedded_root.mkdir(parents=True)
+        init_project(embedded_root, project_type="embedded", project_version="2.3.4")
+        profile = yaml.safe_load((embedded_root / ".agents" / "profile.yaml").read_text(encoding="utf-8"))
+        delta_text = (embedded_root / "docs" / "DELTA_DECISIONS.md").read_text(encoding="utf-8")
+        baseline_text = (embedded_root / "docs" / "NEXT_ITERATION_BASELINE.md").read_text(encoding="utf-8")
+        self.assertEqual(profile["project_version"], "2.3.4")
+        self.assertIn("current_repo_version: `2.3.4`", delta_text)
+        self.assertIn("next_cleanup_due: `2.5.0`", delta_text)
+        self.assertIn("current_repo_version: `2.3.4`", baseline_text)
+        self.assertEqual("Validation passed.", validate_project(embedded_root))
+        shutil.rmtree(embedded_root)
+
     def test_embedded_validate_checks_required_docs(self) -> None:
         embedded_root = self.root.parent / f"{self._testMethodName}_embedded"
         if embedded_root.exists():
@@ -264,6 +280,25 @@ class GovernanceCliTests(unittest.TestCase):
         with self.assertRaises(GovernanceError) as ctx:
             validate_project(embedded_root, check_generated=False)
         self.assertIn("VALIDATION_PLAN.md", str(ctx.exception))
+        shutil.rmtree(embedded_root)
+
+    def test_embedded_validate_checks_v12_docs_and_readme_links(self) -> None:
+        embedded_root = self.root.parent / f"{self._testMethodName}_embedded"
+        if embedded_root.exists():
+            shutil.rmtree(embedded_root)
+        embedded_root.mkdir(parents=True)
+        init_project(embedded_root, project_type="embedded")
+        (embedded_root / "docs" / "DELTA_DECISIONS.md").unlink()
+        with self.assertRaises(GovernanceError) as ctx:
+            validate_project(embedded_root, check_generated=False)
+        self.assertIn("DELTA_DECISIONS.md", str(ctx.exception))
+
+        init_project(embedded_root, project_type="embedded")
+        readme_path = embedded_root / "README.md"
+        readme_path.write_text("# Embedded\n\n1. [docs/DEVELOPMENT_PLAN.md](./docs/DEVELOPMENT_PLAN.md)\n", encoding="utf-8")
+        with self.assertRaises(GovernanceError) as ctx:
+            validate_project(embedded_root, check_generated=False)
+        self.assertIn("NEXT_ITERATION_BASELINE.md", str(ctx.exception))
         shutil.rmtree(embedded_root)
 
     def test_invalid_project_type_is_rejected_by_cli(self) -> None:

@@ -108,7 +108,7 @@ pip install vibe-governance==0.1.0
 
 后续版本升级说明将在此文档中持续更新。
 
-## 从 v1.0.0 升级到 v1.2.0
+## 从 v1.0.0 升级到 v1.2.x 新体系
 
 ### 这次升级新增什么
 
@@ -122,6 +122,8 @@ pip install vibe-governance==0.1.0
 - `DELTA_DECISIONS.md`: 唯一增量真源
 - `NEXT_ITERATION_BASELINE.md`: 下一轮必读索引
 
+当前仓库中承载这套机制的工具版本已经收口到 `1.2.1`, 但迁移目标仍然是接入 `v1.2.0` 这套治理机制本身。
+
 ### 升级步骤
 
 #### 第 1 步：确认当前项目已稳定在 v1.0.0
@@ -130,6 +132,7 @@ pip install vibe-governance==0.1.0
 
 - `project_version` 已存在
 - `render` 和 `validate` 能正常运行
+- 你已经明确目标项目自己的当前版本号, 不准备直接照抄治理工具版本号
 
 #### 第 2 步：补齐 v1.2.0 文档
 
@@ -139,6 +142,14 @@ pip install vibe-governance==0.1.0
 - `docs/NEXT_ITERATION_BASELINE.md`
 - `docs/upgrades/v1.2.0-summary.md`
 - `docs/upgrades/v1.2.0-plan.md`
+
+同时确认:
+
+- `README.md` 已链接 `docs/DELTA_DECISIONS.md`
+- `README.md` 已链接 `docs/NEXT_ITERATION_BASELINE.md`
+- `docs/DELTA_DECISIONS.md` 与 `docs/NEXT_ITERATION_BASELINE.md` 都包含:
+  - `current_iteration`
+  - `current_repo_version`
 
 #### 第 3 步：更新规则与迁移说明
 
@@ -160,6 +171,13 @@ vibe-governance render
 vibe-governance validate
 ```
 
+从当前工具版本开始, 这一步会同时检查:
+
+- `docs/DELTA_DECISIONS.md` 是否存在
+- `docs/NEXT_ITERATION_BASELINE.md` 是否存在
+- `README.md` 是否已链接这两份文件
+- 这两份文件是否声明 `current_iteration` 与 `current_repo_version`
+
 #### 第 6 步：提交升级结果
 
 ```bash
@@ -172,7 +190,7 @@ git commit -m "docs(governance): land v1.2.0 delta and iteration baseline workfl
 如果是新建嵌入式项目:
 
 ```bash
-vibe-governance init --project-type embedded
+vibe-governance init --project-type embedded --project-version 1.0.0
 ```
 
 当前 `v1.2.0` 已支持在嵌入式脚手架中直接带出:
@@ -187,14 +205,16 @@ vibe-governance init --project-type embedded
 1. 先在临时目录执行:
 
 ```bash
-vibe-governance init --project-type embedded
+vibe-governance init --project-type embedded --project-version <你的项目当前版本号>
 ```
 
 2. 从参考骨架中复制:
+   - `README.md` 中与治理入口相关的链接结构
    - `docs/DELTA_DECISIONS.md`
    - `docs/NEXT_ITERATION_BASELINE.md`
-3. 根据当前项目状态补初始内容
-4. 从下一次修复开始按 `L0 / L1 / L2` 规则分流
+3. 保留目标项目自己的 `project_version`, 不要把参考骨架里的版本号直接照抄成治理工具版本
+4. 根据当前项目状态补初始内容
+5. 从下一次修复开始按 `L0 / L1 / L2` 规则分流
 
 ### 回退建议
 

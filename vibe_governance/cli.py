@@ -42,6 +42,11 @@ def _build_parser() -> argparse.ArgumentParser:
         choices=sorted(KNOWN_PROJECT_TYPES),
         help="Project scaffold type. Defaults to governance.",
     )
+    init_parser.add_argument(
+        "--project-version",
+        default=None,
+        help="Optional project version to write into the scaffold, for example 1.0.0.",
+    )
     subparsers.add_parser("render", parents=[target_parent], help="Render all managed outputs.")
     subparsers.add_parser(
         "validate",
@@ -97,7 +102,11 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         if args.command == "init":
-            created = init_project(target, project_type=args.project_type)
+            created = init_project(
+                target,
+                project_type=args.project_type,
+                project_version=args.project_version,
+            )
             for item in created:
                 print(item)
             return 0

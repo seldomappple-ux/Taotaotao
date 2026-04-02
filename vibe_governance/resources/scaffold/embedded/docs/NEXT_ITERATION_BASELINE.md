@@ -7,6 +7,13 @@ It should not repeat design content or summarize delta bodies. It only points to
 ## Current Version
 
 - current_iteration: `__PROJECT_VERSION__`
+- current_repo_version: `__PROJECT_VERSION__`
+
+## Notes
+
+- `current_iteration` is the current project iteration label.
+- `current_repo_version` is the current formal project version.
+- Keep both fields aligned on day 0, then update them deliberately if the project later separates iteration tags from release versions.
 
 ## Suggested Read Order
 
