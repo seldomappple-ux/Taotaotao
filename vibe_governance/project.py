@@ -25,15 +25,19 @@ SEMVER_PATTERN = re.compile(r"^\d+\.\d+\.\d+$")
 EMBEDDED_REQUIRED_DOCS = (
     "README.md",
     "docs/DEVELOPMENT_PLAN.md",
+    "docs/DELTA_DECISIONS.md",
     "docs/PROTOCOL_SPEC.md",
     "docs/HARDWARE_BRINGUP.md",
+    "docs/NEXT_ITERATION_BASELINE.md",
     "docs/VALIDATION_PLAN.md",
     "docs/schema/protocol.schema.json",
 )
 EMBEDDED_README_LINKS = (
     "docs/DEVELOPMENT_PLAN.md",
+    "docs/DELTA_DECISIONS.md",
     "docs/PROTOCOL_SPEC.md",
     "docs/HARDWARE_BRINGUP.md",
+    "docs/NEXT_ITERATION_BASELINE.md",
     "docs/VALIDATION_PLAN.md",
 )
 
@@ -173,11 +177,19 @@ def _load_profile(target: Path) -> dict[str, Any]:
     return _load_yaml_file(_profile_path(target))
 
 
+def _next_cleanup_version(project_version: str, iteration_window: int = 2) -> str:
+    if not SEMVER_PATTERN.fullmatch(project_version):
+        return project_version
+    major, minor, _patch = (int(part) for part in project_version.split("."))
+    return f"{major}.{minor + iteration_window}.0"
+
+
 def _apply_scaffold_tokens(content: str, manifest: ReleaseManifest, project_version: str) -> str:
     return (
         content.replace("__UPSTREAM_REPO__", manifest.repo)
         .replace("__UPSTREAM_VERSION__", manifest.version)
         .replace("__PROJECT_VERSION__", project_version)
+        .replace("__NEXT_CLEANUP_VERSION__", _next_cleanup_version(project_version))
     )
 
 
@@ -494,6 +506,18 @@ def _validate_embedded_docs(target: Path, profile: dict[str, Any]) -> list[str]:
             if phase not in validation_text:
                 errors.append(f"`docs/VALIDATION_PLAN.md` must include `{phase}`.")
 
+    docs_with_iteration_headers = (
+        target / "docs" / "DELTA_DECISIONS.md",
+        target / "docs" / "NEXT_ITERATION_BASELINE.md",
+    )
+    for path in docs_with_iteration_headers:
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for marker in ("current_iteration:", "current_repo_version:"):
+            if marker not in text:
+                errors.append(f"`{path}` must include `{marker}`.")
+
     versioned_markdown_paths = (
         target / "docs" / "PROTOCOL_SPEC.md",
         target / "docs" / "VALIDATION_PLAN.md",
@@ -712,7 +736,11 @@ def _expected_managed_outputs(target: Path) -> tuple[dict[str, str], dict[str, s
     return outputs, checksums
 
 
-def init_project(target: Path, project_type: str = "governance") -> list[str]:
+def init_project(
+    target: Path,
+    project_type: str = "governance",
+    project_version: str | None = None,
+) -> list[str]:
     manifest = _load_release_manifest()
     created: list[str] = []
     target.mkdir(parents=True, exist_ok=True)
@@ -720,7 +748,11 @@ def init_project(target: Path, project_type: str = "governance") -> list[str]:
     if project_type not in KNOWN_PROJECT_TYPES:
         raise GovernanceError(f"Unsupported project_type `{project_type}`. Expected one of: embedded, governance.")
 
-    project_version = manifest.version
+    resolved_project_version = (project_version or manifest.version).strip()
+    if not SEMVER_PATTERN.fullmatch(resolved_project_version):
+        raise GovernanceError(
+            "`project_version` must use `major.minor.patch` format, for example `1.0.0`."
+        )
 
     directories = [
         target / ".agents",
@@ -749,11 +781,15 @@ def init_project(target: Path, project_type: str = "governance") -> list[str]:
     for destination, source_name in scaffold_files.items():
         if not destination.exists():
             destination.parent.mkdir(parents=True, exist_ok=True)
-            content = _apply_scaffold_tokens(_read_scaffold(source_name), manifest, project_version)
+            content = _apply_scaffold_tokens(
+                _read_scaffold(source_name),
+                manifest,
+                resolved_project_version,
+            )
             if source_name == "profile.yaml":
                 profile_data = yaml.safe_load(content) or {}
                 profile_data["project_type"] = project_type
-                profile_data["project_version"] = project_version
+                profile_data["project_version"] = resolved_project_version
                 if project_type == "embedded":
                     profile_data["embedded"] = _embedded_profile_defaults()
                 destination.write_text(
@@ -781,7 +817,7 @@ def init_project(target: Path, project_type: str = "governance") -> list[str]:
             if destination.exists():
                 continue
             destination.parent.mkdir(parents=True, exist_ok=True)
-            content = _apply_scaffold_tokens(_read_scaffold(source_name), manifest, project_version)
+            content = _apply_scaffold_tokens(_read_scaffold(source_name), manifest, resolved_project_version)
             destination.write_text(content, encoding="utf-8")
             created.append(str(destination))
 
