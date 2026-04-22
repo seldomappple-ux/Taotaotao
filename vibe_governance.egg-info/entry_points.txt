@@ -1,0 +1,2 @@
+[console_scripts]
+vibe-governance = vibe_governance.cli:main
