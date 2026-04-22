@@ -4,7 +4,7 @@
 
 让你一眼看懂“哪里是入口, 哪里是真源, 哪里是程序本体, 哪里是生成结果”。
 
-## 一、根目录稳定保留的 5 个给人看的入口文件
+## 一、根目录稳定保留的 6 个给人看的入口文件
 
 | 文件 | 作用 |
 | --- | --- |
@@ -13,8 +13,9 @@
 | `ARCHITECTURE.md` | 解释它为什么这样设计 |
 | `DIRECTORY_STRUCTURE.md` | 解释目录和文件分工 |
 | `CHANGELOG.md` | 看版本和最近工作区变化 |
+| `TEMPLATES.md` | 模板库入口列表 |
 
-除了这 5 个, 根目录不再继续增加更多给人看的解释文档。
+除了这 6 个, 根目录不再继续增加更多给人看的解释文档。
 
 ## 二、还有 3 个根目录文件是给 AI / IDE 读的
 
@@ -46,7 +47,7 @@
 
 其中 `.tmp-tests/` 不应被当成稳定项目结构的一部分; 如果存在, 说明当前工作区残留了本地测试痕迹。
 
-## 五、真正要记住的 5 个目录
+## 五、真正要记住的 6 个目录
 
 ### 1. `.agents/`
 
@@ -90,13 +91,26 @@
 - `docs/NEXT_ITERATION_BASELINE.md`
 - `docs/ROOT_DIRECTORY_PHYSICAL_GOVERNANCE_CHECKLIST.md`
 
-### 4. `references/`
+### 4. `templates/`
+
+这是项目模板库。
+
+当前用于放可复用项目模板的正文内容, 例如:
+
+- `templates/lightweight-comparison-test/`
+
+要特别区分:
+
+- 根目录 `templates/` 是给人读的项目模板库
+- `vibe_governance/resources/templates/` 是给生成器读的适配器模板资源
+
+### 5. `references/`
 
 这是原始资料区。
 
 目前放的是最初三篇文章的网页快照。
 
-### 5. `.cursor/` / `.github/` / `.opencode/`
+### 6. `.cursor/` / `.github/` / `.opencode/`
 
 这些是 IDE / agent 适配结果目录。
 
@@ -106,12 +120,13 @@
 
 ### 可以直接改
 
-- 根目录 5 个入口文档
+- 根目录 6 个入口文档
 - `.agents/profile.yaml`
 - `.agents/RULES.md`
 - `.agents/overrides/rules.yaml`
 - `.agents/architecture-decisions.yaml`
 - `.agents/progress/entries/*`
+- `templates/*`
 - `vibe_governance/` 里的程序代码和资源
 
 ### 不建议直接改
@@ -128,7 +143,7 @@
 
 阅读顺序是:
 
-`README -> QUICKSTART -> ARCHITECTURE -> DIRECTORY_STRUCTURE -> CHANGELOG`
+`README -> QUICKSTART -> ARCHITECTURE -> DIRECTORY_STRUCTURE -> CHANGELOG -> TEMPLATES`
 
 动手顺序是:
 

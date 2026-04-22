@@ -42,6 +42,15 @@
 - `v1.2.1` 只是 `1.2.1` 的展示写法, 不是第二套版本号
 - 默认不自动升版, 必须人工改真源后再执行 `render`
 
+## [Unreleased]
+
+### 当前工作区新增
+
+- 新增根目录模板入口文件 `TEMPLATES.md`, 正式把根目录给人看的入口文件从 5 个扩展为 6 个
+- 新增 `templates/` 项目模板库目录, 用于沉淀和分发可复用项目模板
+- 新增首个模板 `templates/lightweight-comparison-test/README.md`, 用于承接从轻量对比测试项目提炼出的半抽象模板
+- 同步更新根目录入口口径、目录说明和使用手册, 明确根级 `templates/` 与 `vibe_governance/resources/templates/` 不是同一层能力
+
 ## [1.2.1] - 2026-04-01
 
 ### 版本定位

@@ -3,7 +3,7 @@ managed-by: vibe-governance 1.2.1
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 1.2.1
 upstream-published-at: 2026-04-01T00:00:00Z
-checksum-sha256: 02b2af3f4eccb9f616cb506b2e6fea5a8e893197f388bca114ab62adb37e5951
+checksum-sha256: 94ee0171ab032cc6ce406205106c84d12402764b3629f3306133bbf08f0e7525
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -29,6 +29,9 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 
 | Page ID | Date | Title | Status | Path | Related Commit Message |
 | --- | --- | --- | --- | --- | --- |
+| `20260422-4` | `2026-04-22` | Abstract the lightweight comparison test template away from image-specific language | `draft` | `.agents/progress/entries/2026/2026-04-22-4.md` | docs(governance): abstract lightweight comparison test template away from image-specific language |
+| `20260422-3` | `2026-04-22` | Strengthen the lightweight comparison test template around minimal structure | `draft` | `.agents/progress/entries/2026/2026-04-22-3.md` | docs(governance): strengthen lightweight comparison test template around minimal structure |
+| `20260422-2` | `2026-04-22` | Land the template library entry and the first lightweight comparison test template | `draft` | `.agents/progress/entries/2026/2026-04-22-2.md` | docs(governance): add template library entry and first lightweight comparison test template |
 | `20260422-1` | `2026-04-22` | Read the migration brief before starting the next governance upgrade round | `draft` | `.agents/progress/entries/2026/2026-04-22-1.md` | docs(governance): record upgrade kickoff from migration brief |
 | `20260420-1` | `2026-04-20` | Capture governance lessons from the image-generation derivative project | `draft` | `.agents/progress/entries/2026/2026-04-20-生图测试衍生项目经验回流.md` | docs(governance): capture lessons from image-generation derivative project |
 | `20260401-5` | `2026-04-01` | Close migration gaps for projects adopting the v1.2 governance system | `draft` | `.agents/progress/entries/2026/2026-04-01-5.md` | fix(governance): close v1.0 to v1.2 migration gaps |
@@ -36,9 +39,6 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 | `20260401-3` | `2026-04-01` | Unify version numbering strategy and bump to 1.2.1 | `draft` | `.agents/progress/entries/2026/2026-04-01-3.md` | v1.2.1 统一版本号策略，明确工具版本与项目版本保持一致，补充版本递增规则 |
 | `20260401-2` | `2026-04-01` | Land v1.2.0 delta decision and next-iteration baseline workflow | `promotable` | `.agents/progress/entries/2026/2026-04-01-2.md` | docs(governance): land v1.2.0 delta and iteration baseline workflow |
 | `20260401-1` | `2026-04-01` | Unify repository package and project version to 1.0.0 | `draft` | `.agents/progress/entries/2026/2026-04-01-1.md` | chore(release): unify repository version to 1.0.0 |
-| `20260331-4` | `2026-03-31` | Add canonical Chinese directory explainer rule for current and future projects | `draft` | `.agents/progress/entries/2026/2026-03-31-4.md` | docs(governance): require Chinese explainer files for stable directories |
-| `20260331-3` | `2026-03-31` | Add root physical governance checklist and move test temp directories off-root | `draft` | `.agents/progress/entries/2026/2026-03-31-3.md` | docs(governance): add root physical governance checklist and isolate test temp directories |
-| `20260331-2` | `2026-03-31` | Complete v1.0.0 P1 closure and Phase 5 validation | `promotable` | `.agents/progress/entries/2026/2026-03-31-2.md` | feat(governance): complete v1.0.0 P1 closure with environment rules, UTF-8 validation, and commit message templates |
 
 ## Archive
 

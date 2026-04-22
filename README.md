@@ -9,7 +9,7 @@
 
 **当前版本**: `v1.2.1`
 
-## 先看这 5 个根目录文件
+## 先看这 6 个根目录文件
 
 如果你第一次打开这个仓库, 只按这个顺序读:
 
@@ -18,8 +18,9 @@
 3. [ARCHITECTURE.md](./ARCHITECTURE.md)
 4. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
 5. [CHANGELOG.md](./CHANGELOG.md)
+6. [TEMPLATES.md](./TEMPLATES.md)
 
-根目录只保留这 5 个给人看的入口文件。更深的说明已经下沉到 [`docs/`](./docs/)。
+根目录只保留这 6 个给人看的入口文件。更深的说明已经下沉到 [`docs/`](./docs/)。
 
 ## v1.2.1 新增能力
 
@@ -82,7 +83,8 @@ python -m vibe_governance sync --target . --dry-run --json
 
 这个仓库不是靠聊天记忆接力, 而是靠本地文件接力:
 
-- 根目录 5 个入口文件负责讲清楚
+- 根目录 6 个入口文件负责讲清楚
 - `.agents/` 负责保存事实
 - `vibe_governance/` 负责驱动生成
+- `templates/` 负责沉淀可复用项目模板
 - `AGENTS.md`、`CLAUDE.md`、`GEMINI.md` 等适配文件只负责给 IDE / agent 读取

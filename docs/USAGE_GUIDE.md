@@ -123,6 +123,15 @@ python -m vibe_governance render --target .
 
 不要跳过这一步。很多初始化问题, 在第一轮 `validate` 就能暴露出来。
 
+如果你不是要直接初始化一个新仓库, 而是想复用一套已经验证过的项目骨架, 现在也可以先看根目录的 [`TEMPLATES.md`](../TEMPLATES.md)。
+
+要特别区分:
+
+- 根目录 `templates/` 是给人读的项目模板库
+- `vibe_governance/resources/templates/` 是给生成器读的适配器模板资源
+
+当前模板库只是文档分发层, 还没有接入 CLI 模板能力。
+
 ## 四、日常迭代到底怎么做
 
 日常迭代可以按一个固定循环来做。

@@ -37,6 +37,8 @@ python -m vibe_governance sync --target . --dry-run --json
 
 如果你还要继续深挖, 再去看 [`docs/`](./docs/) 里的文档, 不要一开始就被十几份根目录文件淹没。
 
+另外, 当前仓库也开始承载可复用项目模板索引, 可以从根目录的 [`TEMPLATES.md`](./TEMPLATES.md) 进入模板库。
+
 ## 二、如果你要在新 IDE 里开一个新项目
 
 当前版本能帮你搭的是“治理骨架”, 不是“完整业务目录骨架”。
@@ -88,8 +90,9 @@ python -m vibe_governance validate --target .
 
 当前阶段你先不要试图一口气理解所有深度文档。先只记住:
 
-- 根目录 5 个文件是入口
+- 根目录 6 个文件是入口
 - `docs/` 是深度资料
+- `templates/` 是项目模板库
 - `.agents/` 是真源
 - `vibe_governance/` 是程序本体
 
