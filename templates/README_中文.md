@@ -6,7 +6,8 @@
 
 ## 当前模板
 
-- [`lightweight-comparison-test/`](./lightweight-comparison-test/): 轻量对比测试模板（默认不带多 IDE 适配层）
+- [`lightweight-comparison-test/`](./lightweight-comparison-test/): 轻量对比测试模板（默认不带多 IDE 适配层, 可选最小多 agent 入口层）
+- [`lightweight-general/`](./lightweight-general/): 轻量通用模板（不预设阶段目录, 可选最小多 agent 入口层: `AGENTS.md + CLAUDE.md + GEMINI.md`）
 
 ## 使用原则
 
@@ -20,5 +21,8 @@
 - 每个模板必须有目录说明文件
 - 每个模板必须明确适用场景
 - 每个模板必须说明“迁移什么 / 不迁移什么”
+- 凡是声称带治理层或包含 `.agents/` 的模板, 必须明确写出 `.agents` 的最小内部骨架, 不能只写目录名
+- 凡是声称带治理层的模板, 必须明确 bug / 异常与关键操作的记录触发规则
+- 凡是提到 agent 协作的模板, 必须区分“最小多 agent 入口层”和“多 IDE 扩展层”
 - 模板列表页只做索引, 不承载正文
 - 子目录名称使用稳定 slug, 避免随意改名

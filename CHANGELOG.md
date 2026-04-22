@@ -50,6 +50,8 @@
 - 新增 `templates/` 项目模板库目录, 用于沉淀和分发可复用项目模板
 - 新增首个模板 `templates/lightweight-comparison-test/README.md`, 用于承接从轻量对比测试项目提炼出的半抽象模板
 - 同步更新根目录入口口径、目录说明和使用手册, 明确根级 `templates/` 与 `vibe_governance/resources/templates/` 不是同一层能力
+- 补强两个轻量模板的 `.agents` 最小治理骨架说明, 明确 `progress/entries/` 是治理闭环的一部分, 避免手工引入时只带目录名不带治理内核
+- 补强轻量模板的“触发即记”规则与最小多 agent 入口层口径, 明确 bug / 异常、关键操作需要落 progress entry, 且最小多 agent 适配不等于多 IDE 扩展层
 
 ## [1.2.1] - 2026-04-01
 

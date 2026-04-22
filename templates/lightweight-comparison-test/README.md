@@ -47,9 +47,9 @@
 `-- README.md
 ```
 
-这里不把 `AGENTS.md` 视为轻量模板的人工维护必需项。
+这里不把 `AGENTS.md`、`CLAUDE.md`、`GEMINI.md` 视为轻量模板的人工维护必需项。
 
-如果项目后续引入 `vibe-governance` 或其他生成式治理工具, 才可能出现 `AGENTS.md` 这类生成文件。
+如果项目后续引入 `vibe-governance` 或其他生成式治理工具, 才可能出现这类 agent 入口文件。
 
 ### 主体业务结构
 
@@ -73,6 +73,59 @@
 - `01/02/03` 目录用于承载各阶段测试执行、输出结果和记录沉淀
 - `.agents/` 用于放规则、接手信息和过程记录
 - `docs/` 用于放结构说明、索引和目录视图
+
+### `.agents/` 最小治理骨架
+
+如果这个模板要承接 Taotaotao 这类“可接手、可追溯、可沉淀”的治理闭环, 不能只带一个空的 `.agents/` 目录名。
+
+至少要把下面这组最小治理骨架一起带上:
+
+```text
+.agents/
+|-- README_中文.md
+|-- profile.yaml
+|-- RULES.md
+|-- architecture-decisions.yaml
+|-- overrides/
+|   |-- README_中文.md
+|   `-- rules.yaml
+|-- PROGRESS.md
+`-- progress/
+    |-- README_中文.md
+    |-- ENTRY_TEMPLATE.md
+    `-- entries/
+        |-- README_中文.md
+        `-- YYYY/
+```
+
+其中:
+
+- `.agents/profile.yaml` 用于固定项目画像与治理配置
+- `.agents/architecture-decisions.yaml` 用于沉淀稳定架构决策
+- `.agents/overrides/rules.yaml` 用于放本地规则 override
+- `.agents/PROGRESS.md` 是滑动索引, 用于承接当前活跃进展
+- `.agents/progress/ENTRY_TEMPLATE.md` 是新增 progress 条目的统一模板
+- `.agents/progress/entries/YYYY/` 用于按年份沉淀原始条目
+- `.agents/progress/entries/README_中文.md` 用于说明条目目录的职责和组织方式
+
+如果缺少 `profile.yaml`、`overrides/rules.yaml` 或 `progress/entries/` 这些关键层, 说明引入的还只是“轻量目录结构”, 不是完整的治理记忆闭环。
+
+## 可选的最小多 agent 入口层
+
+如果项目希望保留多 agent 协作入口, 但仍然不引入多 IDE 扩展层, 可以只保留这组最小根级入口:
+
+- `AGENTS.md`
+- `CLAUDE.md`
+- `GEMINI.md`
+
+要特别区分:
+
+- 这组文件属于“多 agent 最小适配层”
+- `.cursor/`、`.github/`、`.opencode/` 属于“多 IDE 扩展层”
+- 前者可以单独存在, 不等于后者必须一起引入
+
+在 `Taotaotao` 仓里, 这类入口文件通常由 `render` 生成。
+在一般轻量项目里, 如果没有引入生成式治理工具, 也可以手工维护, 但要与 `.agents/` 真源保持一致。
 
 ## 默认不带的重型部件
 
@@ -111,7 +164,31 @@
 - `docs/项目目录树.md`
 - `.agents/PROGRESS.md`
 
-### 4. 阶段0预处理归属规则
+### 4. bug / 异常触发记录规则
+
+模板里的“自动记录”默认按“触发即记”理解, 即事件一发生就必须落到稳定位置, 即便当前还是人工执行。
+
+- 用户提出 bug、回归、行为异常、规则冲突时, 必须记录
+- 如果当前存在具体测试轮次, 先落到该轮 `第xx轮-测试记录.md` 的 `问题总结`
+- 如果该问题会影响后续接手、规则判断或结构决策, 再补一条 `.agents/progress/entries/YYYY/` 条目
+- 如果没有对应轮次上下文, 至少补一条 progress entry
+- 新增 entry 后应运行 `render`, 让 `.agents/PROGRESS.md` 同步更新
+
+### 5. 关键操作留痕规则
+
+- 运行 `render`、`validate`
+- 目录结构迁移
+- 批量改名或批量移动
+- 模板引入、模板升级
+- 会影响后续协作判断的规则调整
+
+以上操作默认都属于“必须留痕”的治理事件。
+
+- 原始记录应落到 `.agents/progress/entries/YYYY/`
+- `.agents/PROGRESS.md` 只作为滑动索引, 不单独承担完整流水账
+- 如果操作直接影响某一轮测试结论, 还应同步更新对应轮次记录
+
+### 6. 阶段0预处理归属规则
 
 - 与结构拆解、约束提取、标准化强相关的预处理内容, 优先归到 `prompts/00-阶段0-原始元素处理/结构提取/`
 - 与质量优化、背景处理、裁剪清理、图像修复强相关的预处理内容, 优先归到 `prompts/00-阶段0-原始元素处理/图像预处理/`
@@ -130,6 +207,7 @@
 - 在说明文档中明确: 新项目可按自己的目标图类型替换阶段含义
 - `.agents/` 只保留稳定治理逻辑, 不带入原项目的具体历史判断
 - `PROGRESS.md` 只保留仍然重要的滑动索引
+- `progress/entries/YYYY/` 需要从一开始就建好, 否则后续经验沉淀会失去稳定落点
 
 核心原则是:
 
