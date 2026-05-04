@@ -1,4 +1,4 @@
-rules:
+﻿rules:
   - rule_id: governance.entrypoint
     title: Unified governance entrypoint
     body: Root AGENTS.md is the stable human entrypoint. Treat .agents/ as the canonical source tree for profile, local rules, structured overrides, and progress records.
@@ -16,9 +16,9 @@ rules:
     immutable: true
     adapters: [root, copilot, cursor, claude, gemini, opencode]
   - rule_id: governance.onboarding_sequence
-    title: Onboarding reads local context first
-    body: When taking over the repository, read README.md, docs/SOURCE_MATERIALS.md, ARCHITECTURE.md, and .agents/PROGRESS.md before relying on generated adapter files. Align on local context first, then act.
-    body_zh: 接手仓库时, 先阅读 README.md、docs/SOURCE_MATERIALS.md、ARCHITECTURE.md 和 .agents/PROGRESS.md, 再依赖生成的适配文件. 先对齐本地上下文, 再执行修改.
+    title: Onboarding follows START_HERE.md
+    body: When taking over the repository, read START_HERE.md first and then follow the exact local file-reading order defined there before relying on generated adapter files or modifying code.
+    body_zh: 接手仓库时, 先阅读 START_HERE.md, 再严格按其中定义的本地文件读取顺序建立上下文, 之后才能依赖生成的适配文件或开始修改代码.
     scope: governance
     priority: 25
     immutable: true
@@ -96,3 +96,4 @@ rules:
     immutable: true
     adapters: [root, copilot, cursor, claude, gemini, opencode]
     requires_mcp: true
+
