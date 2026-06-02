@@ -1,0 +1,75 @@
+# START HERE
+
+这是当前项目给人和 AI 共用的唯一启动入口。
+
+如果你是在新的 IDE、新的 AI 会话或新的账号里接手这个项目，请先按下面的顺序读取本地文件。不要先递归扫描整个仓库，也不要一上来就直接修改代码。
+
+## 给 AI 的固定启动指令
+
+把下面这段原样发给 AI 即可：
+
+```text
+请先阅读 START_HERE.md，然后严格按其中的“本地读取顺序”读取文件。
+先不要修改任何文件，先输出：
+1. 项目定位
+2. 当前规则和红线
+3. 当前版本和最近进展
+4. 如果继续开发，应该改哪一层
+5. 我现在最适合做的下一步
+```
+
+## 本地读取顺序
+
+1. `START_HERE.md`
+2. `README.md`
+3. `.agents/profile.yaml`
+4. `.agents/RULES.md`
+5. `.agents/architecture-decisions.yaml`
+6. `.agents/skills/*/SKILL.md`
+7. `.agents/PROGRESS.md`
+8. `AGENTS.md`
+9. `CLAUDE.md` / `GEMINI.md` / `.cursor/` / `.github/` 中实际存在的适配文件
+
+## 当前项目类型
+
+- 项目名称: `{{ project_name }}`
+- 项目类型: `{{ display_name_zh }} ({{ project_type }})`
+- 项目说明: {{ description_zh }}
+
+## 初始业务目录
+
+{% for directory in directories -%}
+- `{{ directory }}/`
+{% endfor %}
+
+## 本地 skills
+
+{% for skill in skills -%}
+- `.agents/skills/{{ skill.name }}/SKILL.md`: {{ skill.summary }}
+{% endfor %}
+
+## 当前项目重点
+
+{% for note in rules_notes -%}
+- {{ note }}
+{% endfor %}
+
+## 这套骨架来自哪里
+
+这个项目是由本机的治理工具仓生成的。
+
+- 本机治理仓路径: `{{ governance_source_path }}`
+
+如果你需要理解“这套启动器本身为什么这样设计”，再去读那个仓库里的：
+
+1. `README.md`
+2. `QUICKSTART.md`
+3. `ARCHITECTURE.md`
+
+注意，日常业务开发还是以“当前项目根目录”和当前项目的 `.agents/` 为主，不要反过来把治理仓当成当前项目真源。
+
+## 工作纪律
+
+- 先读本地文件，再动手。
+- 先改 `.agents/` 真源和业务代码，不直接改受管生成文件。
+- 关键变更先写 progress entry，再继续大范围修改。

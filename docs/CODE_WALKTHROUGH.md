@@ -30,12 +30,19 @@
 
 当前公开出来的动作只有这些:
 
+- `bootstrap`
 - `init`
 - `render`
 - `validate`
+- `smoke`
 - `sync`
 - `progress promote`
 - `progress archive`
+
+其中要特别分清:
+
+- `bootstrap` 是当前推荐给使用者的项目创建入口
+- `init` 是更底层的骨架初始化动作, 现在主要给内部流程和维护者理解用
 
 也就是说, 这个文件本身几乎不承载业务逻辑。它更像是一个稳定入口。
 
@@ -168,18 +175,22 @@ CLI 参数
 
 这部分是你在 `cli.py` 里最终会调到的函数:
 
+- `bootstrap_project()`
 - `init_project()`
 - `render_project()`
 - `validate_project()`
+- `smoke_test()`
 - `sync_project()`
 - `promote_progress_entry()`
 - `archive_progress_entry()`
 
 它们分别对应仓库的生命周期动作:
 
-- 初始化
+- 当前目录 bootstrap
+- 低层初始化
 - 生成
 - 校验
+- 冒烟测试
 - 同步
 - 经验提升
 - 经验归档
@@ -226,6 +237,25 @@ CLI 参数
 
 - [`.agents/PROGRESS.md`](../.agents/PROGRESS.md) 是生成文件
 - entry 状态一变, 滑动索引也必须跟着变
+
+### 5. `bootstrap_project()` 才是当前真实的项目启动入口
+
+当前最新流程里, 新项目应该这样启动:
+
+1. 先把 `Taotaotao` 安装到本机
+2. 在新的 IDE 里打开一个空项目目录
+3. 在那个目录里运行 `vibe-governance bootstrap --type ... --target .`
+
+代码上, `bootstrap_project()` 现在会负责:
+
+- 检查目标目录是否足够干净
+- 调用 `init_project()` 建立 `.agents/` 基础骨架
+- 写入项目类型配置
+- 追加项目类型规则和架构决策
+- 创建业务目录骨架
+- 创建本地 `skills`
+- 生成项目级 `START_HERE.md` 和 `README.md`
+- 最后触发 `render_project()`
 
 ## 六、如果你想扩展功能, 应该从哪下手
 

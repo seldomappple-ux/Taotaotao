@@ -1,0 +1,44 @@
+# {{ project_name }}
+
+这是一个由本地 `Taotaotao / vibe-governance` 工具仓生成的 `{{ display_name_zh }}` 项目骨架。
+
+## 先从哪里开始
+
+第一次接手时，先读：
+
+1. [START_HERE.md](./START_HERE.md)
+2. [`.agents/profile.yaml`](./.agents/profile.yaml)
+3. [`.agents/RULES.md`](./.agents/RULES.md)
+4. [`.agents/architecture-decisions.yaml`](./.agents/architecture-decisions.yaml)
+5. [`.agents/PROGRESS.md`](./.agents/PROGRESS.md)
+
+## 当前项目是什么类型
+
+- 项目类型: `{{ project_type }}`
+- 中文说明: {{ description_zh }}
+
+## 初始目录骨架
+
+{% for directory in directories -%}
+- `{{ directory }}/`
+{% endfor %}
+
+## 当前骨架已经包含
+
+- `.agents/` 真源
+- `START_HERE.md` 启动入口
+- `AGENTS.md`、`CLAUDE.md`、`GEMINI.md` 等适配层
+- `.agents/skills/` 本地技能文件
+
+## 本机治理仓来源
+
+- `{{ governance_source_path }}`
+
+如果你需要理解这套生成器本身，再去那个仓库看根目录入口文档。
+
+## 下一步该做什么
+
+1. 先完善 `.agents/profile.yaml`
+2. 先补 `.agents/RULES.md` 里的项目红线
+3. 先补 `.agents/architecture-decisions.yaml`
+4. 再开始往业务目录里写代码

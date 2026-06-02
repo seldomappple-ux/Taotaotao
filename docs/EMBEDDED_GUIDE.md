@@ -50,15 +50,56 @@
 
 ## 三、当前最推荐的嵌入式接入路径
 
-### 第 1 步: 初始化治理骨架
+### 第 1 步: 先把 `Taotaotao` 安装成你本机工具
+
+这一步通常只做一次:
+
+```bash
+cd "d:\code\VS Code\Taotaotao"
+python -m pip install -e .
+```
+
+安装后, 你在新的 IDE 终端里就可以直接用:
+
+```bash
+vibe-governance
+```
+
+### 第 2 步: 在嵌入式项目当前目录直接落骨架
 
 在嵌入式项目根目录运行:
 
 ```bash
+<<<<<<< HEAD
 python -m vibe_governance init --target . --project-type embedded
+=======
+vibe-governance bootstrap --type embedded --target .
+>>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
 ```
 
-### 第 2 步: 先填项目事实, 不要先填技巧
+这一步会直接生成:
+
+- `START_HERE.md`
+- `README.md`
+- `.agents/`
+- `firmware/`
+- `firmware/src/`
+- `host/`
+- `web/`
+- `hardware/`
+- `tools/`
+- `docs/`
+- `tests/`
+
+### 第 3 步: 先让 AI 读当前项目入口
+
+先让新的 IDE 里的 AI 读取当前项目根目录的:
+
+- `START_HERE.md`
+
+不要让它一上来就乱扫仓库。
+
+### 第 4 步: 先填项目事实, 不要先填技巧
 
 优先修改:
 
@@ -77,6 +118,7 @@ python -m vibe_governance init --target . --project-type embedded
 
 如果这是一个真正的嵌入式项目, `project_type` 建议明确写成诸如 `embedded` 这样的值, 方便后续 overlay 演进时有稳定落点。
 
+<<<<<<< HEAD
 当前治理仓已经具备的最小落地能力包括:
 
 - `init --project-type embedded` 生成默认治理骨架
@@ -88,6 +130,9 @@ python -m vibe_governance init --target . --project-type embedded
 - `validate` 对嵌入式最小文档、`DELTA/NEXT` 入口和版本一致性做检查
 
 ### 第 3 步: 把硬件红线先写进 `.agents/RULES.md`
+=======
+### 第 5 步: 把硬件红线先写进 `.agents/RULES.md`
+>>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
 
 最先该写的不是“优化建议”, 而是红线。
 
@@ -101,7 +146,7 @@ python -m vibe_governance init --target . --project-type embedded
 
 当前 v1 还不会把这些全部自动变成机器强制规则, 但它至少能保证这些内容留在仓库里, 后续人和 AI 都能读到。
 
-### 第 4 步: 把系统边界写进架构决策
+### 第 6 步: 把系统边界写进架构决策
 
 去改:
 
@@ -117,7 +162,7 @@ python -m vibe_governance init --target . --project-type embedded
 - 上位机与前端边界
 - 协议层边界
 
-### 第 5 步: 用 `PROGRESS` 记录 bring-up 和联调
+### 第 7 步: 用 `PROGRESS` 记录 bring-up 和联调
 
 嵌入式项目比纯软件更需要结构化经验记录。
 

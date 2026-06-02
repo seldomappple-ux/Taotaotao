@@ -69,33 +69,71 @@ python -m vibe_governance sync --target . --dry-run --json
 
 如果这一步判断错了, 后面基本都会乱。
 
-## 三、场景 2: 用这套治理体系初始化一个新仓库
+## 三、场景 2: 在新 IDE 里启动一个新项目
 
-当前仓库已经是初始化完成的状态, 但你以后复用时应该按下面做。
+当前最新流程不是“把治理内核复制进新项目再跑 `init`”, 而是:
 
-### 第 1 步: 把治理内核带进新项目
+1. 先把 `Taotaotao` 安装成你本机常驻工具
+2. 再在新的 IDE 里打开一个空项目目录
+3. 在那个新项目目录里直接跑 `bootstrap`
 
-最少需要:
+### 第 1 步: 先安装本机工具
 
-- `vibe_governance/`
-- `pyproject.toml`
-
-### 第 2 步: 初始化 `.agents/` 骨架
+这一步通常只做一次:
 
 ```bash
-python -m vibe_governance init --target .
+cd "d:\code\VS Code\Taotaotao"
+python -m pip install -e .
 ```
 
-当前代码会创建这些核心文件:
+做完后, 任意新 IDE 的终端里都可以直接调用:
 
-- `.agents/profile.yaml`
-- `.agents/RULES.md`
-- `.agents/overrides/rules.yaml`
-- `.agents/architecture-decisions.yaml`
-- `.agents/progress/ENTRY_TEMPLATE.md`
-- `.agents/.managed/upstream-rule-catalog.yaml`
+```bash
+vibe-governance
+```
 
-### 第 3 步: 补项目事实和项目边界
+### 第 2 步: 在新 IDE 里打开空项目目录
+
+例如:
+
+```text
+D:\work\my-project
+```
+
+这里应当是一个新的、基本空白的项目目录。允许已经存在 `.git`、`.vscode`、`.idea` 这类元数据目录, 但不要先放业务文件进去。
+
+### 第 3 步: 在当前目录直接落骨架
+
+```bash
+vibe-governance bootstrap --type software --target .
+```
+
+如果是嵌入式项目:
+
+```bash
+vibe-governance bootstrap --type embedded --target .
+```
+
+这一步会直接在当前目录生成:
+
+- `START_HERE.md`
+- `README.md`
+- `.agents/`
+- `AGENTS.md`、`CLAUDE.md`、`GEMINI.md`
+- 对应项目类型的业务目录骨架
+- 本地 `skills`
+
+### 第 4 步: 先让 AI 读当前项目入口
+
+不要让 AI 自己递归扫描整个仓库。
+
+先让它读取当前项目根目录的:
+
+- `START_HERE.md`
+
+然后它再按里面规定的顺序读取 `.agents/` 真源和适配层。
+
+### 第 5 步: 补项目事实和项目边界
 
 优先改:
 
@@ -114,11 +152,11 @@ python -m vibe_governance init --target .
 
 写清楚。
 
-### 第 4 步: 立刻校验和生成
+### 第 6 步: 立刻校验和生成
 
 ```bash
-python -m vibe_governance validate --target .
-python -m vibe_governance render --target .
+vibe-governance validate --target .
+vibe-governance render --target .
 ```
 
 不要跳过这一步。很多初始化问题, 在第一轮 `validate` 就能暴露出来。
