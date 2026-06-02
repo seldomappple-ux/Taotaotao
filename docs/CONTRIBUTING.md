@@ -119,11 +119,12 @@ python -m unittest discover -s tests -v
 
 #### 版本号规则
 
-从 `1.2.1` 开始, 当前仓库正式收口为**统一版本号**策略:
+从 `1.2.1` 开始, 当前仓库正式收口为**统一版本号**策略；当前正式主线版本为 `1.3.2`:
 
 - 工具版本（Package Version）和项目版本（Project Version）保持一致
 - 不再区分”包版本”和”治理版本”
-- `v1.2.0` 仍是最近一次治理迭代的文档标签
+- `v1.2.0` 仍是历史治理迭代的文档标签
+- `v1.3.2` 是当前正式主线展示标签
 - 治理机制升级也会触发工具版本号升级
 
 **版本号真源（3 个文件必须同步）**:
@@ -267,7 +268,7 @@ fix(validation): add UTF-8 encoding check for critical files
   - `pyproject.toml`
   - `vibe_governance/resources/release-manifest.yaml`
   - `.agents/profile.yaml`
-- 如果提交消息里写了 `v1.2.0`、`v1.2.1` 之类的字样, 默认表示“本次改动属于该轮升级上下文”, 不表示仓库正式版本已经变成该值
+- 如果提交消息里写了 `v1.2.0`、`v1.2.1`、`v1.3.2` 之类的字样, 默认表示“本次改动属于该轮升级上下文”, 不表示仓库正式版本已经变成该值
 - 不要把提交标题里的版本号当作正式版本发布依据
 - 如果一次提交只是落地某轮升级中的一个子步骤, 推荐写法是:
   - `docs(governance): land v1.2.0 delta workflow`

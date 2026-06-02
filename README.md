@@ -7,7 +7,7 @@
 
 它已经能帮你把 AI 协作规则、项目事实、适配层生成和经验闭环固化到本地文件里, 但它还不是最终的一键业务脚手架产品。
 
-**当前版本**: `v1.2.1`
+**当前版本**: `v1.3.2`
 
 ## 先看这 6 个根目录文件
 
@@ -22,13 +22,14 @@
 
 根目录只保留这 6 个给人看的入口文件。更深的说明已经下沉到 [`docs/`](./docs/)。
 
-## v1.2.1 新增能力
+## v1.3.2 主线能力
 
 - **统一版本号策略**: 工具版本与项目版本保持一致，版本号只能递增
 - **增量决议机制**: 通过 `DELTA_DECISIONS.md` 管理修复后的增量变化
 - **下一轮迭代索引**: 通过 `NEXT_ITERATION_BASELINE.md` 明确下一轮必读文件
 - **判定决策树**: L0/L1/L2 分级规则，明确何时回写上游真源
 - **Git 提交模板**: 自动配置提交信息格式，规范版本号管理
+- **模板库主线化**: 将轻量模板库与最小多 agent 入口层纳入当前主线承接路径
 
 ## 这个仓库现在已经能做什么
 
@@ -71,10 +72,10 @@ python -m vibe_governance sync --target . --dry-run --json
 
 ## 当前迭代先看哪里
 
-如果你现在要承接当前 `1.2.x` 这轮治理上下文, 建议按这个顺序看:
+如果你现在要承接当前 `1.3.2` 主线治理上下文, 建议按这个顺序看:
 
-1. [docs/upgrades/v1.2.0-summary.md](./docs/upgrades/v1.2.0-summary.md)
-2. [docs/upgrades/v1.2.0-plan.md](./docs/upgrades/v1.2.0-plan.md)
+1. [docs/upgrades/v1.3.2-summary.md](./docs/upgrades/v1.3.2-summary.md)
+2. [docs/upgrades/v1.3.2-plan.md](./docs/upgrades/v1.3.2-plan.md)
 3. [docs/DELTA_DECISIONS.md](./docs/DELTA_DECISIONS.md)
 4. [docs/NEXT_ITERATION_BASELINE.md](./docs/NEXT_ITERATION_BASELINE.md)
 5. [CHANGELOG.md](./CHANGELOG.md)

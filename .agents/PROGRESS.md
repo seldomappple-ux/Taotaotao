@@ -1,9 +1,9 @@
 <!--
-managed-by: vibe-governance 1.2.1
+managed-by: vibe-governance 1.3.2
 upstream-repo: https://github.com/example/vibe-governance
-upstream-version: 1.2.1
-upstream-published-at: 2026-04-01T00:00:00Z
-checksum-sha256: fdf8d84695a341c1a6161a798bc484d6b8b2d5eafdab2e79a24a7f7b0976bfdc
+upstream-version: 1.3.2
+upstream-published-at: 2026-06-02T00:00:00Z
+checksum-sha256: a5fc816bb4dd4662251c8fe82f745af460ef83dafaeb57b6f2e7ff74b8d6f5ae
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -11,7 +11,7 @@ managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render`
 
 ## Project Version
 
-- Current project version: `1.2.1`
+- Current project version: `1.3.2`
 
 ## Purpose
 
@@ -29,6 +29,7 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 
 | Page ID | Date | Title | Status | Path | Related Commit Message |
 | --- | --- | --- | --- | --- | --- |
+| `20260602-1` | `2026-06-02` | Promote 1.3.2 as the current governance mainline | `draft` | `.agents/progress/entries/2026/2026-06-02-1.md` | chore(release): bump version to 1.3.2 |
 | `20260422-7` | `2026-04-22` | Add trigger-based recording rules and minimum multi-agent entry layer to lightweight templates | `draft` | `.agents/progress/entries/2026/2026-04-22-7.md` | docs(governance): add trigger-based recording and multi-agent layer to lightweight templates |
 | `20260422-6` | `2026-04-22` | Strengthen lightweight templates with the minimum .agents governance skeleton | `draft` | `.agents/progress/entries/2026/2026-04-22-6.md` | docs(governance): clarify minimum .agents skeleton in lightweight templates |
 | `20260422-5` | `2026-04-22` | Add the lightweight general template as the second template-library entry | `draft` | `.agents/progress/entries/2026/2026-04-22-5.md` | docs(governance): add lightweight general template as second template-library entry |
@@ -38,7 +39,6 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 | `20260422-1` | `2026-04-22` | Read the migration brief before starting the next governance upgrade round | `draft` | `.agents/progress/entries/2026/2026-04-22-1.md` | docs(governance): record upgrade kickoff from migration brief |
 | `20260420-1` | `2026-04-20` | Capture governance lessons from the image-generation derivative project | `draft` | `.agents/progress/entries/2026/2026-04-20-生图测试衍生项目经验回流.md` | docs(governance): capture lessons from image-generation derivative project |
 | `20260401-5` | `2026-04-01` | Close migration gaps for projects adopting the v1.2 governance system | `draft` | `.agents/progress/entries/2026/2026-04-01-5.md` | fix(governance): close v1.0 to v1.2 migration gaps |
-| `20260401-4` | `2026-04-01` | Close v1.2 documentation wording around the 1.2.1 official version | `draft` | `.agents/progress/entries/2026/2026-04-01-4.md` | docs(governance): close v1.2 version wording around 1.2.1 |
 
 ## Archive
 

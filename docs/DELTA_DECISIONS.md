@@ -16,8 +16,8 @@
 
 ## 文件头
 
-- current_iteration: `v1.2.0`
-- current_repo_version: `1.2.1`
+- current_iteration: `v1.3.2`
+- current_repo_version: `1.3.2`
 - last_cleanup_version: `v1.2.0`
 - next_cleanup_due: `v1.4.0`
 
@@ -46,7 +46,7 @@
 
 当前为空。
 
-首条决议将在 `v1.2.0` 发布后的第一次 `L1` 或 `L2` 修复时写入。
+首条决议将在 `v1.3.2` 主线提升后的第一次 `L1` 或 `L2` 修复时写入。
 
 ### 模板
 
@@ -54,7 +54,7 @@
 - delta_id: DELTA-2026-04-001
   status: active
   level: L1
-  created: v1.2.0
+  created: v1.3.2
   expires: v1.4.0
   promotion_target: ""
   source_entries:

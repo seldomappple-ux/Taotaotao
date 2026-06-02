@@ -9,8 +9,8 @@
 
 ## 当前版本
 
-- current_iteration: `v1.2.0`
-- current_repo_version: `1.2.1`
+- current_iteration: `v1.3.2`
+- current_repo_version: `1.3.2`
 
 说明:
 
@@ -21,8 +21,8 @@
 
 1. `README.md`
 2. `ARCHITECTURE.md`
-3. `docs/upgrades/v1.2.0-summary.md`
-4. `docs/upgrades/v1.2.0-plan.md`
+3. `docs/upgrades/v1.3.2-summary.md`
+4. `docs/upgrades/v1.3.2-plan.md`
 5. `CHANGELOG.md`
 6. `docs/DELTA_DECISIONS.md`
 7. `docs/MIGRATION_GUIDE.md`
@@ -34,10 +34,10 @@
   - 项目门面和最短导航
 - `ARCHITECTURE.md`
   - 长期稳定的系统边界与分层原则
-- `docs/upgrades/v1.2.0-summary.md`
-  - 本轮为什么做、边界是什么
-- `docs/upgrades/v1.2.0-plan.md`
-  - 本轮怎么做
+- `docs/upgrades/v1.3.2-summary.md`
+  - 当前主线为什么提升、边界是什么
+- `docs/upgrades/v1.3.2-plan.md`
+  - 当前主线怎么落地
 - `CHANGELOG.md`
   - 当前正式版本号与版本演进锚点
 - `docs/DELTA_DECISIONS.md`
