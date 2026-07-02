@@ -3,7 +3,7 @@ managed-by: vibe-governance 1.3.2
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 1.3.2
 upstream-published-at: 2026-06-02T00:00:00Z
-checksum-sha256: 59eb8a01ccf93fc9ab9aa034ba86bdbf7b545a6c46023514cdb7452767cbe26c
+checksum-sha256: f4e4a7df40bf5f2905cce396c85fe559bbdc54c84a524d3a4095f90fb6a38dbf
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -20,7 +20,7 @@ Root AGENTS.md is the stable human entrypoint. Treat .agents/ as the canonical s
 Do not edit generated adapter files directly. Apply durable changes in .agents/profile.yaml, .agents/overrides/rules.yaml, or canonical upstream templates, then rerender.
 
 ## `governance.onboarding_sequence`
-When taking over the repository, read README.md, docs/SOURCE_MATERIALS.md, ARCHITECTURE.md, and .agents/PROGRESS.md before relying on generated adapter files. Align on local context first, then act.
+When taking over the repository, read START_HERE.md first and then follow the exact local file-reading order defined there before relying on generated adapter files or modifying code.
 
 ## `git.flow`
 Use a Git Flow style branch strategy with at least main and dev. Feature and release work should branch from dev unless a project-specific workflow overlay says otherwise.

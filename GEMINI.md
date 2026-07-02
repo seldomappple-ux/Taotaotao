@@ -3,7 +3,7 @@ managed-by: vibe-governance 1.3.2
 upstream-repo: https://github.com/example/vibe-governance
 upstream-version: 1.3.2
 upstream-published-at: 2026-06-02T00:00:00Z
-checksum-sha256: 2a70b0c5edcf3cf6bbc853adebd0ab0dbea503208e14bbb67badeb0416fed98b
+checksum-sha256: a0ae2ec93d32744f2e542a45bca02d4e30fc7c6a0aed1807da6f4eede1cb82af
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -24,8 +24,8 @@ Current project version: `1.3.2`
   中文: 不要直接编辑生成的适配文件. 持久规则变更应写入 `.agents/profile.yaml`、`.agents/overrides/rules.yaml` 或上游 canonical 模板, 然后重新渲染.
   English: Do not edit generated adapter files directly. Apply durable changes in .agents/profile.yaml, .agents/overrides/rules.yaml, or canonical upstream templates, then rerender.
 - `governance.onboarding_sequence`:
-  中文: 接手仓库时, 先阅读 README.md、docs/SOURCE_MATERIALS.md、ARCHITECTURE.md 和 .agents/PROGRESS.md, 再依赖生成的适配文件. 先对齐本地上下文, 再执行修改.
-  English: When taking over the repository, read README.md, docs/SOURCE_MATERIALS.md, ARCHITECTURE.md, and .agents/PROGRESS.md before relying on generated adapter files. Align on local context first, then act.
+  中文: 接手仓库时, 先阅读 START_HERE.md, 再严格按其中定义的本地文件读取顺序建立上下文, 之后才能依赖生成的适配文件或开始修改代码.
+  English: When taking over the repository, read START_HERE.md first and then follow the exact local file-reading order defined there before relying on generated adapter files or modifying code.
 - `git.flow`:
   中文: 使用 Git Flow 风格的分支策略, 至少包含 main 与 dev. 除非项目 overlay 另有规定, feature 与 release 工作应从 dev 分出.
   English: Use a Git Flow style branch strategy with at least main and dev. Feature and release work should branch from dev unless a project-specific workflow overlay says otherwise.

@@ -4,22 +4,18 @@ upstream_version: 1.3.2
 upstream_published_at: '2026-06-02T00:00:00Z'
 files:
 - path: .agents/PROGRESS.md
-<<<<<<< HEAD
-  checksum: a5fc816bb4dd4662251c8fe82f745af460ef83dafaeb57b6f2e7ff74b8d6f5ae
-=======
-  checksum: e9c39fd283efab1d0b038093b72b52db6608b15426525c34a11d7cdc31742742
->>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
+  checksum: ff4e37dd97014d5ce874457866882059895116f9601f01d94720592357223136
 - path: .cursor/rules/governance.mdc
-  checksum: 0151986856bc923893b8c6f9d13206d18ac48530d12a3d9b543d927e514c7e88
+  checksum: 4c851322df0da50f466cdb11223f7ab630dfde2b6bd5efe93aec65443e67b225
 - path: .github/copilot-instructions.md
-  checksum: 0686b86bfaacf60ffbfd6668365ef67a4a0e619699fe897bda5c18145ab183e1
+  checksum: 41ec36dc6a8a32509398edee40da0d076b1ae29fd6b83d54235f73596745e976
 - path: .github/instructions/project-governance.instructions.md
-  checksum: 59eb8a01ccf93fc9ab9aa034ba86bdbf7b545a6c46023514cdb7452767cbe26c
+  checksum: f4e4a7df40bf5f2905cce396c85fe559bbdc54c84a524d3a4095f90fb6a38dbf
 - path: .opencode/AGENTS.md
-  checksum: 7a8b05fee95f4df8a5a18c8edb4da52f30915a39cdf95595a4e18c5db7d91b97
+  checksum: 9600d98266c0b84d617e3e6881ee9a19bcbd3675685cc17ac22d585856972147
 - path: AGENTS.md
-  checksum: 9bf6fb7bbbe6cde58214c8462fa81338af81f6aadf96044c4e0a2b174fbe4919
+  checksum: 09b20407d3fd796277aeacecd6294f40c405c443c657d1c132efa5dbc896b2c7
 - path: CLAUDE.md
-  checksum: 36775927de5e6fca3ba1eb655e7253e240ed2cf54b07daad046de163557c1ee3
+  checksum: da37a28b6bb6fe8c5798eefa41082f0b173178b4556dc6307ba372732a27ebe3
 - path: GEMINI.md
-  checksum: 2a70b0c5edcf3cf6bbc853adebd0ab0dbea503208e14bbb67badeb0416fed98b
+  checksum: a0ae2ec93d32744f2e542a45bca02d4e30fc7c6a0aed1807da6f4eede1cb82af

@@ -1,21 +1,36 @@
 # 5 分钟快速上手
 
-这份文档只回答一个问题：
+这份文档只回答两个问题:
 
-我在新的 IDE 里开一个新项目后，应该怎么调用 `Taotaotao`，让 AI 进入正确工作状态？
+1. 我怎么快速看懂当前仓库
+2. 我怎么把这套东西用到一个新项目里
 
-## 第 1 步：先把 `Taotaotao` 装成你本机的工具
+## 一、先看懂当前仓库
 
-这一步通常只做一次。
+先做这 3 件事:
 
-在 `Taotaotao` 根目录执行：
+### 1. 读 3 个文件
+
+按顺序读:
+
+1. [README.md](./README.md)
+2. [ARCHITECTURE.md](./ARCHITECTURE.md)
+3. [DIRECTORY_STRUCTURE.md](./DIRECTORY_STRUCTURE.md)
+
+读完后你至少要知道:
+
+- 这个仓库是治理内核, 不是业务项目
+- `.agents/` 是真源
+- 根目录的 `AGENTS.md`、`CLAUDE.md`、`GEMINI.md` 是生成结果
+
+### 2. 跑 3 条命令
 
 ```bash
-cd "d:\code\VS Code\Taotaotao"
-python -m pip install -e .
+python -m vibe_governance validate --target .
+python -m vibe_governance render --target .
+python -m vibe_governance sync --target . --dry-run --json
 ```
 
-<<<<<<< HEAD
 如果这 3 条命令都正常, 说明当前仓库可以继续接手。
 
 ### 3. 知道深度资料在哪里
@@ -26,132 +41,77 @@ python -m pip install -e .
 
 ## 二、如果你要在新 IDE 里开一个新项目
 
-当前版本能帮你搭的是“治理骨架”, 不是“完整业务目录骨架”。
+当前推荐路径是: 先把 `Taotaotao` 安装成一次性的本机工具, 再在新 IDE 打开的空项目目录里运行 `bootstrap`。
 
 最短路径是:
 
-### 1. 把治理内核带进新项目
+### 1. 先安装本机工具
 
-最少带这两样:
-
-- `vibe_governance/`
-- `pyproject.toml`
-
-### 2. 初始化治理骨架
-
-在新项目根目录运行:
-=======
-安装完成后，你在任意终端里都可以直接用：
->>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
+这一步通常只做一次:
 
 ```bash
-vibe-governance
+cd "d:\code\VS Code\Taotaotao"
+python -m pip install -e .
 ```
 
-## 第 2 步：在新的 IDE 里创建空项目目录
+### 2. 在新 IDE 里打开空项目目录
 
-例如你在新的 IDE 里新建并打开：
+例如:
 
 ```text
-D:\work\my-esp32-project
+D:\work\my-project
 ```
 
-注意，这里应该是一个新的、基本空白的项目目录。  
-允许已经存在 `.git`、`.vscode`、`.idea` 这类元数据目录，但不要先放业务文件进去。
+这个目录可以已经有 `.git`、`.vscode`、`.idea` 这类元数据, 但不要先放业务文件。
 
-## 第 3 步：在新的 IDE 终端里直接落骨架
-
-进入那个新项目目录后，执行：
-
-```bash
-vibe-governance bootstrap --type embedded --target .
-```
-
-如果是纯软件项目：
+### 3. 在当前目录直接 bootstrap
 
 ```bash
 vibe-governance bootstrap --type software --target .
 ```
 
-如果是后端项目：
+嵌入式项目用:
 
 ```bash
-vibe-governance bootstrap --type backend --target .
+vibe-governance bootstrap --type embedded --target .
 ```
 
-这一步会直接在“当前新项目根目录”生成：
+如果 `vibe-governance` 还不在 PATH, 可以从本仓库路径直接调用:
+
+```bash
+cd "d:\code\VS Code\Taotaotao"
+python -m vibe_governance bootstrap --type embedded --target "D:\work\my-project"
+```
+
+### 4. 先读生成的 START_HERE
+
+`bootstrap` 会生成:
 
 - `START_HERE.md`
 - `README.md`
 - `.agents/`
-- `AGENTS.md`、`CLAUDE.md`、`GEMINI.md`
-- 对应项目类型的业务目录骨架
-- 本地 `skills`
+- `AGENTS.md`、`CLAUDE.md`、`GEMINI.md` 等适配层
+- 对应项目类型的初始目录
+- `.agents/skills/` 本地技能文件
 
-## 第 4 步：让新 IDE 里的 AI 先读本地入口
+新项目里的 AI 应该先读 `START_HERE.md`, 再按它指定的顺序读取 `.agents/` 真源。
 
-不要让 AI 自己扫仓库。
+### 5. 补 3 个核心真源
 
-直接把这段话发给 AI：
+优先改:
 
-```text
-请先阅读 START_HERE.md，然后严格按里面的本地读取顺序读取文件，再开始工作。先不要修改任何文件，先输出：
-1. 项目定位
-2. 当前规则和红线
-3. 当前版本和最近进展
-4. 如果继续开发，应该改哪一层
-5. 我现在最适合做的下一步
-```
-
-如果你不想每次手工组织这段话，直接复制根目录的 [`AI_QUICKSTART.md`](./AI_QUICKSTART.md) 给 AI 即可。
-
-## 第 5 步：如果 AI 需要理解启动器本身
-
-新项目生成出来的 `START_HERE.md` 里，会记录本机 `Taotaotao` 工具仓路径。
-
-如果 AI 需要理解“这套生成器本身为什么这样设计”，再让它去读那个路径下的：
-
-1. `README.md`
-2. `QUICKSTART.md`
-3. `ARCHITECTURE.md`
-
-但日常业务开发，仍然以“当前新项目根目录”和“当前新项目 `.agents/` 真源”为主。
-
-## 第 6 步：开始写代码前先补两件事
-
-建议先补：
-
+- `.agents/profile.yaml`
 - `.agents/RULES.md`
 - `.agents/architecture-decisions.yaml`
 
-尤其是嵌入式项目，第一批就该补：
-
-- 硬件红线
-- 烧录边界
-- 串口参数
-- 联调纪律
-
-## 第 7 步：之后最常用的命令
-
-在新项目里，最常用的是：
+### 6. 重新生成适配层
 
 ```bash
-vibe-governance validate --target .
 vibe-governance render --target .
-vibe-governance sync --target . --dry-run
+vibe-governance validate --target .
 ```
 
-## 你只要记住这一条线
-
-正确顺序是：
-
-<<<<<<< HEAD
-- `src/`
-- `firmware/`
-- `backend/`
-- `frontend/`
-
-当前 v1 还没有把“业务目录模板化”做完, 所以这一步仍然需要你自己定。
+`init` 命令仍然保留, 但它是底层兼容入口。新项目默认不要从 `init` 开始, 除非你明确只需要 `.agents` 治理骨架。
 
 ## 三、现在先别纠结的事
 
@@ -164,6 +124,3 @@ vibe-governance sync --target . --dry-run
 - `vibe_governance/` 是程序本体
 
 做到这一步, 你的阅读路径就不会乱。
-=======
-`先安装 Taotaotao -> 新 IDE 打开空项目目录 -> bootstrap 到当前目录 -> AI 先读 START_HERE -> 再开始写代码`
->>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a

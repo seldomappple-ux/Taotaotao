@@ -1,15 +1,9 @@
 <!--
 managed-by: vibe-governance 1.3.2
 upstream-repo: https://github.com/example/vibe-governance
-<<<<<<< HEAD
 upstream-version: 1.3.2
 upstream-published-at: 2026-06-02T00:00:00Z
-checksum-sha256: a5fc816bb4dd4662251c8fe82f745af460ef83dafaeb57b6f2e7ff74b8d6f5ae
-=======
-upstream-version: 0.1.0
-upstream-published-at: 2026-03-07T00:00:00Z
-checksum-sha256: e9c39fd283efab1d0b038093b72b52db6608b15426525c34a11d7cdc31742742
->>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
+checksum-sha256: ff4e37dd97014d5ce874457866882059895116f9601f01d94720592357223136
 managed-note-en: DO NOT EDIT DIRECTLY. Regenerate with `vibe-governance render`.
 managed-note-zh: 请勿直接编辑此文件, 请运行 `vibe-governance render` 重新生成.
 -->
@@ -35,7 +29,7 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 
 | Page ID | Date | Title | Status | Path | Related Commit Message |
 | --- | --- | --- | --- | --- | --- |
-<<<<<<< HEAD
+| `20260702-1` | `2026-07-02` | Resolve committed merge conflicts and restore bootstrap workflow | `draft` | `.agents/progress/entries/2026/2026-07-02-1.md` | fix(governance): resolve committed merge conflicts and restore bootstrap |
 | `20260602-1` | `2026-06-02` | Promote 1.3.2 as the current governance mainline | `draft` | `.agents/progress/entries/2026/2026-06-02-1.md` | chore(release): bump version to 1.3.2 |
 | `20260422-7` | `2026-04-22` | Add trigger-based recording rules and minimum multi-agent entry layer to lightweight templates | `draft` | `.agents/progress/entries/2026/2026-04-22-7.md` | docs(governance): add trigger-based recording and multi-agent layer to lightweight templates |
 | `20260422-6` | `2026-04-22` | Strengthen lightweight templates with the minimum .agents governance skeleton | `draft` | `.agents/progress/entries/2026/2026-04-22-6.md` | docs(governance): clarify minimum .agents skeleton in lightweight templates |
@@ -45,19 +39,6 @@ Use this file as a sliding index, not a long-form journal. Detailed history live
 | `20260422-2` | `2026-04-22` | Land the template library entry and the first lightweight comparison test template | `draft` | `.agents/progress/entries/2026/2026-04-22-2.md` | docs(governance): add template library entry and first lightweight comparison test template |
 | `20260422-1` | `2026-04-22` | Read the migration brief before starting the next governance upgrade round | `draft` | `.agents/progress/entries/2026/2026-04-22-1.md` | docs(governance): record upgrade kickoff from migration brief |
 | `20260420-1` | `2026-04-20` | Capture governance lessons from the image-generation derivative project | `draft` | `.agents/progress/entries/2026/2026-04-20-生图测试衍生项目经验回流.md` | docs(governance): capture lessons from image-generation derivative project |
-| `20260401-5` | `2026-04-01` | Close migration gaps for projects adopting the v1.2 governance system | `draft` | `.agents/progress/entries/2026/2026-04-01-5.md` | fix(governance): close v1.0 to v1.2 migration gaps |
-=======
-| `20260308-9` | `2026-03-08` | Clarify path resolution in AI quickstart prompt | `draft` | `.agents/progress/entries/2026/2026-03-08-9.md` | docs(governance): clarify local path handling in AI quickstart |
-| `20260308-8` | `2026-03-08` | Add dedicated root AI quickstart prompt | `draft` | `.agents/progress/entries/2026/2026-03-08-8.md` | docs(governance): add dedicated AI quickstart prompt |
-| `20260308-7` | `2026-03-08` | Align deep docs with bootstrap-first workflow | `draft` | `.agents/progress/entries/2026/2026-03-08-7.md` | docs(governance): align deep docs with bootstrap workflow |
-| `20260308-6` | `2026-03-08` | Keep bootstrap as the single project creation path | `draft` | `.agents/progress/entries/2026/2026-03-08-6.md` | refactor(governance): keep bootstrap as sole project creation path |
-| `20260308-5` | `2026-03-08` | Add in-place bootstrap flow for new IDE project directories | `draft` | `.agents/progress/entries/2026/2026-03-08-5.md` | feat(governance): add in-place bootstrap workflow |
-| `20260308-4` | `2026-03-08` | Rewrite root entry docs around bootstrap and START_HERE workflow | `draft` | `.agents/progress/entries/2026/2026-03-08-4.md` | docs(governance): rewrite root entry docs around bootstrap usage |
-| `20260308-3` | `2026-03-08` | Add one-command smoke test for repo validation and sample project bootstrap | `draft` | `.agents/progress/entries/2026/2026-03-08-3.md` | feat(governance): add one-command smoke test |
-| `20260308-10` | `2026-03-08` | Write explicit Taotaotao absolute path into AI quickstart | `draft` | `.agents/progress/entries/2026/2026-03-08-10.md` | docs(governance): add explicit Taotaotao path to AI quickstart |
-| `20260308-1` | `2026-03-08` | Slim root human docs to five entry files and move deep guides into docs | `draft` | `.agents/progress/entries/2026/2026-03-08-1.md` | docs(governance): slim root human docs and move deep guides to docs |
-| `20260307-4` | `2026-03-07` | Unify remaining human docs and add onboarding rule for generated adapters | `draft` | `.agents/progress/entries/2026/2026-03-07-4.md` | docs(governance): unify human docs and add onboarding adapter rule |
->>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
 
 ## Archive
 

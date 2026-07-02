@@ -2,11 +2,8 @@ from __future__ import annotations
 
 import copy
 import hashlib
-<<<<<<< HEAD
 import re
-=======
 import shutil
->>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -25,8 +22,17 @@ DOC_MODES = {"zh", "en", "bilingual"}
 ACTIVE_PROGRESS_STATUSES = {"draft", "promotable"}
 ALL_PROGRESS_STATUSES = ACTIVE_PROGRESS_STATUSES | {"upstreamed"}
 FRONTMATTER_DELIMITER = "---"
-<<<<<<< HEAD
 SEMVER_PATTERN = re.compile(r"^\d+\.\d+\.\d+$")
+SAFE_BOOTSTRAP_NAMES = {
+    ".git",
+    ".gitignore",
+    ".gitattributes",
+    ".vscode",
+    ".idea",
+    ".vs",
+    ".DS_Store",
+    "Thumbs.db",
+}
 EMBEDDED_REQUIRED_DOCS = (
     "README.md",
     "docs/DEVELOPMENT_PLAN.md",
@@ -45,18 +51,6 @@ EMBEDDED_README_LINKS = (
     "docs/NEXT_ITERATION_BASELINE.md",
     "docs/VALIDATION_PLAN.md",
 )
-=======
-SAFE_BOOTSTRAP_NAMES = {
-    ".git",
-    ".gitignore",
-    ".gitattributes",
-    ".vscode",
-    ".idea",
-    ".vs",
-    ".DS_Store",
-    "Thumbs.db",
-}
->>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
 
 
 class GovernanceError(RuntimeError):
@@ -295,8 +289,8 @@ def _validate_profile(profile: dict[str, Any], catalog: dict[str, Any]) -> list[
         errors.append(f"Missing profile fields: {', '.join(missing)}")
 
     project_type = str(profile.get("project_type", "")).strip()
-    if project_type not in KNOWN_PROJECT_TYPES:
-        errors.append("`project_type` must be one of: embedded, governance")
+    if project_type not in PROJECT_TYPES:
+        errors.append("`project_type` must be one of: " + ", ".join(sorted(PROJECT_TYPES)))
 
     project_version = str(profile.get("project_version", "")).strip()
     if not project_version:
@@ -843,7 +837,8 @@ def _apply_project_type_scaffold(
     comment_lang: str | None = None,
     doc_mode: str | None = None,
 ) -> list[str]:
-    created = init_project(root)
+    init_type = project_type if project_type in KNOWN_PROJECT_TYPES else "governance"
+    created = init_project(root, project_type=init_type)
 
     profile = _load_profile(root)
     profile["project_type"] = project_type

@@ -34,24 +34,6 @@ def _build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
-<<<<<<< HEAD
-    init_parser = subparsers.add_parser(
-        "init",
-        parents=[target_parent],
-        help="Initialize the .agents source tree.",
-    )
-    init_parser.add_argument(
-        "--project-type",
-        default="governance",
-        choices=sorted(KNOWN_PROJECT_TYPES),
-        help="Project scaffold type. Defaults to governance.",
-    )
-    init_parser.add_argument(
-        "--project-version",
-        default=None,
-        help="Optional project version to write into the scaffold, for example 1.0.0.",
-    )
-=======
     bootstrap_parser = subparsers.add_parser(
         "bootstrap",
         parents=[target_parent],
@@ -84,8 +66,23 @@ def _build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Optional doc mode override: zh, en, or bilingual.",
     )
-    subparsers.add_parser("init", parents=[target_parent], help="Initialize the .agents source tree.")
->>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
+
+    init_parser = subparsers.add_parser(
+        "init",
+        parents=[target_parent],
+        help="Initialize the .agents source tree.",
+    )
+    init_parser.add_argument(
+        "--project-type",
+        default="governance",
+        choices=sorted(KNOWN_PROJECT_TYPES),
+        help="Project scaffold type. Defaults to governance.",
+    )
+    init_parser.add_argument(
+        "--project-version",
+        default=None,
+        help="Optional project version to write into the scaffold, for example 1.0.0.",
+    )
     subparsers.add_parser("render", parents=[target_parent], help="Render all managed outputs.")
     subparsers.add_parser(
         "validate",

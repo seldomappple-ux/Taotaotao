@@ -212,7 +212,6 @@ class GovernanceCliTests(unittest.TestCase):
         self.assertIn("中文:", gemini)
         self.assertIn("English:", gemini)
 
-<<<<<<< HEAD
     def test_profile_requires_project_version(self) -> None:
         profile_path = _profile_path(self.root)
         profile = yaml.safe_load(profile_path.read_text(encoding="utf-8"))
@@ -304,10 +303,6 @@ class GovernanceCliTests(unittest.TestCase):
         self.assertIn("NEXT_ITERATION_BASELINE.md", str(ctx.exception))
         shutil.rmtree(embedded_root)
 
-    def test_invalid_project_type_is_rejected_by_cli(self) -> None:
-        with self.assertRaises(SystemExit):
-            cli_main(["init", "--project-type", "invalid", "--target", str(self.root / "invalid")])
-=======
     def test_bootstrap_project_writes_into_current_directory(self) -> None:
         target = self.root / "fresh-app"
         created = bootstrap_project(target, "embedded")
@@ -351,7 +346,10 @@ class GovernanceCliTests(unittest.TestCase):
         self.assertEqual("clean", report["sync_status"])
         self.assertEqual(str(generated_root), report["generated_project"])
         self.assertTrue((generated_root / "START_HERE.md").exists())
->>>>>>> 3a5b8e46de24dad832a8aeeed26e633f5707838a
+
+    def test_invalid_project_type_is_rejected_by_cli(self) -> None:
+        with self.assertRaises(SystemExit):
+            cli_main(["init", "--project-type", "invalid", "--target", str(self.root / "invalid")])
 
 
 if __name__ == "__main__":
